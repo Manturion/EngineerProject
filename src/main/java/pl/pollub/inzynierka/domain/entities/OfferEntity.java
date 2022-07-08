@@ -6,59 +6,51 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Objects;
 
-@Data
 @Entity
+@Data
 @Table(name = "offer", schema = "public", catalog = "inzynierka")
 public class OfferEntity {
-
-
+    @Basic
+    @Column(name = "title", nullable = false, length = 255)
     private String title;
-
-
+    @Basic
+    @Column(name = "description", nullable = false, length = -1)
     private String description;
-
-
+    @Basic
+    @Column(name = "image", nullable = false, length = 255)
     private String image;
-
-
+    @Basic
+    @Column(name = "old_price", nullable = true, precision = 2)
     private BigDecimal oldPrice;
-
-
+    @Basic
+    @Column(name = "new_prize", nullable = true, precision = 2)
     private BigDecimal newPrize;
-
-
+    @Basic
+    @Column(name = "gps", nullable = false, precision = 2)
     private BigDecimal gps;
-
-
+    @Basic
+    @Column(name = "start_date", nullable = false)
     private Timestamp startDate;
-
-
+    @Basic
+    @Column(name = "expire_date", nullable = true)
     private Timestamp expireDate;
-
-
+    @Basic
+    @Column(name = "is_available", nullable = false)
     private boolean isAvailable;
-
-
-    private int likes;
-
-
-    private int dislikes;
-
-
+    @Basic
+    @Column(name = "customer_id", nullable = false)
     private int customerId;
-
-
+    @Basic
+    @Column(name = "status_id", nullable = false)
     private int statusId;
-
-
+    @Basic
+    @Column(name = "category_id", nullable = false)
     private int categoryId;
-
-
-    private int sellerId;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-
+    @Column(name = "id", nullable = false)
     private int id;
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
@@ -69,10 +61,6 @@ public class OfferEntity {
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
     private CategoryEntity categoryByCategoryId;
-    @ManyToOne
-    @JoinColumn(name = "seller_id", referencedColumnName = "id", nullable = false)
-    private CustomerEntity customerBySellerId;
     @OneToMany(mappedBy = "offerByOfferId")
     private Collection<ReportEntity> reportsById;
-
 }
