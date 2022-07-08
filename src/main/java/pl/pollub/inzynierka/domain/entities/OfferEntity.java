@@ -1,15 +1,12 @@
 package pl.pollub.inzynierka.domain.entities;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Collection;
-import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Data
 @Table(name = "offer", schema = "public", catalog = "inzynierka")
 public class OfferEntity {
     @Basic
@@ -52,9 +49,10 @@ public class OfferEntity {
     @Id
     @Column(name = "id", nullable = false)
     private int id;
+
     @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
-    private CustomerEntity customerByCustomerId;
+    @JoinColumn(name = "created_by", referencedColumnName = "id", nullable = false)
+    private CustomerEntity createdBy;
     @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id", nullable = false)
     private StatusEntity statusByStatusId;
@@ -63,4 +61,7 @@ public class OfferEntity {
     private CategoryEntity categoryByCategoryId;
     @OneToMany(mappedBy = "offerByOfferId")
     private Collection<ReportEntity> reportsById;
+    @OneToMany(mappedBy = "offer")
+    private Set<OfferCustomerEntity> grades;
+    //private Collection<OfferCustomerEntity> offerCustomersById;
 }

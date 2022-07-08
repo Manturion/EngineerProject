@@ -3,22 +3,24 @@ package pl.pollub.inzynierka.domain.entities;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
+@Table(name = "offer_customer")
 @Data
-@Table(name = "offer_customer", schema = "public", catalog = "inzynierka")
-@IdClass(OfferCustomerEntityPK.class)
 public class OfferCustomerEntity {
-    @Basic
-    @Column(name = "grade")
+    @EmbeddedId
+    private OfferCustomerKey id;
+
+    @ManyToOne
+    @MapsId("customerId")
+    @JoinColumn(name = "customer_id")
+    private CustomerEntity customer;
+
+    @ManyToOne
+    @MapsId("offerId")
+    @JoinColumn(name = "offer_id")
+    private OfferEntity offer;
+
     private int grade;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "customer_id")
-    private int customerId;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "offer_id")
-    private int offerId;
+
 }

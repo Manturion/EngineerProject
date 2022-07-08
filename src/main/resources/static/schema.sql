@@ -1,15 +1,15 @@
 -- tables
 DROP TABLE IF EXISTS public.Report;
+DROP TABLE IF EXISTS public.Offer_Customer;
 DROP TABLE IF EXISTS public.Offer;
 DROP TABLE IF EXISTS public.Banned_Customer;
+DROP TABLE IF EXISTS public.Customer_Shop;
 DROP TABLE IF EXISTS public.Customer;
 DROP TABLE IF EXISTS public.Shop;
 DROP TABLE IF EXISTS public.Address;
 DROP TABLE IF EXISTS public.City;
 DROP TABLE IF EXISTS public.Status;
 DROP TABLE IF EXISTS public.Category;
-DROP TABLE IF EXISTS public.Offer_Customer;
-DROP TABLE IF EXISTS public.Customer_Shop;
 DROP TABLE IF EXISTS public.Role;
 
 CREATE TABLE IF NOT EXISTS public.City
@@ -83,7 +83,6 @@ CREATE TABLE IF NOT EXISTS public.Customer
     is_banned     BOOLEAN                NOT NULL,
     offer_counter int                    NOT NULL,
     token         character varying(255) NOT NULL,
-    shop_id       int                    NOT NULL,
     role_id       int                    NOT NULL,
     id            int                    NOT NULL
 );
@@ -99,7 +98,7 @@ CREATE TABLE IF NOT EXISTS public.Offer
     start_date   TIMESTAMP              NOT NULL,
     expire_date  TIMESTAMP,
     is_available BOOLEAN                NOT NULL,
-    Customer_id  int                    NOT NULL,
+    created_by  int                    NOT NULL, --zmienić na created_by/created_by_customer_id
     status_id    int                    NOT NULL,
     category_id  int                    NOT NULL,
     id           int                    NOT NULL
@@ -216,11 +215,6 @@ ALTER TABLE Banned_Customer
             REFERENCES Customer (id);
 
 ALTER TABLE Customer
-    ADD CONSTRAINT shop_fk
-        FOREIGN KEY (shop_id)
-            REFERENCES Shop (id);
-
-ALTER TABLE Customer
     ADD CONSTRAINT role_fk
         FOREIGN KEY (role_id)
             REFERENCES Role (id);
@@ -228,7 +222,7 @@ ALTER TABLE Customer
 -- Offer Foreign keys
 ALTER TABLE Offer
     ADD CONSTRAINT Customer_fk
-        FOREIGN KEY (Customer_id)
+        FOREIGN KEY (created_by)
             REFERENCES Customer (id);
 
 ALTER TABLE Offer
@@ -240,3 +234,25 @@ ALTER TABLE Offer
     ADD CONSTRAINT category_fk
         FOREIGN KEY (category_id)
             REFERENCES Category (id);
+
+-- Customer_shop foreign keys
+ALTER TABLE Customer_Shop
+    ADD CONSTRAINT customer_fk
+        FOREIGN KEY (customer_id)
+            REFERENCES Customer (id);
+
+ALTER TABLE Customer_Shop
+    ADD CONSTRAINT shop_fk
+        FOREIGN KEY (shop_id)
+            REFERENCES Shop (id);
+
+-- Offer_Customer foreign keys
+ALTER TABLE Offer_Customer
+    ADD CONSTRAINT customer_fk
+        FOREIGN KEY (customer_id)
+            REFERENCES Customer (id);
+
+ALTER TABLE Offer_Customer
+    ADD CONSTRAINT offer_fk
+        FOREIGN KEY (offer_id)
+            REFERENCES Offer (id);
