@@ -1,14 +1,18 @@
 package pl.pollub.inzynierka.domain.entities;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Set;
 
 @Entity
+@Data
 @Table(name = "offer", schema = "public", catalog = "inzynierka")
-public class OfferEntity {
+public class OfferEntity implements java.io.Serializable {
     @Basic
     @Column(name = "title", nullable = false, length = 255)
     private String title;
@@ -36,15 +40,6 @@ public class OfferEntity {
     @Basic
     @Column(name = "is_available", nullable = false)
     private boolean isAvailable;
-    @Basic
-    @Column(name = "customer_id", nullable = false)
-    private int customerId;
-    @Basic
-    @Column(name = "status_id", nullable = false)
-    private int statusId;
-    @Basic
-    @Column(name = "category_id", nullable = false)
-    private int categoryId;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)

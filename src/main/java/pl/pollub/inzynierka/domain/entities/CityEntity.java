@@ -1,10 +1,13 @@
 package pl.pollub.inzynierka.domain.entities;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@Data
 @Table(name = "city", schema = "public", catalog = "inzynierka")
 public class CityEntity {
     @Basic
@@ -16,41 +19,4 @@ public class CityEntity {
     private int id;
     @OneToMany(mappedBy = "cityByCityId")
     private Collection<AddressEntity> addressesById;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CityEntity that = (CityEntity) o;
-        return id == that.id && Objects.equals(name, that.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, id);
-    }
-
-    public Collection<AddressEntity> getAddressesById() {
-        return addressesById;
-    }
-
-    public void setAddressesById(Collection<AddressEntity> addressesById) {
-        this.addressesById = addressesById;
-    }
 }

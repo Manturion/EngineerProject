@@ -1,10 +1,13 @@
 package pl.pollub.inzynierka.domain.entities;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
 
 @Entity
+@Data
 @Table(name = "customer", schema = "public", catalog = "inzynierka")
 public class CustomerEntity {
     @Basic
@@ -34,12 +37,6 @@ public class CustomerEntity {
     @Basic
     @Column(name = "token", nullable = false, length = 255)
     private String token;
-    @Basic
-    @Column(name = "shop_id", nullable = false)
-    private int shopId;
-    @Basic
-    @Column(name = "role_id", nullable = false)
-    private int roleId;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
@@ -56,8 +53,8 @@ public class CustomerEntity {
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
     private RoleEntity roleByRoleId;
-    @OneToMany(mappedBy = "customerByCustomerId")
-    private Collection<OfferEntity> offersById;
+    //@OneToMany(mappedBy = "customerByCustomerId")
+    //private Collection<OfferEntity> offersById;
     @OneToMany(mappedBy = "customerByCustomerId")
     private Collection<ReportEntity> reportsById;
 
