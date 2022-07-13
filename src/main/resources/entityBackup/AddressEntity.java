@@ -25,7 +25,7 @@ public class AddressEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "city_id", referencedColumnName = "id", nullable = false)
     private CityEntity cityByCityId;

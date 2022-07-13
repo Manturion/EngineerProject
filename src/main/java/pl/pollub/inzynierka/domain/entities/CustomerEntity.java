@@ -40,7 +40,7 @@ public class CustomerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
 
     @ManyToMany
     @JoinTable(name = "customer_shop",

@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 @Data
@@ -16,7 +15,7 @@ public class StatusEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
     @OneToMany(mappedBy = "statusByStatusId")
     private Collection<OfferEntity> offersById;
 }

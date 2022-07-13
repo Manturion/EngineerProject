@@ -3,7 +3,6 @@ package pl.pollub.inzynierka.domain.entities;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,7 +15,7 @@ public class ShopEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
 
     @ManyToMany
     Set<OfferEntity> offers;

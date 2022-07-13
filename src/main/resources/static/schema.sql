@@ -1,6 +1,7 @@
 -- tables
 DROP TABLE IF EXISTS public.Report;
 DROP TABLE IF EXISTS public.Offer_Customer;
+DROP TABLE IF EXISTS public.shop_offers;
 DROP TABLE IF EXISTS public.Offer;
 DROP TABLE IF EXISTS public.Banned_Customer;
 DROP TABLE IF EXISTS public.Customer_Shop;
@@ -15,25 +16,25 @@ DROP TABLE IF EXISTS public.Role;
 CREATE TABLE IF NOT EXISTS public.City
 (
     name character varying(30) NOT NULL UNIQUE,
-    id   int                    NOT NULL
+    id   serial                NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.Status
 (
     name character varying(255) NOT NULL UNIQUE,
-    id   int                    NOT NULL
+    id   serial                 NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.Category
 (
     name character varying(255) NOT NULL UNIQUE,
-    id   int                    NOT NULL
+    id   serial                 NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.Role
 (
     name character varying(20) NOT NULL UNIQUE,
-    id   int                   NOT NULL
+    id   serial                NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.Address
@@ -42,24 +43,24 @@ CREATE TABLE IF NOT EXISTS public.Address
     street_number character varying(5)   NOT NULL,
     flat_number   character varying(5),
     zip_code      character varying(6)   NOT NULL,
-    city_id       int                    NOT NULL,
-    id            int                    NOT NULL
+    city_id       serial                 NOT NULL,
+    id            serial                 NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.Shop
 (
     name       character varying(255) NOT NULL,
-    address_id int                    NOT NULL,
-    id         int                    NOT NULL
+    address_id serial                 NOT NULL,
+    id         serial                 NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.Report
 (
     description text,
     date        TIMESTAMP NOT NULL,
-    offer_id    int       NOT NULL,
-    Customer_id int       NOT NULL,
-    id          int       NOT NULL
+    offer_id    serial    NOT NULL,
+    Customer_id serial    NOT NULL,
+    id          serial    NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.Banned_Customer
@@ -68,14 +69,14 @@ CREATE TABLE IF NOT EXISTS public.Banned_Customer
     expire_date TIMESTAMP NOT NULL,
     reason      text      NOT NULL,
     banned_by   int       NOT NULL,
-    Customer_id int       NOT NULL,
-    id          int       NOT NULL
+    Customer_id serial    NOT NULL,
+    id          serial    NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.Customer
 (
     email         character varying(255) NOT NULL UNIQUE,
-    name  character varying(255) NOT NULL UNIQUE,
+    name          character varying(255) NOT NULL UNIQUE,
     password      character varying(255) NOT NULL,
     salt          character varying(255) NOT NULL,
     phone_number  character varying(15),
@@ -83,8 +84,8 @@ CREATE TABLE IF NOT EXISTS public.Customer
     is_banned     BOOLEAN                NOT NULL,
     offer_counter int                    NOT NULL,
     token         character varying(255) NOT NULL,
-    role_id       int                    NOT NULL,
-    id            int                    NOT NULL
+    role_id       serial                 NOT NULL,
+    id            serial                 NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.Offer
@@ -98,23 +99,23 @@ CREATE TABLE IF NOT EXISTS public.Offer
     start_date   TIMESTAMP              NOT NULL,
     expire_date  TIMESTAMP,
     is_available BOOLEAN                NOT NULL,
-    created_by  int                    NOT NULL, --zmienić na created_by/created_by_customer_id
-    status_id    int                    NOT NULL,
-    category_id  int                    NOT NULL,
-    id           int                    NOT NULL
+    created_by   int                    NOT NULL, --zmienić na created_by/created_by_customer_id
+    status_id    serial                 NOT NULL,
+    category_id  serial                 NOT NULL,
+    id           serial                 NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.Offer_Customer
 (
-    grade       int NOT NULL,
-    customer_id int NOT NULL,
-    offer_id    int NOT NULL
+    grade       int    NOT NULL,
+    customer_id serial NOT NULL,
+    offer_id    serial NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.Customer_Shop
 (
-    customer_id int NOT NULL,
-    shop_id     int NOT NULL
+    customer_id serial NOT NULL,
+    shop_id     serial NOT NULL
 );
 
 -- primary keys

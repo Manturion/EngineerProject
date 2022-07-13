@@ -22,7 +22,7 @@ public class ReportEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "offer_id", referencedColumnName = "id", nullable = false)
     private OfferEntity offerByOfferId;

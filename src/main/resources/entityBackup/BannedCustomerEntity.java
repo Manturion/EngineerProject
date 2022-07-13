@@ -25,7 +25,7 @@ public class BannedCustomerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
     private CustomerEntity customerByCustomerId;

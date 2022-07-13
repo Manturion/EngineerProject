@@ -48,7 +48,7 @@ public class OfferEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "created_by", referencedColumnName = "id", nullable = false)
     private CustomerEntity customerByCreatedBy;

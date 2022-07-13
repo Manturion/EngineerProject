@@ -16,7 +16,7 @@ public class ShopEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
     @OneToMany(mappedBy = "shopByShopId")
     private Collection<CustomerShopEntity> customerShopsById;
     @ManyToOne

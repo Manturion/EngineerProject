@@ -1,9 +1,10 @@
 package pl.pollub.inzynierka.domain.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Collection;
@@ -12,7 +13,9 @@ import java.util.Set;
 @Entity
 @Data
 @Table(name = "offer", schema = "public", catalog = "inzynierka")
-public class OfferEntity implements java.io.Serializable {
+@AllArgsConstructor
+@NoArgsConstructor
+public class OfferEntity {
     @Basic
     @Column(name = "title", nullable = false, length = 255)
     private String title;
@@ -40,10 +43,10 @@ public class OfferEntity implements java.io.Serializable {
     @Basic
     @Column(name = "is_available", nullable = false)
     private boolean isAvailable;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id", nullable = false)
-    private int id;
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "created_by", referencedColumnName = "id", nullable = false)
@@ -59,4 +62,7 @@ public class OfferEntity implements java.io.Serializable {
     @OneToMany(mappedBy = "offer")
     private Set<OfferCustomerEntity> grades;
     //private Collection<OfferCustomerEntity> offerCustomersById;
+
+//    @Enumerated(EnumType.STRING)
+//    private OfferStatus offerStatus;
 }

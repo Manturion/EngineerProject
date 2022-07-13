@@ -13,7 +13,7 @@ public class RoleEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
     @OneToMany(mappedBy = "roleByRoleId")
     private Collection<CustomerEntity> customersById;
 
