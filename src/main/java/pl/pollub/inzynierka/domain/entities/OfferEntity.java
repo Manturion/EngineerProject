@@ -57,8 +57,10 @@ public class OfferEntity {
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
     private CategoryEntity categoryByCategoryId;
-    @OneToMany(mappedBy = "offerByOfferId")
+
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "offerByOfferId")
     private Collection<ReportEntity> reportsById;
+
     @OneToMany(mappedBy = "offer")
     private Set<OfferCustomerEntity> grades;
     //private Collection<OfferCustomerEntity> offerCustomersById;

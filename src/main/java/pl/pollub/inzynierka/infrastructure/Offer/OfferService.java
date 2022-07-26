@@ -1,4 +1,4 @@
-package pl.pollub.inzynierka.infrastructure;
+package pl.pollub.inzynierka.infrastructure.Offer;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,5 +24,8 @@ public class OfferService {
         return offerPort.createOffer(createOfferDto);
     }
 
+    public Long deleteOffer(Long id) {
+        return offerPort.deleteOffer(id);
+    }
 
 }

@@ -1,4 +1,4 @@
-package pl.pollub.inzynierka.infrastructure;
+package pl.pollub.inzynierka.infrastructure.Offer;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package pl.pollub.inzynierka.infrastructure;
+package pl.pollub.inzynierka.infrastructure.Offer;
 
 import lombok.Getter;
 import lombok.Setter;

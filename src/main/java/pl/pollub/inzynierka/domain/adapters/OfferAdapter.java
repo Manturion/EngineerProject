@@ -8,9 +8,9 @@ import pl.pollub.inzynierka.domain.repositories.CategoryRepository;
 import pl.pollub.inzynierka.domain.repositories.CustomerRepository;
 import pl.pollub.inzynierka.domain.repositories.OfferRepository;
 import pl.pollub.inzynierka.domain.repositories.StatusRepository;
-import pl.pollub.inzynierka.infrastructure.CreateOfferDto;
-import pl.pollub.inzynierka.infrastructure.OfferDto;
-import pl.pollub.inzynierka.infrastructure.OfferPort;
+import pl.pollub.inzynierka.infrastructure.Offer.CreateOfferDto;
+import pl.pollub.inzynierka.infrastructure.Offer.OfferDto;
+import pl.pollub.inzynierka.infrastructure.Offer.OfferPort;
 
 import java.util.List;
 
@@ -54,6 +54,12 @@ public class OfferAdapter implements OfferPort {
                 .ifPresent(offerEntity::setCategoryByCategoryId);
         OfferEntity savedEntity = offerRepository.save(offerEntity);
         return savedEntity.getId();
+    }
+
+    @Override
+    public Long deleteOffer(Long id) {
+        offerRepository.deleteById(id);
+        return id;
     }
 
     private OfferEntity mapToEntity(CreateOfferDto offerDto) {
