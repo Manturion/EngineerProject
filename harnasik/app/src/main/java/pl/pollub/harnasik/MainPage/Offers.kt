@@ -1,9 +1,7 @@
 package pl.pollub.harnasik.MainPage
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.OutlinedButton
@@ -19,34 +17,33 @@ import androidx.compose.ui.unit.dp
 import pl.pollub.harnasik.R
 
 @Composable
-fun OfferDetailsOnMainPage(names: List<String> = List(10){"$it"}) {
+fun GenerateListOfAllOffersLoaded(names: List<String> = List(10) { "$it" }) {
     LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
-        items (items = names) { name ->
-            GenerateBlocksWithOffers(name = name)
+        items(items = names) { name ->
+            GenerateBlocksWithSingleOffer(name = name)
         }
     }
 }
 
 @Composable
-private fun GenerateBlocksWithOffers(name: String) {
+private fun GenerateBlocksWithSingleOffer(name: String) {
 
     val expanded = remember { mutableStateOf(false) }
 
-    val extraPadding = if (expanded.value) 48.dp else 0.dp
-
     Surface(
-
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
         Row(modifier = Modifier.padding(24.dp)) {
             Image(
                 painter = painterResource(id = R.drawable.ic_launcher_background),
-                contentDescription = "Offer description"
+                contentDescription = "Offer description",
+                modifier = Modifier
+                    .height(75.dp)
+                    .width(75.dp)
             )
             Column(
                 modifier = Modifier
                     .weight(1f)
-                    .padding(bottom = extraPadding)
             ) {
                 Text(
                     text = "Oferta $name",
@@ -61,13 +58,7 @@ private fun GenerateBlocksWithOffers(name: String) {
                 ) {
                     Text(if (expanded.value) "+1" else "-1")
                 }
-                OutlinedButton(
-                    onClick = { expanded.value = !expanded.value }
-                ) {
-                    Text(if (expanded.value) "-1" else "+1")
-                }
             }
-
         }
     }
 }
