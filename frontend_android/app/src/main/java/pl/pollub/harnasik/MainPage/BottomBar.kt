@@ -17,7 +17,7 @@ fun BottomBar() {
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
-            .height(60.dp)
+            .height(48.dp)
             .background(color = MaterialTheme.colorScheme.primary)
             .fillMaxSize()
 
