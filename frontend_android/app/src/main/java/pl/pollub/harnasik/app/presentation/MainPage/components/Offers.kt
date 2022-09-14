@@ -1,9 +1,11 @@
-package pl.pollub.harnasik.MainPage
+package pl.pollub.harnasik.app.presentation.MainPage
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -15,6 +17,28 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import pl.pollub.harnasik.R
+
+@Composable
+fun CategorySlideBar(categories: List<String> = List(10){"Category $it"}){
+    LazyRow(){
+        items(items = categories){ category ->
+            SingleCategoryButton(name = category)
+            
+        }
+    }
+}
+
+@Composable
+fun SingleCategoryButton(name:String) {
+    Button(
+        onClick = { /*TODO*/ },
+        modifier = Modifier
+            .padding(all = 4.dp)
+    ) {
+        Text(text = name)
+    }
+}
+
 
 @Composable
 fun GenerateListOfAllOffersLoaded(names: List<String> = List(10) { "$it" }) {
@@ -31,9 +55,12 @@ private fun GenerateBlocksWithSingleOffer(name: String) {
     val expanded = remember { mutableStateOf(false) }
 
     Surface(
+        onClick = {},
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+
     ) {
         Row(modifier = Modifier.padding(24.dp)) {
+
             Image(
                 painter = painterResource(id = R.drawable.ic_launcher_background),
                 contentDescription = "Offer description",
