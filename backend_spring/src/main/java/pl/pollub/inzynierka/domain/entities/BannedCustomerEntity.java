@@ -16,7 +16,7 @@ public class BannedCustomerEntity {
     @Column(name = "expire_date", nullable = false)
     private Timestamp expireDate;
     @Basic
-    @Column(name = "reason", nullable = false, length = -1)
+    @Column(name = "reason", nullable = false)
     private String reason;
     @Basic
     @Column(name = "banned_by", nullable = false)
