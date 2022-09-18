@@ -20,19 +20,19 @@ public class OfferEntity {
     @Column(name = "title", nullable = false, length = 255)
     private String title;
     @Basic
-    @Column(name = "description", nullable = false, length = -1)
+    @Column(name = "description", nullable = false)
     private String description;
     @Basic
     @Column(name = "image", nullable = false, length = 255)
     private String image;
     @Basic
-    @Column(name = "old_price", nullable = true, precision = 2)
+    @Column(name = "old_price", nullable = true, precision = 9, scale = 2)
     private BigDecimal oldPrice;
     @Basic
-    @Column(name = "new_prize", nullable = true, precision = 2)
+    @Column(name = "new_prize", nullable = true , precision = 9, scale = 2)
     private BigDecimal newPrize;
     @Basic
-    @Column(name = "gps", nullable = false, precision = 2)
+    @Column(name = "gps", nullable = false, precision = 12, scale = 2)
     private BigDecimal gps;
     @Basic
     @Column(name = "start_date", nullable = false)
@@ -49,7 +49,7 @@ public class OfferEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "created_by", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "created_by_customer_id", referencedColumnName = "id", nullable = false)
     private CustomerEntity createdBy;
     @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id", nullable = false)
@@ -63,8 +63,5 @@ public class OfferEntity {
 
     @OneToMany(mappedBy = "offer")
     private Set<OfferCustomerEntity> grades;
-    //private Collection<OfferCustomerEntity> offerCustomersById;
 
-//    @Enumerated(EnumType.STRING)
-//    private OfferStatus offerStatus;
 }

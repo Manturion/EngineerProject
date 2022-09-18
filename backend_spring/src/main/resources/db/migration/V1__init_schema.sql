@@ -1,43 +1,43 @@
 -- tables
-DROP TABLE IF EXISTS public.Report;
-DROP TABLE IF EXISTS public.Offer_Customer;
-DROP TABLE IF EXISTS public.shop_offers;
-DROP TABLE IF EXISTS public.Offer;
-DROP TABLE IF EXISTS public.Banned_Customer;
-DROP TABLE IF EXISTS public.Customer_Shop;
-DROP TABLE IF EXISTS public.Customer;
-DROP TABLE IF EXISTS public.Shop;
-DROP TABLE IF EXISTS public.Address;
-DROP TABLE IF EXISTS public.City;
-DROP TABLE IF EXISTS public.Status;
-DROP TABLE IF EXISTS public.Category;
-DROP TABLE IF EXISTS public.Role;
+DROP TABLE IF EXISTS Report;
+DROP TABLE IF EXISTS Offer_Customer;
+DROP TABLE IF EXISTS shop_offers;
+DROP TABLE IF EXISTS Offer;
+DROP TABLE IF EXISTS Banned_Customer;
+DROP TABLE IF EXISTS Customer_Shop;
+DROP TABLE IF EXISTS Customer;
+DROP TABLE IF EXISTS Shop;
+DROP TABLE IF EXISTS Address;
+DROP TABLE IF EXISTS City;
+DROP TABLE IF EXISTS Status;
+DROP TABLE IF EXISTS Category;
+DROP TABLE IF EXISTS Role;
 
-CREATE TABLE IF NOT EXISTS public.City
+CREATE TABLE IF NOT EXISTS City
 (
     name character varying(30) NOT NULL UNIQUE,
     id   serial                NOT NULL
-);
+    );
 
-CREATE TABLE IF NOT EXISTS public.Status
+CREATE TABLE IF NOT EXISTS Status
 (
     name character varying(255) NOT NULL UNIQUE,
     id   serial                 NOT NULL
-);
+    );
 
-CREATE TABLE IF NOT EXISTS public.Category
+CREATE TABLE IF NOT EXISTS Category
 (
     name character varying(255) NOT NULL UNIQUE,
     id   serial                 NOT NULL
-);
+    );
 
-CREATE TABLE IF NOT EXISTS public.Role
+CREATE TABLE IF NOT EXISTS Role
 (
     name character varying(20) NOT NULL UNIQUE,
     id   serial                NOT NULL
-);
+    );
 
-CREATE TABLE IF NOT EXISTS public.Address
+CREATE TABLE IF NOT EXISTS Address
 (
     street_name   character varying(255) NOT NULL,
     street_number character varying(5)   NOT NULL,
@@ -45,16 +45,16 @@ CREATE TABLE IF NOT EXISTS public.Address
     zip_code      character varying(6)   NOT NULL,
     city_id       serial                 NOT NULL,
     id            serial                 NOT NULL
-);
+    );
 
-CREATE TABLE IF NOT EXISTS public.Shop
+CREATE TABLE IF NOT EXISTS Shop
 (
     name       character varying(255) NOT NULL,
     address_id serial                 NOT NULL,
     id         serial                 NOT NULL
-);
+    );
 
-CREATE TABLE IF NOT EXISTS public.Report
+CREATE TABLE IF NOT EXISTS Report
 (
     description text,
     date        TIMESTAMP NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS public.Report
     id          serial    NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS public.Banned_Customer
+CREATE TABLE IF NOT EXISTS Banned_Customer
 (
     ban_date    TIMESTAMP NOT NULL,
     expire_date TIMESTAMP NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS public.Banned_Customer
     id          serial    NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS public.Customer
+CREATE TABLE IF NOT EXISTS Customer
 (
     email         character varying(255) NOT NULL UNIQUE,
     name          character varying(255) NOT NULL UNIQUE,
@@ -86,9 +86,9 @@ CREATE TABLE IF NOT EXISTS public.Customer
     token         character varying(255) NOT NULL,
     role_id       serial                 NOT NULL,
     id            serial                 NOT NULL
-);
+    );
 
-CREATE TABLE IF NOT EXISTS public.Offer
+CREATE TABLE IF NOT EXISTS Offer
 (
     title        character varying(255) NOT NULL,
     description  text                   NOT NULL,
@@ -99,20 +99,20 @@ CREATE TABLE IF NOT EXISTS public.Offer
     start_date   TIMESTAMP              NOT NULL,
     expire_date  TIMESTAMP,
     is_available BOOLEAN                NOT NULL,
-    created_by   int                    NOT NULL, --zmienić na created_by/created_by_customer_id
+    created_by_customer_id   int        NOT NULL,
     status_id    serial                 NOT NULL,
     category_id  serial                 NOT NULL,
     id           serial                 NOT NULL
-);
+    );
 
-CREATE TABLE IF NOT EXISTS public.Offer_Customer
+CREATE TABLE IF NOT EXISTS Offer_Customer
 (
     grade       int    NOT NULL,
     customer_id serial NOT NULL,
     offer_id    serial NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS public.Customer_Shop
+CREATE TABLE IF NOT EXISTS Customer_Shop
 (
     customer_id serial NOT NULL,
     shop_id     serial NOT NULL
@@ -223,7 +223,7 @@ ALTER TABLE Customer
 -- Offer Foreign keys
 ALTER TABLE Offer
     ADD CONSTRAINT Customer_fk
-        FOREIGN KEY (created_by)
+        FOREIGN KEY (created_by_customer_id)
             REFERENCES Customer (id);
 
 ALTER TABLE Offer

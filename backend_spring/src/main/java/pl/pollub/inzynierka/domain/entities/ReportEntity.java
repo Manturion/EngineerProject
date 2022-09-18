@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 @Table(name = "report", schema = "public", catalog = "inzynierka")
 public class ReportEntity {
     @Basic
-    @Column(name = "description", nullable = true, length = -1)
+    @Column(name = "description", nullable = true)
     private String description;
     @Basic
     @Column(name = "date", nullable = false)
