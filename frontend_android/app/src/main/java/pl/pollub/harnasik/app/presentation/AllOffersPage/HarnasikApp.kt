@@ -10,13 +10,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.launch
 import pl.pollub.harnasik.R
-import pl.pollub.harnasik.app.presentation.Drawer.DrawerBody
-import pl.pollub.harnasik.app.presentation.Drawer.DrawerHeader
-import pl.pollub.harnasik.app.presentation.Drawer.MenuItem
-import pl.pollub.harnasik.app.presentation.MainPage.AppBar
-import pl.pollub.harnasik.app.presentation.MainPage.BottomBar
-import pl.pollub.harnasik.app.presentation.MainPage.CategorySlideBar
-import pl.pollub.harnasik.app.presentation.MainPage.GenerateListOfAllOffersLoaded
+import pl.pollub.harnasik.app.core.Drawer.DrawerBody
+import pl.pollub.harnasik.app.core.Drawer.DrawerHeader
+import pl.pollub.harnasik.app.core.Drawer.MenuItem
+import pl.pollub.harnasik.app.presentation.AllOffersPage.AppBar
+import pl.pollub.harnasik.app.core.BottomBar.BottomBar
+import pl.pollub.harnasik.app.presentation.AllOffersPage.CategorySlideBar
+import pl.pollub.harnasik.app.presentation.AllOffersPage.GenerateListOfAllOffersLoaded
 import pl.pollub.harnasik.ui.theme.HarnasikTheme
 
 

@@ -13,6 +13,7 @@ import pl.pollub.inzynierka.infrastructure.Offer.OfferDto;
 import pl.pollub.inzynierka.infrastructure.Offer.OfferPort;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -26,21 +27,13 @@ public class OfferAdapter implements OfferPort {
 
     @Override
     public List<OfferDto> getAllOffers() {
-        if (offerRepository.getAllOffers() == null) {
-            return null;
-        }
         return offerRepository.getAllOffers();
     }
 
     @Override
-    public OfferDto getOfferById(int id) {
-        OfferDto offer = offerRepository.getOfferById(id);
-        if (offer == null) {
-            return null;
-        } else if (offer.getId() != id) {
-            return null;
-        }
-        return offerRepository.getOfferById(id);
+    public Optional<OfferDto> getOfferById(Long id) {
+
+        return Optional.<OfferDto>ofNullable(offerRepository.getOfferById(id));
     }
 
     @Override
@@ -60,6 +53,13 @@ public class OfferAdapter implements OfferPort {
     public Long deleteOffer(Long id) {
         offerRepository.deleteById(id);
         return id;
+    }
+
+    @Override
+    public List<OfferDto> getAllOffersBelongingToUser(Long id) {
+        offerRepository.getAllOffers();
+        /*TODO  fetch offers belonging to user */
+        return null;
     }
 
     private OfferEntity mapToEntity(CreateOfferDto offerDto) {

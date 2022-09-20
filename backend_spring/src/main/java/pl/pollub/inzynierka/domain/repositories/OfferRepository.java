@@ -13,6 +13,6 @@ public interface OfferRepository extends JpaRepository<OfferEntity, Long> {
     List<OfferDto> getAllOffers();
 
     @Query("select new pl.pollub.inzynierka.infrastructure.Offer.OfferDto(o.title,o.description,o.image,o.oldPrice,o.newPrize,o.gps,o.startDate,o.expireDate,o.isAvailable, o.categoryByCategoryId.id, o.id) from OfferEntity o where o.id = :id")
-    OfferDto getOfferById(int id);
+    OfferDto getOfferById(Long id);
 
 }
