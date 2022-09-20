@@ -34,6 +34,9 @@ class OfferServiceImpl(
             println("Error: ${e.message}")
             emptyList()
         }
+        finally {
+            client.close()
+        }
     }
 
     override suspend fun createPost(postRequest: OfferRequest): OfferResponse? {
