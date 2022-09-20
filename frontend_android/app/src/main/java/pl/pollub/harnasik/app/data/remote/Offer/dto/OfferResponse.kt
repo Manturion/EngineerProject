@@ -1,10 +1,6 @@
 package pl.pollub.harnasik.app.data.remote.Offer.dto
 
-import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
-import java.math.BigDecimal
-import java.sql.Date
-import java.util.*
 
 
 @Serializable

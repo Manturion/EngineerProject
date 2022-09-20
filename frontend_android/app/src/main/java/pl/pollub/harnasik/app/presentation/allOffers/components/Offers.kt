@@ -55,6 +55,7 @@ fun getAllOffers() {
 @Composable
 fun GenerateListOfAllOffersLoaded(offers: State<List<OfferResponse>>) {
     LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
+
         items(offers.value) {
 
             val expanded = remember { mutableStateOf(false) }
@@ -93,48 +94,6 @@ fun GenerateListOfAllOffersLoaded(offers: State<List<OfferResponse>>) {
                     }
                 }
             }
-
         }
     }
 }
-//
-//@Composable
-//private fun GenerateBlocksWithSingleOffer(name: List<OfferResponse>) {
-//
-//    val expanded = remember { mutableStateOf(false) }
-//
-//    Surface(
-//        onClick = {},
-//        modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
-//
-//    ) {
-//        Row(modifier = Modifier.padding(24.dp)) {
-//
-//            Image(
-//                painter = painterResource(id = R.drawable.ic_launcher_background),
-//                contentDescription = "Offer description",
-//                modifier = Modifier
-//                    .height(75.dp)
-//                    .width(75.dp)
-//            )
-//            Column(
-//                modifier = Modifier
-//                    .weight(1f)
-//            ) {
-//                Text(
-//                    text = "Oferta $name",
-//                    fontWeight = FontWeight.Bold
-//                )
-//                Text(text = "Opis oferty trala lala laa")
-//
-//            }
-//            Column() {
-//                OutlinedButton(
-//                    onClick = { expanded.value = !expanded.value }
-//                ) {
-//                    Text(if (expanded.value) "+1" else "-1")
-//                }
-//            }
-//        }
-//    }
-//}

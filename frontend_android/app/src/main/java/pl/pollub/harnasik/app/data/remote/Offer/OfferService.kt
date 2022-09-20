@@ -20,7 +20,7 @@ interface OfferService {
         fun create(): OfferService {
             return OfferServiceImpl(
                 client = HttpClient(Android) {
-                    install(Logging){
+                    install(Logging) {
                         level = LogLevel.ALL
                     }
                     install(JsonFeature) {
