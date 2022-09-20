@@ -13,16 +13,17 @@ import pl.pollub.harnasik.R
 import pl.pollub.harnasik.app.core.Drawer.DrawerBody
 import pl.pollub.harnasik.app.core.Drawer.DrawerHeader
 import pl.pollub.harnasik.app.core.Drawer.MenuItem
-import pl.pollub.harnasik.app.presentation.AllOffersPage.AppBar
+import pl.pollub.harnasik.app.presentation.allOffers.AppBar
 import pl.pollub.harnasik.app.core.BottomBar.BottomBar
-import pl.pollub.harnasik.app.presentation.AllOffersPage.CategorySlideBar
-import pl.pollub.harnasik.app.presentation.AllOffersPage.GenerateListOfAllOffersLoaded
+import pl.pollub.harnasik.app.presentation.allOffers.CategorySlideBar
+import pl.pollub.harnasik.app.presentation.allOffers.GenerateListOfAllOffersLoaded
+import pl.pollub.harnasik.app.presentation.allOffers.getAllOffers
 import pl.pollub.harnasik.ui.theme.HarnasikTheme
 
 
 @ExperimentalMaterial3Api
 @Composable
-fun HarnasikApp() {
+fun AllOffersScreen() {
 
     HarnasikTheme {
 
@@ -53,9 +54,9 @@ fun HarnasikApp() {
                 )
             },
             content = {
-                Column() {
+                Column {
                     CategorySlideBar()
-                    GenerateListOfAllOffersLoaded()
+                    getAllOffers()
                 }
 
                       },

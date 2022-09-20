@@ -11,8 +11,8 @@ import java.util.Date;
 public class OfferDto extends OfferDtoTemplate {
     private Long id;
 
-    public OfferDto(String title, String description, String image, BigDecimal oldPrice, BigDecimal newPrize, BigDecimal gps, Date startDate, Date expireDate, boolean isAvailable, Long categoryId, Long id) {
-        super(title, description, image, oldPrice, newPrize, gps, startDate, expireDate, isAvailable, categoryId);
+    public OfferDto(String title, String description, String image, BigDecimal oldPrice, BigDecimal newPrice, BigDecimal gps, Date startDate, Date expireDate, boolean isAvailable, Long categoryId, Long id) {
+        super(title, description, image, oldPrice, newPrice, gps, startDate, expireDate, isAvailable, categoryId);
         this.id = id;
     }
 }

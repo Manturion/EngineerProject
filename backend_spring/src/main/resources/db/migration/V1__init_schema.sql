@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS Offer
     description  text                   NOT NULL,
     image        character varying(255) NOT NULL,
     old_price    NUMERIC(9, 2),
-    new_prize    NUMERIC(9, 2),
+    new_price    NUMERIC(9, 2),
     gps          NUMERIC(15, 2)         NOT NULL,
     start_date   TIMESTAMP              NOT NULL,
     expire_date  TIMESTAMP,
