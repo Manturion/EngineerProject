@@ -39,12 +39,14 @@ public class OfferAdapter implements OfferPort {
     @Override
     public Long createOffer(CreateOfferDto offerDto) {
         OfferEntity offerEntity = mapToEntity(offerDto);
-        customerRepository.findById(1L)
+
+        customerRepository.findById(offerEntity.getCreatedBy().getId())
                 .ifPresent(offerEntity::setCreatedBy);
-        statusRepository.findById(1L)
+        statusRepository.findById(offerEntity.getStatusByStatusId().getId())
                 .ifPresent(offerEntity::setStatusByStatusId);
-        categoryRepository.findById(offerDto.getCategoryId())
+        categoryRepository.findById(offerEntity.getCategoryByCategoryId().getId())
                 .ifPresent(offerEntity::setCategoryByCategoryId);
+
         OfferEntity savedEntity = offerRepository.save(offerEntity);
         return savedEntity.getId();
     }
