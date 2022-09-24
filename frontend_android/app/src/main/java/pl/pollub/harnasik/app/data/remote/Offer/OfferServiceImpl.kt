@@ -12,7 +12,7 @@ class OfferServiceImpl(
     private val client: HttpClient
 ) : OfferService {
 
-    override suspend fun getOfferById(id: Long): OfferResponse? {
+    override suspend fun getOfferById(id: Int): OfferResponse? {
         return try {
             client.get{
                 url(HttpRoutes.OFFER)

@@ -15,6 +15,9 @@ import androidx.compose.ui.unit.dp
 import pl.pollub.harnasik.R
 import pl.pollub.harnasik.app.data.remote.Offer.OfferService
 import pl.pollub.harnasik.app.data.remote.Offer.dto.OfferResponse
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import pl.pollub.harnasik.app.util.Screen
 
 @Composable
 fun CategorySlideBar(categories: List<String> = List(10) { "Category $it" }) {
@@ -37,7 +40,7 @@ fun SingleCategoryButton(name: String) {
 }
 
 @Composable
-fun getAllOffers() {
+fun getAllOffers(navController: NavController) {
     val service = OfferService.create()
     val offers = produceState<List<OfferResponse>>(
         initialValue = emptyList(),
@@ -45,11 +48,14 @@ fun getAllOffers() {
             value = service.getAllOffers()
         })
 
-    GenerateListOfAllOffersLoaded(offers)
+    GenerateListOfAllOffersLoaded(offers,navController)
 }
 
 @Composable
-fun GenerateListOfAllOffersLoaded(offers: State<List<OfferResponse>>) {
+fun GenerateListOfAllOffersLoaded(
+    offers: State<List<OfferResponse>>,
+    navController: NavController
+) {
 
     if (offers.value.isEmpty()) {
         Column(
@@ -70,7 +76,9 @@ fun GenerateListOfAllOffersLoaded(offers: State<List<OfferResponse>>) {
             val expanded = remember { mutableStateOf(false) }
 
             Surface(
-                onClick = {},
+                onClick = {
+                    navController.navigate(Screen.SingleOfferScreen.route)
+                },
                 modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
             ) {
                 Row(modifier = Modifier.padding(24.dp)) {

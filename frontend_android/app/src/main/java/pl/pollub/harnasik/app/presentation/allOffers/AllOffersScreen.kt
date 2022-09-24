@@ -8,6 +8,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import kotlinx.coroutines.launch
 import pl.pollub.harnasik.R
 import pl.pollub.harnasik.app.core.BottomBar.BottomBar
@@ -22,7 +24,7 @@ import pl.pollub.harnasik.ui.theme.HarnasikTheme
 
 @ExperimentalMaterial3Api
 @Composable
-fun AllOffersScreen() {
+fun AllOffersScreen(navController: NavController) {
 
     HarnasikTheme {
 
@@ -55,7 +57,7 @@ fun AllOffersScreen() {
             content = {
                 Column {
                     CategorySlideBar()
-                    getAllOffers()
+                    getAllOffers(navController)
                 }
 
             },
