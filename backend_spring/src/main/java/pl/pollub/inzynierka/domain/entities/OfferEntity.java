@@ -29,8 +29,8 @@ public class OfferEntity {
     @Column(name = "old_price", nullable = true, precision = 9, scale = 2)
     private BigDecimal oldPrice;
     @Basic
-    @Column(name = "new_prize", nullable = true , precision = 9, scale = 2)
-    private BigDecimal newPrize;
+    @Column(name = "new_price", nullable = true , precision = 9, scale = 2)
+    private BigDecimal newPrice;
     @Basic
     @Column(name = "gps", nullable = false, precision = 12, scale = 2)
     private BigDecimal gps;

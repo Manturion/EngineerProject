@@ -9,30 +9,31 @@ import pl.pollub.inzynierka.infrastructure.Offer.OfferDto;
 import pl.pollub.inzynierka.infrastructure.Offer.OfferService;
 
 import java.util.List;
+import java.util.Optional;
 
-@RequestMapping("/api")
+@RequestMapping("/api/offer")
 @Controller
 @RequiredArgsConstructor
 public class OfferController {
 
     private final OfferService offerService;
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     @ResponseBody
-    public OfferDto getOfferById(@PathVariable int id) {
+    public Optional<OfferDto> getOfferId(@PathVariable Long id) {
         return offerService.getOfferById(id);
     }
 
-    @GetMapping("/users")
+    @GetMapping("/user/{id}")
     @ResponseBody
-    public List<OfferDto> getAllOffers() {
-        return offerService.getAllOffers();
+    public List<OfferDto> getAllOffersBelongingToUser(@PathVariable Long id) {
+        return offerService.getAllOffersBelongingToUser(id);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping
     @ResponseBody
-    public String hello(@PathVariable int id) {
-        return "id" + id;
+    public List<OfferDto> getAllOffers(){
+        return offerService.getAllOffers();
     }
 
     @PostMapping("/create")
@@ -45,7 +46,5 @@ public class OfferController {
         return ResponseEntity.ok(offerService.deleteOffer(id));
     }
 
-//    @PutMapping("/edit/{id}")
-//    public
 
 }

@@ -1,4 +1,4 @@
-package pl.pollub.harnasik.app.presentation.MainPage
+package pl.pollub.harnasik.app.core.BottomBar
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

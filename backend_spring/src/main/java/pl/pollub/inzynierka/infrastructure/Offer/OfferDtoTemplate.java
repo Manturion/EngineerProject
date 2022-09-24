@@ -18,7 +18,7 @@ public abstract class OfferDtoTemplate {
     protected String description;
     protected String image;
     protected BigDecimal oldPrice;
-    protected BigDecimal newPrize;
+    protected BigDecimal newPrice;
     protected BigDecimal gps;
     @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss")
     protected Date startDate;

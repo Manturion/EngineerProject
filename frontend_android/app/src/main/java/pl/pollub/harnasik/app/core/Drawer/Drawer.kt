@@ -1,4 +1,4 @@
-package pl.pollub.harnasik.app.presentation.Drawer
+package pl.pollub.harnasik.app.core.Drawer
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*

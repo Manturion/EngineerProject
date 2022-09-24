@@ -1,4 +1,4 @@
-package pl.pollub.harnasik.app.presentation.Drawer
+package pl.pollub.harnasik.app.core.Drawer
 
 import androidx.compose.ui.graphics.vector.ImageVector
 
