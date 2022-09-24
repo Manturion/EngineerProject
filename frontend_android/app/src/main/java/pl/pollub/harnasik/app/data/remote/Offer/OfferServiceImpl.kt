@@ -11,10 +11,23 @@ import pl.pollub.harnasik.app.data.remote.Offer.dto.OfferResponse
 class OfferServiceImpl(
     private val client: HttpClient
 ) : OfferService {
-    override suspend fun getOffers(): List<OfferResponse> {
+
+    override suspend fun getOfferById(id: Long): OfferResponse? {
+        return try {
+            client.get{
+                url(HttpRoutes.OFFER)
+            }
+        }catch (e: RedirectResponseException){
+            println("Error: ${e.response.status.description}")
+            null
+        }
+    }
+
+
+    override suspend fun getAllOffers(): List<OfferResponse> {
         return try {
             client.get {
-                url(HttpRoutes.OFFER)
+                url(HttpRoutes.ALL_OFFERS)
             }
 
         } catch (e: RedirectResponseException) {
@@ -39,10 +52,10 @@ class OfferServiceImpl(
         }
     }
 
-    override suspend fun createPost(postRequest: OfferRequest): OfferResponse? {
+    override suspend fun createOffer(postRequest: OfferRequest): OfferResponse? {
         return try {
             client.post<OfferResponse> {
-                url(HttpRoutes.OFFER)
+                url(HttpRoutes.ALL_OFFERS)
                 contentType(ContentType.Application.Json)
                 body = postRequest
             }

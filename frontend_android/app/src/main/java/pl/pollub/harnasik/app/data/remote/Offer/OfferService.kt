@@ -12,9 +12,11 @@ import pl.pollub.harnasik.app.data.remote.Offer.dto.OfferResponse
 
 interface OfferService {
 
-    suspend fun getOffers(): List<OfferResponse>
+    suspend fun getOfferById(id: Long): OfferResponse?
 
-    suspend fun createPost(postRequest: OfferRequest): OfferResponse?
+    suspend fun getAllOffers(): List<OfferResponse>
+
+    suspend fun createOffer(postRequest: OfferRequest): OfferResponse?
 
     companion object {
         fun create(): OfferService {
