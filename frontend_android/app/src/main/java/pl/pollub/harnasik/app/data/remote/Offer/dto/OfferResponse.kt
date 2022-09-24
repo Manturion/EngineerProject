@@ -1,6 +1,7 @@
 package pl.pollub.harnasik.app.data.remote.Offer.dto
 
 import kotlinx.serialization.Serializable
+import pl.pollub.harnasik.app.domain.model.OfferModel
 
 
 @Serializable
@@ -17,3 +18,19 @@ data class OfferResponse(
     val id: Long,
     val available: Boolean
 )
+
+fun OfferResponse.toOffer(): OfferModel {
+    return OfferModel(
+        title = title,
+        description = description,
+        image = image,
+        oldPrice = oldPrice,
+        newPrice = newPrice,
+        gps = gps,
+        startDate = startDate,
+        expireDate = expireDate,
+        categoryId = categoryId,
+        id = id,
+        available = available
+    )
+}

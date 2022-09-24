@@ -8,15 +8,17 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 import pl.pollub.harnasik.R
 import pl.pollub.harnasik.app.core.BottomBar.BottomBar
 import pl.pollub.harnasik.app.core.Drawer.DrawerBody
 import pl.pollub.harnasik.app.core.Drawer.DrawerHeader
-import pl.pollub.harnasik.app.presentation.allOffers.AppBar
-import pl.pollub.harnasik.app.presentation.allOffers.CategorySlideBar
-import pl.pollub.harnasik.app.presentation.allOffers.getAllOffers
+import pl.pollub.harnasik.app.presentation.offers.AppBar
+import pl.pollub.harnasik.app.presentation.offers.CategorySlideBar
+import pl.pollub.harnasik.app.presentation.offers.OffersViewModel
+import pl.pollub.harnasik.app.presentation.offers.getAllOffers
 import pl.pollub.harnasik.ui.theme.HarnasikTheme
 
 
@@ -24,6 +26,9 @@ import pl.pollub.harnasik.ui.theme.HarnasikTheme
 @ExperimentalAnimationApi
 @Composable
 fun AllOffersScreen(navController: NavController) {
+
+    val viewModel = hiltViewModel<OffersViewModel>()
+    val state = viewModel.state.value
 
     HarnasikTheme {
 
@@ -49,7 +54,7 @@ fun AllOffersScreen(navController: NavController) {
             content = {
                 Column {
                     CategorySlideBar()
-                    getAllOffers(navController)
+                    getAllOffers(state, navController)
                 }
 
             },

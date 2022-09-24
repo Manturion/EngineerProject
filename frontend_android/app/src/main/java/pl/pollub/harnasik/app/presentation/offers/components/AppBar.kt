@@ -1,4 +1,4 @@
-package pl.pollub.harnasik.app.presentation.allOffers
+package pl.pollub.harnasik.app.presentation.offers
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
