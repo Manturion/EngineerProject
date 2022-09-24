@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -19,9 +20,9 @@ fun DrawerHeader() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(all = 64.dp)            ,
+            .padding(all = 64.dp),
 
-    ) {
+        ) {
         Text(text = "Harnasik", fontSize = 36.sp)
         Icon(imageVector = Icons.Rounded.AccountCircle, contentDescription = "LOGO")
     }
@@ -29,13 +30,21 @@ fun DrawerHeader() {
 
 @Composable
 fun DrawerBody(
-    items: List<MenuItem>,
     modifier: Modifier = Modifier,
     itemTextStyle: TextStyle = TextStyle(fontSize = 18.sp),
     onItemClick: (MenuItem) -> Unit
 ) {
+
+    val menuItems = listOf(
+        MenuItem(id = "myOffers", title = "My Offers", icon = Icons.Default.Add),
+        MenuItem(id = "help", title = "Help", icon = Icons.Default.Add),
+        MenuItem(id = "aboutUs", title = "About Us", icon = Icons.Default.Add),
+        MenuItem(id = "contact", title = "Contact", icon = Icons.Default.Add),
+        MenuItem(id = "logout", title = "Logout", icon = Icons.Default.Add),
+    )
+
     LazyColumn(modifier) {
-        items(items) { item ->
+        items(menuItems) { item ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -57,5 +66,4 @@ fun DrawerBody(
             }
         }
     }
-
 }

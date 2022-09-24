@@ -12,11 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import pl.pollub.harnasik.R
 import pl.pollub.harnasik.app.data.remote.Offer.OfferService
 import pl.pollub.harnasik.app.data.remote.Offer.dto.OfferResponse
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import pl.pollub.harnasik.app.util.Screen
 
 @Composable
@@ -48,7 +47,7 @@ fun getAllOffers(navController: NavController) {
             value = service.getAllOffers()
         })
 
-    GenerateListOfAllOffersLoaded(offers,navController)
+    GenerateListOfAllOffersLoaded(offers, navController)
 }
 
 @Composable
@@ -77,7 +76,10 @@ fun GenerateListOfAllOffersLoaded(
 
             Surface(
                 onClick = {
-                    navController.navigate(Screen.SingleOfferScreen.route)
+                    navController.navigate(
+                        Screen.SingleOfferScreen.route +
+                                "?offerId=${it.id}"
+                    )
                 },
                 modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
             ) {
