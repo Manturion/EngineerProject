@@ -22,31 +22,30 @@ class SingleOfferViewModel @Inject constructor(
     private val _state = mutableStateOf(SingleOfferState())
     val state: State<SingleOfferState> = _state
 
-
     init {
         savedStateHandle.get<Long>("offerId")?.let { offerId ->
             _state.value = SingleOfferState(offerId = offerId)
         }
 
         val offerId = state.value.offerId
-        println(state.value.offerId)
 
         repository.getOfferById(offerId!!).onEach { result ->
             when (result) {
                 is Resource.Success -> {
-                    _state.value =
-                        SingleOfferState(
-                            offerId = offerId,
-                            offer = result.data,
-                            loading = false,
-                            error = null
-                        )
+                    _state.value = SingleOfferState(
+                        offerId = offerId,
+                        offer = result.data,
+                        loading = false,
+                        error = null
+                    )
                 }
 
                 is Resource.Loading -> {
                     _state.value = SingleOfferState(
                         offerId = offerId,
-                        offer = null, loading = true, error = null
+                        offer = null,
+                        loading = true,
+                        error = null
                     )
                 }
 
@@ -60,6 +59,5 @@ class SingleOfferViewModel @Inject constructor(
                 }
             }
         }.launchIn(viewModelScope)
-
     }
 }
