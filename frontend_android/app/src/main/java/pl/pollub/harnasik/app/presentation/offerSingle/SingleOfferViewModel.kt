@@ -28,24 +28,38 @@ class SingleOfferViewModel @Inject constructor(
             _state.value = SingleOfferState(offerId = offerId)
         }
 
+        val offerId = state.value.offerId
         println(state.value.offerId)
 
-        repository.getOfferById(state.value.offerId!!)
+        repository.getOfferById(offerId!!).onEach { result ->
+            when (result) {
+                is Resource.Success -> {
+                    _state.value =
+                        SingleOfferState(
+                            offerId = offerId,
+                            offer = result.data,
+                            loading = false,
+                            error = null
+                        )
+                }
 
+                is Resource.Loading -> {
+                    _state.value = SingleOfferState(
+                        offerId = offerId,
+                        offer = null, loading = true, error = null
+                    )
+                }
 
-//        repository.getOfferById(state.value.offerId!!).onEach { result ->
-//            println(result.data!!.title)
-//            when (result) {
-//                is Resource.Success -> {
-//                    _state.value = SingleOfferState(
-//                        offerId = result.data.id,
-//                        offer = result.data,
-//                        loading = false,
-//                        error = null
-//                    )
-//                }
-//            }
-//
-//        }.launchIn(viewModelScope)
+                is Resource.Error -> {
+                    _state.value = SingleOfferState(
+                        offerId = offerId,
+                        offer = null,
+                        loading = false,
+                        error = result.message
+                    )
+                }
+            }
+        }.launchIn(viewModelScope)
+
     }
 }

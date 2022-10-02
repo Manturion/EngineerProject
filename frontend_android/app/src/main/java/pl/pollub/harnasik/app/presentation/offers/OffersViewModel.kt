@@ -31,7 +31,7 @@ class OffersViewModel @Inject constructor(
                 }
 
                 is Resource.Error -> {
-                    OffersState(offers = null, loading = false, error = result.message)
+                    _state.value = OffersState(offers = null, loading = false, error = result.message)
                 }
             }
         }.launchIn(viewModelScope)
