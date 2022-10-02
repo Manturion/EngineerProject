@@ -4,7 +4,7 @@ import pl.pollub.harnasik.app.domain.model.OfferModel
 
 data class SingleOfferState(
     val offerId: Long? = null,
-    val offers: OfferModel? = null,
+    var offer: OfferModel? = null,
     val loading: Boolean = false,
     val error: String? = null
 )

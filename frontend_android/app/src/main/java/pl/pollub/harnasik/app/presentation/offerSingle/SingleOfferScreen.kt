@@ -50,7 +50,7 @@ fun SingleOfferScreen(
                 )
             },
             content = {
-                Text(text = "ID: ${state.value.offerId}")
+                Text(text = "ID: ${state.value.offerId} \n ${state.value.offer}")
 
             },
 

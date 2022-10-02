@@ -13,8 +13,8 @@ class OfferRepositoryImpl(private val api: OfferDao) : OfferRepository {
     override fun getOfferById(id: Long): Flow<Resource<OfferModel>> = flow {
         try {
             emit(Resource.Loading())
-            val post = api.getOfferById(id)!!.toOffer()
-            emit(Resource.Success(data = post))
+            val offer = api.getOfferById(id)!!.toOffer()
+            emit(Resource.Success(data = offer))
         } catch (e: Exception) {
             emit(Resource.Error(message = e.message ?: "Error"))
         }
@@ -23,8 +23,8 @@ class OfferRepositoryImpl(private val api: OfferDao) : OfferRepository {
     override fun getAllOffers(): Flow<Resource<List<OfferModel>>> = flow {
         try {
             emit(Resource.Loading())
-            val posts = api.getAllOffers().map { it.toOffer() }
-            emit(Resource.Success(data = posts))
+            val offers = api.getAllOffers().map { it.toOffer() }
+            emit(Resource.Success(data = offers))
         } catch (e: Exception) {
             emit(Resource.Error(message = e.message ?: "Error"))
         }
