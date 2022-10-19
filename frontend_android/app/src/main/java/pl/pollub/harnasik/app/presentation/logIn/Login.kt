@@ -1,7 +1,5 @@
 package pl.pollub.harnasik.app.presentation.logIn
 
-import android.R.attr.data
-import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
@@ -59,9 +57,7 @@ fun LoginPage(navController: NavHostController) {
         Spacer(modifier = Modifier.height(40.dp))
         Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
             Button(
-                onClick = {
-
-                },
+                onClick = {},
                 shape = RoundedCornerShape(50.dp),
                 modifier = Modifier
                     .fillMaxWidth()
