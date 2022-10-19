@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -18,8 +19,11 @@ fun AddEditOfferScreen(
     navController: NavController,
     viewModel: AddEditOfferViewModel = hiltViewModel()
 ) {
+
     val scaffoldState = rememberScaffoldState()
+
     val titleState = viewModel.offerTitle.value
+    val descriptionState = viewModel.offerDescription.value
 
 
     Scaffold(
@@ -36,48 +40,60 @@ fun AddEditOfferScreen(
         },
         scaffoldState = scaffoldState
     ) {
+
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
 //                .background(noteBackgroundAnimatable.value)
-                .padding(16.dp)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center
+
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.Center
             ) {
-
+                Text(
+                    text = "Add new Offer",
+                    modifier = Modifier,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold
+                )
             }
+
+
+
             Spacer(modifier = Modifier.height(16.dp))
             TransparentHintTextField(
                 text = titleState.text,
                 hint = titleState.hint,
                 onValueChange = {
-//                    viewModel.onEvent(AddEditNoteEvent.EnteredTitle(it))
+                    viewModel.onEvent(AddEditOfferEvent.EnteredTitle(it))
                 },
                 onFocusChange = {
-//                    viewModel.onEvent(AddEditNoteEvent.ChangeTitleFocus(it))
+                    viewModel.onEvent(AddEditOfferEvent.ChangeFocusTitle(it))
                 },
                 isHintVisible = titleState.isHintVisible,
                 singleLine = true,
                 textStyle = MaterialTheme.typography.titleLarge
             )
             Spacer(modifier = Modifier.height(16.dp))
-//            TransparentHintTextField(
-//                text = contentState.text,
-//                hint = contentState.hint,
-//                onValueChange = {
-//                    viewModel.onEvent(AddEditNoteEvent.EnteredContent(it))
-//                },
-//                onFocusChange = {
-//                    viewModel.onEvent(AddEditNoteEvent.ChangeContentFocus(it))
-//                },
-//                isHintVisible = contentState.isHintVisible,
-//                textStyle = MaterialTheme.typography.body1,
-//                modifier = Modifier.fillMaxHeight()
-//            )
+            TransparentHintTextField(
+                text = descriptionState.text,
+                hint = descriptionState.hint,
+                onValueChange = {
+                    viewModel.onEvent(AddEditOfferEvent.EnteredDescription(it))
+                },
+                onFocusChange = {
+                    viewModel.onEvent(AddEditOfferEvent.ChangeFocusDescription(it))
+                },
+                isHintVisible = descriptionState.isHintVisible,
+                textStyle = MaterialTheme.typography.titleLarge,
+                modifier = Modifier.fillMaxHeight()
+            )
         }
     }
 }
