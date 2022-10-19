@@ -1,4 +1,4 @@
-package pl.pollub.harnasik.app.presentation.logIn
+package pl.pollub.harnasik.app.presentation.login
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
