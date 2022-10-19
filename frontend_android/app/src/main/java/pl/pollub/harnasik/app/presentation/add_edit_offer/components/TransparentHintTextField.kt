@@ -2,6 +2,7 @@ package pl.pollub.harnasik.app.presentation.add_edit_offer.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -10,6 +11,7 @@ import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun TransparentHintTextField(
@@ -29,7 +31,8 @@ fun TransparentHintTextField(
             singleLine = singleLine,
             textStyle = textStyle,
             modifier = Modifier
-                .fillMaxWidth()
+//                .fillMaxWidth()
+                .width(256.dp)
                 .onFocusChanged {
                     onFocusChange(it)
                 }

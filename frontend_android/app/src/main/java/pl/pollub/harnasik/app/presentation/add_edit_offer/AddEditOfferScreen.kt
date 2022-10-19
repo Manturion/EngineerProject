@@ -1,19 +1,29 @@
 package pl.pollub.harnasik.app.presentation.add_edit_offer
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Save
-import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberScaffoldState
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import pl.pollub.harnasik.app.presentation.add_edit_offer.components.TransparentHintTextField
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun AddEditOfferScreen(
     navController: NavController,
@@ -47,7 +57,8 @@ fun AddEditOfferScreen(
                 .fillMaxSize()
 //                .background(noteBackgroundAnimatable.value)
                 .padding(16.dp),
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
 
         ) {
             Row(
@@ -64,8 +75,6 @@ fun AddEditOfferScreen(
                 )
             }
 
-
-
             Spacer(modifier = Modifier.height(16.dp))
             TransparentHintTextField(
                 text = titleState.text,
@@ -80,6 +89,71 @@ fun AddEditOfferScreen(
                 singleLine = true,
                 textStyle = MaterialTheme.typography.titleLarge
             )
+            Spacer(modifier = Modifier.height(16.dp))
+
+
+            //dropdown categories
+            val contextForToast = LocalContext.current.applicationContext
+
+            val listItems = arrayOf("Food", "Drinks", "Candy", "Snacks")
+
+            var selectedItem by remember {
+                mutableStateOf(listItems[0])
+            }
+
+            var expanded by remember {
+                mutableStateOf(false)
+            }
+            // the box
+            ExposedDropdownMenuBox(
+                expanded = expanded,
+                onExpandedChange = {
+                    expanded = !expanded
+                }
+            ) {
+
+                // text field
+                TextField(
+                    value = selectedItem,
+                    onValueChange = {},
+                    readOnly = true,
+                    label = {
+                        Text(
+                            text = "Category",
+                            modifier = Modifier,
+                            style = MaterialTheme.typography.labelSmall
+                        ) },
+                    trailingIcon = {
+                        ExposedDropdownMenuDefaults.TrailingIcon(
+                            expanded = expanded
+                        )
+                    },
+                    colors = ExposedDropdownMenuDefaults.textFieldColors()
+                )
+
+                // menu
+                ExposedDropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    listItems.forEach { selectedOption ->
+                        // menu item
+                        DropdownMenuItem(onClick = {
+                            selectedItem = selectedOption
+                            Toast.makeText(contextForToast, selectedOption, Toast.LENGTH_SHORT)
+                                .show()
+                            expanded = false
+                        }) {
+                            Text(text = selectedOption)
+                        }
+                    }
+                }
+            }
+
+
+            //End of dropdown categories
+
+
             Spacer(modifier = Modifier.height(16.dp))
             TransparentHintTextField(
                 text = descriptionState.text,
