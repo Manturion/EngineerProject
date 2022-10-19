@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -36,11 +36,12 @@ fun DrawerBody(
 ) {
 
     val menuItems = listOf(
-        MenuItem(id = "myOffers", title = "My Offers", icon = Icons.Default.Add),
-        MenuItem(id = "help", title = "Help", icon = Icons.Default.Add),
-        MenuItem(id = "aboutUs", title = "About Us", icon = Icons.Default.Add),
-        MenuItem(id = "contact", title = "Contact", icon = Icons.Default.Add),
-        MenuItem(id = "logout", title = "Logout", icon = Icons.Default.Add),
+        MenuItem(id = "myOffers", title = "My Offers", icon = Icons.Default.LocalOffer),
+        MenuItem(id = "help", title = "Help", icon = Icons.Default.Help),
+        MenuItem(id = "aboutUs", title = "About Us", icon = Icons.Default.Book),
+        MenuItem(id = "contact", title = "Contact", icon = Icons.Default.Contacts),
+        MenuItem(id = "logout", title = "Logout", icon = Icons.Default.Logout),
+        MenuItem(id = "login", title = "Log In", icon = Icons.Default.Login)
     )
 
     LazyColumn(modifier) {
