@@ -19,8 +19,7 @@ public class MyUserDetails implements UserDetails {
     public MyUserDetails(UserRequestDto user) {
         this.username = user.getUsername();
         this.password = user.getPassword();
-//        user
-//                .getRoles()
+//        user.getRoles()
 //                .forEach(role -> authorities.add(new SimpleGrantedAuthority("USER")));
     }
 
