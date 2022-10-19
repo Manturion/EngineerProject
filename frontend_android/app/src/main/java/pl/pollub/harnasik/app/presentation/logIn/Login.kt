@@ -1,5 +1,7 @@
-package pl.pollub.harnasik.app.presentation.login
+package pl.pollub.harnasik.app.presentation.logIn
 
+import android.R.attr.data
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
@@ -21,6 +23,8 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import pl.pollub.harnasik.app.util.Screen
+
 
 @Composable
 fun LoginPage(navController: NavHostController) {
@@ -55,31 +59,37 @@ fun LoginPage(navController: NavHostController) {
         Spacer(modifier = Modifier.height(40.dp))
         Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
             Button(
-                onClick = { },
+                onClick = {
+
+                },
                 shape = RoundedCornerShape(50.dp),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp)
             ) {
-                LoginText()
+                LogInText()
             }
         }
         OrText()
         Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
             Button(
-                onClick = { },
+                onClick = {
+                    navController.navigate(Screen.SignUp.route)
+                },
                 shape = RoundedCornerShape(50.dp),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp)
             ) {
-                SigninText()
+                SignUpText()
             }
         }
         Spacer(modifier = Modifier.height(60.dp))
         ClickableText(
             text = AnnotatedString("Forgot password?"),
-            onClick = { },
+            onClick = {
+                navController.navigate(Screen.ForgotPassword.route)
+            },
             style = TextStyle(
                 fontSize = 20.sp,
                 fontFamily = FontFamily.Default
@@ -89,12 +99,12 @@ fun LoginPage(navController: NavHostController) {
 }
 
 @Composable
-fun LoginText() {
+fun LogInText() {
     Text("Log in", fontSize = 22.sp)
 }
 
 @Composable
-fun SigninText() {
+fun SignUpText() {
     Text("Sign up", fontSize = 22.sp)
 }
 
