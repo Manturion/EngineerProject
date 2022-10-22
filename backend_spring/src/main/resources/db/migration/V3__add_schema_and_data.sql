@@ -1,0 +1,12 @@
+ALTER TABLE city ADD deleted boolean DEFAULT FALSE;
+ALTER TABLE status ADD deleted boolean DEFAULT FALSE;
+ALTER TABLE category ADD deleted boolean DEFAULT FALSE;
+ALTER TABLE role ADD deleted boolean DEFAULT FALSE;
+ALTER TABLE address ADD deleted boolean DEFAULT FALSE;
+ALTER TABLE shop ADD deleted boolean DEFAULT FALSE;
+ALTER TABLE report ADD deleted boolean DEFAULT FALSE;
+ALTER TABLE banned_customer ADD deleted boolean DEFAULT FALSE;
+ALTER TABLE customer ADD deleted boolean DEFAULT FALSE;
+ALTER TABLE offer ADD deleted boolean DEFAULT FALSE;
+ALTER TABLE offer_customer ADD deleted boolean DEFAULT FALSE;
+ALTER TABLE customer_shop ADD deleted boolean DEFAULT FALSE;
