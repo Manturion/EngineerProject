@@ -1,7 +1,10 @@
 package pl.pollub.inzynierka.infrastructure.Offer;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +33,10 @@ public class OfferService {
 
     public Long deleteOffer(Long id) {
         return offerPort.deleteOffer(id);
+    }
+
+    public Optional<Long> editOffer(OfferDto offerDto, Long id){
+        return offerPort.editOffer(id, offerDto);
     }
 
 }

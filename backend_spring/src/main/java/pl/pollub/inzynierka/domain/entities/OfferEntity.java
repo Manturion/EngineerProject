@@ -3,6 +3,8 @@ package pl.pollub.inzynierka.domain.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,6 +17,8 @@ import java.util.Set;
 @Table(name = "offer", schema = "public", catalog = "inzynierka")
 @AllArgsConstructor
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE offer SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 public class OfferEntity {
     @Basic
     @Column(name = "title", nullable = false, length = 255)
@@ -43,6 +47,9 @@ public class OfferEntity {
     @Basic
     @Column(name = "is_available", nullable = false)
     private boolean isAvailable;
+    @Basic
+    @Column(name = "deleted")
+    private boolean deleted = Boolean.FALSE;
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -25,8 +25,9 @@ public abstract class OfferDtoTemplate {
     @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss")
     protected Date expireDate;
     protected boolean isAvailable;
-    //    private int createdBy;
-//    private int statusId;
+    //private int createdBy;
+    //private int statusId;
     private Long categoryId;
+    private boolean deleted;
 
 }

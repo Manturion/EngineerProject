@@ -46,5 +46,8 @@ public class OfferController {
         return ResponseEntity.ok(offerService.deleteOffer(id));
     }
 
-
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<Optional<Long>> editOffer(@RequestBody OfferDto offerDto, @PathVariable Long id){
+        return ResponseEntity.ok(offerService.editOffer(offerDto,id));
+    }
 }

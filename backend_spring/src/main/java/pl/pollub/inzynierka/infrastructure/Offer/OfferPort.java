@@ -14,4 +14,6 @@ public interface OfferPort {
     Long deleteOffer(Long id);
 
     List<OfferDto> getAllOffersBelongingToUser(Long id);
+
+    Optional<Long> editOffer(Long id, OfferDto offerDto);
 }
