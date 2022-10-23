@@ -19,6 +19,7 @@ import pl.pollub.harnasik.app.presentation.offers.AppBar
 import pl.pollub.harnasik.app.presentation.offers.CategorySlideBar
 import pl.pollub.harnasik.app.presentation.offers.OffersViewModel
 import pl.pollub.harnasik.app.presentation.offers.getAllOffers
+import pl.pollub.harnasik.app.util.Screen
 import pl.pollub.harnasik.ui.theme.HarnasikTheme
 
 
@@ -60,7 +61,11 @@ fun AllOffersScreen(navController: NavController) {
             },
             floatingActionButton = {
                 FloatingActionButton(
-                    onClick = { },
+                    onClick = {
+                        navController.navigate(
+                            Screen.AddEditOfferScreen.route
+                        )
+                    },
                 ) {
                     Icon(
                         imageVector = Icons.Rounded.Add,
