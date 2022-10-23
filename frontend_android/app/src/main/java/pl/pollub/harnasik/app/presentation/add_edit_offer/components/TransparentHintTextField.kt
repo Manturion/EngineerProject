@@ -1,17 +1,20 @@
 package pl.pollub.harnasik.app.presentation.add_edit_offer.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.TextField
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun TransparentHintTextField(
@@ -24,21 +27,38 @@ fun TransparentHintTextField(
     singleLine: Boolean = false,
     onFocusChange: (FocusState) -> Unit
 ) {
-    Box(modifier = modifier) {
-        BasicTextField(
+    Box(
+        modifier = Modifier
+            .background(color = MaterialTheme.colorScheme.onPrimary),
+
+
+        ) {
+
+        TextField(
             value = text,
             onValueChange = onValueChange,
             singleLine = singleLine,
-            textStyle = textStyle,
+            textStyle = TextStyle(
+                textAlign = TextAlign.Left, fontSize = 16.sp
+            ),
             modifier = Modifier
-//                .fillMaxWidth()
-                .width(256.dp)
+                .fillMaxWidth()
+                .background(color = MaterialTheme.colorScheme.onPrimary)
                 .onFocusChanged {
                     onFocusChange(it)
-                }
+                },
+            shape = RoundedCornerShape(16.dp)
+
+
         )
         if (isHintVisible) {
-            Text(text = hint, style = textStyle, color = Color.DarkGray)
+            Text(
+                text = hint, style = TextStyle(
+                    fontSize = 16.sp,
+
+                    ),
+                color = MaterialTheme.colorScheme.primary
+            )
         }
     }
 }

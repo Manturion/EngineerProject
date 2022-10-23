@@ -1,6 +1,6 @@
 package pl.pollub.harnasik.app.presentation.add_edit_offer
 
-import android.widget.CalendarView
+import android.app.DatePickerDialog
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -20,11 +20,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import pl.pollub.harnasik.app.presentation.add_edit_offer.components.DatePicker
 import pl.pollub.harnasik.app.presentation.add_edit_offer.components.TransparentHintTextField
+import java.util.*
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
@@ -58,7 +57,7 @@ fun AddEditOfferScreen(
             modifier = Modifier
                 .fillMaxSize()
 //                .background(noteBackgroundAnimatable.value)
-                .padding(8.dp),
+                .padding(24.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
 
@@ -89,7 +88,7 @@ fun AddEditOfferScreen(
                 },
                 isHintVisible = titleState.isHintVisible,
                 singleLine = true,
-                textStyle = MaterialTheme.typography.titleLarge
+//                textStyle = MaterialTheme.typography.titleLarge
             )
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -140,8 +139,6 @@ fun AddEditOfferScreen(
                     }
                 }
             }
-
-
             //End of dropdown categories
 
 
@@ -156,13 +153,41 @@ fun AddEditOfferScreen(
                     viewModel.onEvent(AddEditOfferEvent.ChangeFocusDescription(it))
                 },
                 isHintVisible = descriptionState.isHintVisible,
-                textStyle = MaterialTheme.typography.titleLarge,
+//                textStyle = MaterialTheme.typography.titleLarge,
                 modifier = Modifier.height(256.dp)
             )
-            
+
+            //Calendar setup
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+            val context = LocalContext.current
+            var date by remember {
+                mutableStateOf("")
+            }
+            val datePickerDialog = DatePickerDialog(
+                context, { d, year, month1, day ->
+                    val month = month + 1
+                    date = "$day/$month/$year"
+                }, year, month, day
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+            TransparentHintTextField(
+                text = "Expires: $date",
+                hint = "Expiration date",
+                onValueChange = { },
+                onFocusChange = { },
+                isHintVisible = false,
+//                textStyle = MaterialTheme.typography.titleLarge,
+            )
+            Button(onClick = { datePickerDialog.show() }) {
+                Text(text = "Select expire date")
+            }
 
 
-            //            Old price
+            //Old price
             Spacer(modifier = Modifier.height(16.dp))
             TransparentHintTextField(
                 text = oldPriceState.text,
@@ -174,12 +199,11 @@ fun AddEditOfferScreen(
                     viewModel.onEvent(AddEditOfferEvent.ChangeFocusOldPrice(it))
                 },
                 isHintVisible = oldPriceState.isHintVisible,
-                textStyle = MaterialTheme.typography.titleLarge,
-//                modifier = Modifier.fillMaxHeight()
+//                textStyle = MaterialTheme.typography.titleLarge,
             )
 
 
-            //            New price
+//            New price
             Spacer(modifier = Modifier.height(16.dp))
             TransparentHintTextField(
                 text = newPriceState.text,
@@ -191,10 +215,8 @@ fun AddEditOfferScreen(
                     viewModel.onEvent(AddEditOfferEvent.ChangeFocusNewPrice(it))
                 },
                 isHintVisible = newPriceState.isHintVisible,
-                textStyle = MaterialTheme.typography.titleLarge,
-//                modifier = Modifier.fillMaxHeight()
+//                textStyle = MaterialTheme.typography.titleLarge,
             )
         }
     }
 }
-
