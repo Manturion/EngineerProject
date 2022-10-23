@@ -28,6 +28,20 @@ class AddEditOfferViewModel @Inject constructor(
     )
     val offerDescription: State<OfferTextFieldState> = _offerDescription
 
+    private val _offerOldPrice = mutableStateOf(
+        OfferTextFieldState(
+            hint = "Enter old price"
+        )
+    )
+    val offerOldPrice: State<OfferTextFieldState> = _offerOldPrice
+
+    private val _offerNewPrice = mutableStateOf(
+        OfferTextFieldState(
+            hint = "Enter new price"
+        )
+    )
+    val offerNewPrice: State<OfferTextFieldState> = _offerNewPrice
+
     private val _eventFlow = MutableSharedFlow<UiEvent>()
 
 //
@@ -57,6 +71,30 @@ class AddEditOfferViewModel @Inject constructor(
                 _offerDescription.value = offerDescription.value.copy(
                     isHintVisible = !event.focusState.isFocused &&
                             offerDescription.value.text.isBlank()
+                )
+            }
+
+            is AddEditOfferEvent.EnteredOldPrice -> {
+                _offerOldPrice.value = offerOldPrice.value.copy(
+                    text = event.value
+                )
+            }
+            is AddEditOfferEvent.ChangeFocusOldPrice -> {
+                _offerOldPrice.value = offerOldPrice.value.copy(
+                    isHintVisible = !event.focusState.isFocused &&
+                            offerOldPrice.value.text.isBlank()
+                )
+            }
+
+            is AddEditOfferEvent.EnteredNewPrice -> {
+                _offerNewPrice.value = offerNewPrice.value.copy(
+                    text = event.value
+                )
+            }
+            is AddEditOfferEvent.ChangeFocusNewPrice -> {
+                _offerNewPrice.value = offerNewPrice.value.copy(
+                    isHintVisible = !event.focusState.isFocused &&
+                            offerNewPrice.value.text.isBlank()
                 )
             }
 
