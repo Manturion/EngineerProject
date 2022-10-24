@@ -24,7 +24,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-
             HarnasikTheme {
 
                 val navController = rememberNavController()
@@ -45,7 +44,6 @@ class MainActivity : ComponentActivity() {
                                 name = "offerId"
                             ) {
                                 type = NavType.LongType
-
                             }
                         )
                     ) {
@@ -59,7 +57,6 @@ class MainActivity : ComponentActivity() {
                     }
 
                 }
-
             }
         }
     }

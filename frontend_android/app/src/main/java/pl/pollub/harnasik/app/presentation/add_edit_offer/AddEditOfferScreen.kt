@@ -44,10 +44,15 @@ fun AddEditOfferScreen(
             FloatingActionButton(
                 onClick = {
 //                    viewModel.onEvent(AddEditNoteEvent.SaveNote)
-                }, Modifier.background(color = MaterialTheme.colorScheme.primary)
+                },
+                Modifier.background(color = MaterialTheme.colorScheme.primary),
+
 //                backgroundColor = MaterialTheme.colors.primary
             ) {
-                Icon(imageVector = Icons.Default.Save, contentDescription = "Add offer")
+                Icon(
+                    imageVector = Icons.Filled.Save,
+                    contentDescription = "Add offer"
+                )
             }
         }, scaffoldState = scaffoldState
     ) {
@@ -106,26 +111,38 @@ fun AddEditOfferScreen(
                 mutableStateOf(false)
             }
             // the box
-            ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = {
-                expanded = !expanded
-            }) {
+            ExposedDropdownMenuBox(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                expanded = expanded,
+                onExpandedChange = {
+                    expanded = !expanded
+                }) {
 
                 // text field
-                TextField(value = selectedItem, onValueChange = {}, readOnly = true, label = {
-                    Text(
-                        text = "Category",
-                        modifier = Modifier,
-                        style = MaterialTheme.typography.labelSmall
-                    )
-                }, trailingIcon = {
-                    ExposedDropdownMenuDefaults.TrailingIcon(
-                        expanded = expanded
-                    )
-                }, colors = ExposedDropdownMenuDefaults.textFieldColors()
+                TextField(
+                    value = selectedItem,
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    onValueChange = {},
+                    readOnly = true,
+                    label = {
+                        Text(
+                            text = "Category",
+                            modifier = Modifier,
+                            style = MaterialTheme.typography.labelSmall
+                        )
+                    }, trailingIcon = {
+                        ExposedDropdownMenuDefaults.TrailingIcon(
+                            expanded = expanded
+                        )
+                    }, colors = ExposedDropdownMenuDefaults.textFieldColors()
                 )
 
                 // menu
-                ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+                ExposedDropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }) {
                     listItems.forEach { selectedOption ->
                         // menu item
                         DropdownMenuItem(onClick = {
@@ -167,11 +184,14 @@ fun AddEditOfferScreen(
                 mutableStateOf("")
             }
             val datePickerDialog = DatePickerDialog(
-                context, { d, year, month1, day ->
+                context,
+                { d, year, month1, day ->
                     val month = month + 1
                     date = "$day/$month/$year"
-                }, year, month, day
-            )
+                },
+                year, month, day,
+
+                )
 
             Spacer(modifier = Modifier.height(16.dp))
             TransparentHintTextField(
@@ -182,8 +202,15 @@ fun AddEditOfferScreen(
                 isHintVisible = false,
 //                textStyle = MaterialTheme.typography.titleLarge,
             )
-            Button(onClick = { datePickerDialog.show() }) {
-                Text(text = "Select expire date")
+
+            Button(
+                onClick = { datePickerDialog.show() },
+                colors = ButtonDefaults
+                    .buttonColors(
+                        backgroundColor = MaterialTheme.colorScheme.onPrimary
+                    )
+            ) {
+                Text(text = "Pick expire date")
             }
 
 
