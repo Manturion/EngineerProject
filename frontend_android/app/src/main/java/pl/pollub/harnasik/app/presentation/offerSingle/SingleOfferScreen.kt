@@ -1,8 +1,6 @@
 package pl.pollub.harnasik.app.presentation.offerSingle
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Image
@@ -13,14 +11,17 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
 import kotlinx.coroutines.launch
-import pl.pollub.harnasik.R
 import pl.pollub.harnasik.app.core.BottomBar.BottomBar
 import pl.pollub.harnasik.app.core.Drawer.DrawerBody
 import pl.pollub.harnasik.app.core.Drawer.DrawerHeader
@@ -28,6 +29,7 @@ import pl.pollub.harnasik.app.presentation.offers.AppBar
 import pl.pollub.harnasik.ui.theme.HarnasikTheme
 
 
+@OptIn(ExperimentalCoilApi::class)
 @ExperimentalMaterial3Api
 @Composable
 fun SingleOfferScreen(
@@ -82,22 +84,20 @@ fun SingleOfferScreen(
                             modifier = Modifier
                                 .padding(start = 116.dp),
                             colors = ButtonDefaults.buttonColors(Color.Red),
-                            border = BorderStroke(1.dp, color = Color.Black)
-
                         ) {
-                            Text(text = "ReportOfferButton")
+                            Text(text = "Report this offer")
                         }
                     }
                     Row(
                         modifier = Modifier
-                            .border(BorderStroke(1.dp, Color.Black))
                             .fillMaxWidth()
                     ) {
                         Text(
                             text = "${state.value.offer?.title}",
                             modifier = Modifier
                                 .padding(12.dp),
-                            style = MaterialTheme.typography.titleLarge
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold
                         )
 
                         IconButton(
@@ -116,11 +116,13 @@ fun SingleOfferScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 16.dp)
-                            .border(BorderStroke(1.dp, Color.Black))
+                            .align(CenterHorizontally)
+
                     ) {
                         Image(
-                            painter = painterResource(id = R.drawable.ic_launcher_background),
-                            contentDescription = "Offer Image",
+                            contentScale = ContentScale.FillWidth,
+                            painter = rememberImagePainter("${state.value.offer?.image}"),
+                            contentDescription = state.value.offer?.image,
                             modifier = Modifier
                                 .height(200.dp)
                                 .width(300.dp)
@@ -131,12 +133,12 @@ fun SingleOfferScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 16.dp)
-                            .border(BorderStroke(1.dp, Color.Black))
                             .height(176.dp)
                     ) {
                         Text(
                             modifier = Modifier.padding(4.dp),
-                            text = "${state.value.offer?.description}"
+                            text = "${state.value.offer?.description} " +
+                                    "${state.value.offer?.image}"
                         )
                     }
 

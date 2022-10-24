@@ -13,11 +13,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
 import pl.pollub.harnasik.R
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun AppBar(
     onNavigationIconClick: () -> Unit
@@ -41,10 +45,21 @@ fun AppBar(
         }
 
         Image(
-            painter = painterResource(id = R.drawable.ic_launcher_background),
-            contentDescription = null,
-            modifier = Modifier.padding(16.dp)
+            contentScale = ContentScale.FillWidth,
+            painter = rememberImagePainter("http://atlas-content-cdn.pixelsquid.com/stock-images/sale-label-purple-metallic-logo-J33VPk6-600.jpg"),
+            contentDescription = "Logo",
+            modifier = Modifier
+                .height(50.dp)
+                .width(50.dp)
         )
+
+
+//        Image(
+//            painter = painterResource(id = R.drawable.ic_launcher_background),
+//            contentDescription = null,
+//            modifier = Modifier.padding(16.dp)
+//        )
+
         Text(text = "Navbar")
         IconButton(
             modifier = Modifier.padding(16.dp),
