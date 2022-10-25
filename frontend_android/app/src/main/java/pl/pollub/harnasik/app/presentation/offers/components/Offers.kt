@@ -20,7 +20,7 @@ import coil.compose.rememberImagePainter
 import pl.pollub.harnasik.app.util.Screen
 
 @Composable
-fun CategorySlideBar(categories: List<String> = List(10) { "Category $it" }) {
+fun CategorySlideBar(categories: List<String> = listOf<String>("Food","Drinks","Candies","Snacks")) {
     LazyRow() {
         items(items = categories) { category ->
             SingleCategoryButton(name = category)

@@ -12,8 +12,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import pl.pollub.harnasik.R
 
 @Composable
 fun DrawerHeader() {
@@ -61,7 +64,8 @@ fun DrawerBody(
                 Text(
                     text = item.title,
                     style = itemTextStyle,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
+                    fontFamily = FontFamily(Font(R.font.opensans))
                 )
             }
         }

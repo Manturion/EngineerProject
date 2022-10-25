@@ -43,7 +43,7 @@ fun AddEditOfferScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-//                    viewModel.onEvent(AddEditNoteEvent.SaveNote)
+
                 },
                 Modifier.background(color = MaterialTheme.colorScheme.primary),
 
@@ -74,7 +74,7 @@ fun AddEditOfferScreen(
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "Add new Offer",
+                    text = "Add new offer",
                     modifier = Modifier,
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold
@@ -101,7 +101,7 @@ fun AddEditOfferScreen(
             //dropdown categories
             val contextForToast = LocalContext.current.applicationContext
 
-            val listItems = arrayOf("Food", "Drinks", "Candy", "Snacks")
+            val listItems = arrayOf("Food", "Drinks", "Candies", "Snacks")
 
             var selectedItem by remember {
                 mutableStateOf(listItems[0])

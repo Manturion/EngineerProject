@@ -2,7 +2,6 @@ package pl.pollub.harnasik.app.presentation.add_edit_offer.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,10 +14,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import pl.pollub.harnasik.R
 
 @Composable
 fun TransparentHintTextField(
@@ -43,7 +45,8 @@ fun TransparentHintTextField(
             onValueChange = onValueChange,
             singleLine = singleLine,
             textStyle = TextStyle(
-                textAlign = TextAlign.Left, fontSize = 16.sp
+                textAlign = TextAlign.Left, fontSize = 16.sp,
+                fontFamily = FontFamily(Font(R.font.opensans))
             ),
             modifier = Modifier
                 .fillMaxWidth()
@@ -63,8 +66,9 @@ fun TransparentHintTextField(
                 text = hint,
                 style = TextStyle(
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium
-                    ),
+                    fontWeight = FontWeight.Medium,
+                    fontFamily = FontFamily(Font(R.font.opensans))
+                ),
                 color = MaterialTheme.colorScheme.primary
             )
         }
