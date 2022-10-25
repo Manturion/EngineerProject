@@ -53,13 +53,6 @@ fun AppBar(
                 .width(50.dp)
         )
 
-
-//        Image(
-//            painter = painterResource(id = R.drawable.ic_launcher_background),
-//            contentDescription = null,
-//            modifier = Modifier.padding(16.dp)
-//        )
-
         Text(text = "Navbar")
         IconButton(
             modifier = Modifier.padding(16.dp),
