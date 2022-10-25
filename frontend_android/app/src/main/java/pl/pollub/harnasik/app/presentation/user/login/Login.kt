@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -21,8 +22,10 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import pl.pollub.harnasik.R
 import pl.pollub.harnasik.app.util.Screen
 
+var fontFamily: FontFamily = FontFamily(Font(R.font.opensans))
 
 @Composable
 fun LoginPage(navController: NavHostController) {
@@ -41,14 +44,12 @@ fun LoginPage(navController: NavHostController) {
             style = TextStyle(fontSize = 50.sp, fontFamily = FontFamily.Cursive)
         )
         Spacer(modifier = Modifier.height(60.dp))
-        TextField(
-            label = { Text(text = "Username") },
+        TextField(label = { Text(text = "Username", fontFamily = fontFamily) },
             value = username.value,
             onValueChange = { username.value = it })
 
         Spacer(modifier = Modifier.height(20.dp))
-        TextField(
-            label = { Text(text = "Password") },
+        TextField(label = { Text(text = "Password", fontFamily = fontFamily) },
             value = password.value,
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -82,13 +83,10 @@ fun LoginPage(navController: NavHostController) {
         }
         Spacer(modifier = Modifier.height(60.dp))
         ClickableText(
-            text = AnnotatedString("Forgot password?"),
-            onClick = {
+            text = AnnotatedString("Forgot password?"), onClick = {
                 navController.navigate(Screen.ForgotPassword.route)
-            },
-            style = TextStyle(
-                fontSize = 20.sp,
-                fontFamily = FontFamily.Default
+            }, style = TextStyle(
+                fontSize = 20.sp, fontFamily = fontFamily
             )
         )
     }
@@ -96,17 +94,17 @@ fun LoginPage(navController: NavHostController) {
 
 @Composable
 fun LogInText() {
-    Text("Log in", fontSize = 22.sp)
+    Text("Log in", fontFamily = fontFamily, fontSize = 22.sp)
 }
 
 @Composable
 fun SignUpText() {
-    Text("Sign up", fontSize = 22.sp)
+    Text("Sign up", fontFamily = fontFamily, fontSize = 22.sp)
 }
 
 @Composable
 fun OrText() {
     Spacer(modifier = Modifier.height(10.dp))
-    Text(" OR ", fontSize = 16.sp)
+    Text(" OR ", fontFamily = fontFamily, fontSize = 16.sp)
     Spacer(modifier = Modifier.height(10.dp))
 }

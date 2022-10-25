@@ -11,12 +11,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import pl.pollub.harnasik.R
+
+var fontFamily: FontFamily = FontFamily(Font(R.font.opensans))
 
 @Composable
 fun ForgotPassword(navController: NavHostController) {
@@ -30,7 +34,7 @@ fun ForgotPassword(navController: NavHostController) {
         val password = remember { mutableStateOf(TextFieldValue()) }
 
         Text(
-            text = "You may reset your password below",
+            text = "You may reset your password below", fontFamily = fontFamily,
             style = TextStyle(fontSize = 40.sp, fontFamily = FontFamily.Default),
             textAlign = TextAlign.Center
         )
@@ -38,7 +42,7 @@ fun ForgotPassword(navController: NavHostController) {
 
         Spacer(modifier = Modifier.height(20.dp))
         TextField(
-            label = { Text(text = "Your email (username)") },
+            label = { Text(text = "Your email (username)", fontFamily = fontFamily) },
             value = username.value,
             onValueChange = { username.value = it })
 
@@ -61,10 +65,10 @@ fun ForgotPassword(navController: NavHostController) {
 
 @Composable
 fun PasswordResetText() {
-    Text("Reset", fontSize = 22.sp)
+    Text("Reset", fontSize = 22.sp, fontFamily = fontFamily)
 }
 
 @Composable
 fun PasswordWillBeSentOnEmailText() {
-    Text("Password will be sent on this email", fontSize = 22.sp)
+    Text("Password will be sent on this email", fontSize = 22.sp, fontFamily = fontFamily)
 }
