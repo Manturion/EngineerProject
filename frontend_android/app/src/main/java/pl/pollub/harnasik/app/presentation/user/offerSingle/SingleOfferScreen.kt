@@ -1,4 +1,4 @@
-package pl.pollub.harnasik.app.presentation.offerSingle
+package pl.pollub.harnasik.app.presentation.user.offerSingle
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -57,7 +57,7 @@ fun SingleOfferScreen(
                 DrawerBody(
                     onItemClick = {
                         println("Clicked on ${it.title}")
-                    }
+                    }, navController = navController
                 )
             },
             content = {

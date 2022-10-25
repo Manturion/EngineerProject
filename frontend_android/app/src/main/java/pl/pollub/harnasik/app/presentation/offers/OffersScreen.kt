@@ -17,8 +17,8 @@ import pl.pollub.harnasik.app.core.Drawer.DrawerBody
 import pl.pollub.harnasik.app.core.Drawer.DrawerHeader
 import pl.pollub.harnasik.app.presentation.offers.AppBar
 import pl.pollub.harnasik.app.presentation.offers.CategorySlideBar
-import pl.pollub.harnasik.app.presentation.offers.OffersViewModel
 import pl.pollub.harnasik.app.presentation.offers.GetAllOffers
+import pl.pollub.harnasik.app.presentation.offers.OffersViewModel
 import pl.pollub.harnasik.app.util.Screen
 import pl.pollub.harnasik.ui.theme.HarnasikTheme
 
@@ -49,7 +49,8 @@ fun AllOffersScreen(navController: NavController) {
                 DrawerBody(
                     onItemClick = {
                         println("Clicked on ${it.title}")
-                    }
+                    },
+                    navController = navController
                 )
             },
             content = {
