@@ -26,13 +26,13 @@ import pl.pollub.harnasik.R
 import pl.pollub.harnasik.app.util.Screen
 
 
-var loggedIn = false
+var loggedIn = true
 var username = ""
 
 @Composable
 fun DrawerHeader() {
     if(loggedIn){
-        var username = "Witaj PromoHunterUserName"
+        username = "Witaj PromoHunterUserName"
     }
 
 
