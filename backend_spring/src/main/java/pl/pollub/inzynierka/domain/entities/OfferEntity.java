@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -40,10 +41,10 @@ public class OfferEntity {
     private BigDecimal gps;
     @Basic
     @Column(name = "start_date", nullable = false)
-    private Timestamp startDate;
+    private Date startDate;
     @Basic
     @Column(name = "expire_date", nullable = true)
-    private Timestamp expireDate;
+    private Date expireDate;
     @Basic
     @Column(name = "is_available", nullable = false)
     private boolean isAvailable;

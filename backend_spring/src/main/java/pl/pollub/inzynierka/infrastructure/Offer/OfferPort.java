@@ -15,5 +15,5 @@ public interface OfferPort {
 
     List<OfferDto> getAllOffersBelongingToUser(Long id);
 
-    Optional<Long> editOffer(Long id, OfferDto offerDto);
+    Optional<Long> editOffer(Long id, CreateOfferDto createOfferDto);
 }

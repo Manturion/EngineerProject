@@ -38,8 +38,8 @@ public class OfferAdapter implements OfferPort {
     }
 
     @Override
-    public Long createOffer(CreateOfferDto offerDto) {
-        OfferEntity offerEntity = mapToEntity(offerDto);
+    public Long createOffer(CreateOfferDto createOfferDto) {
+        OfferEntity offerEntity = mapToEntity(createOfferDto);
 
         customerRepository.findById(1L)
                 .ifPresent(offerEntity::setCreatedBy);
@@ -66,17 +66,17 @@ public class OfferAdapter implements OfferPort {
     }
 
     @Override
-    public Optional<Long> editOffer(Long id, OfferDto offerDto) {
+    public Optional<Long> editOffer(Long id, CreateOfferDto createOfferDto) {
 
         return offerRepository.findById(id).map(offer -> {
-            offer.setTitle(offerDto.getTitle());
-            offer.setDescription(offerDto.getDescription());
-            offer.setImage(offerDto.getImage());
-            offer.setOldPrice(offerDto.getOldPrice());
-            offer.setNewPrice(offerDto.getNewPrice());
-            offer.setGps(offerDto.getGps());
-            offer.setStartDate((Timestamp) offerDto.getStartDate());
-            offer.setExpireDate((Timestamp) offerDto.getExpireDate());
+            offer.setTitle(createOfferDto.getTitle());
+            offer.setDescription(createOfferDto.getDescription());
+            offer.setImage(createOfferDto.getImage());
+            offer.setOldPrice(createOfferDto.getOldPrice());
+            offer.setNewPrice(createOfferDto.getNewPrice());
+            offer.setGps(createOfferDto.getGps());
+            offer.setStartDate( createOfferDto.getStartDate());
+            offer.setExpireDate(createOfferDto.getExpireDate());
             offerRepository.save(offer);
             return offer.getId();
         });

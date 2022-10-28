@@ -20,9 +20,9 @@ public abstract class OfferDtoTemplate {
     protected BigDecimal oldPrice;
     protected BigDecimal newPrice;
     protected BigDecimal gps;
-    @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     protected Date startDate;
-    @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     protected Date expireDate;
     protected boolean isAvailable;
     //private int createdBy;
