@@ -34,7 +34,7 @@ fun ForgotPassword(navController: NavHostController) {
         val password = remember { mutableStateOf(TextFieldValue()) }
 
         Text(
-            text = "You may reset your password below", fontFamily = fontFamily,
+            text = "Możesz zresetować swoje hasło poniżej", fontFamily = fontFamily,
             style = TextStyle(fontSize = 40.sp, fontFamily = FontFamily.Default),
             textAlign = TextAlign.Center
         )
@@ -42,7 +42,7 @@ fun ForgotPassword(navController: NavHostController) {
 
         Spacer(modifier = Modifier.height(20.dp))
         TextField(
-            label = { Text(text = "Your email (username)", fontFamily = fontFamily) },
+            label = { Text(text = "Twój email (login)", fontFamily = fontFamily) },
             value = username.value,
             onValueChange = { username.value = it })
 
@@ -65,10 +65,10 @@ fun ForgotPassword(navController: NavHostController) {
 
 @Composable
 fun PasswordResetText() {
-    Text("Reset", fontSize = 22.sp, fontFamily = fontFamily)
+    Text("Resetuj hasło", fontSize = 22.sp, fontFamily = fontFamily)
 }
 
 @Composable
 fun PasswordWillBeSentOnEmailText() {
-    Text("Password will be sent on this email", fontSize = 22.sp, fontFamily = fontFamily)
+    Text("Hasło zostanie wysłane na ten email", fontSize = 22.sp, fontFamily = fontFamily)
 }

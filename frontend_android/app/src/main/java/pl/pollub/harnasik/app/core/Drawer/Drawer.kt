@@ -32,7 +32,7 @@ var username = ""
 @Composable
 fun DrawerHeader() {
     if(loggedIn){
-        username = "Witaj PromoHunterUserName"
+        username = "Witaj, PromoHunterUserName"
     }
 
 
@@ -76,12 +76,10 @@ fun DrawerBody(
 ) {
 
     val menuItems = listOf(
-        MenuItem(id = "myOffers", title = "My Offers", icon = Icons.Default.LocalOffer),
-        MenuItem(id = "help", title = "Help", icon = Icons.Default.Help),
-        MenuItem(id = "aboutUs", title = "About Us", icon = Icons.Default.Book),
-        MenuItem(id = "contact", title = "Contact", icon = Icons.Default.Contacts),
-//        MenuItem(id = "logout", title = "Logout", icon = Icons.Default.Logout),
-//        MenuItem(id = "login", title = "Log In", icon = Icons.Default.Login)
+        MenuItem(id = "myOffers", title = "Moje oferty", icon = Icons.Default.LocalOffer),
+        MenuItem(id = "help", title = "Pomoc", icon = Icons.Default.Help),
+        MenuItem(id = "aboutUs", title = "O nas", icon = Icons.Default.Book),
+        MenuItem(id = "contact", title = "Kontakt", icon = Icons.Default.Contacts),
     )
 
     LazyColumn(modifier) {
@@ -118,7 +116,7 @@ fun DrawerBody(
             onClick = {
                 navController.navigate(Screen.Login.route)
             }) {
-            Text(text = "Logout")
+            Text(text = "Wyloguj się")
 
         }
     } else {
@@ -129,7 +127,7 @@ fun DrawerBody(
             onClick = {
                 navController.navigate(Screen.Login.route)
             }) {
-            Text(text = "Login")
+            Text(text = "Zaloguj się")
         }
     }
 

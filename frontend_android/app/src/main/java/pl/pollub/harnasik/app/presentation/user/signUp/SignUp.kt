@@ -38,16 +38,11 @@ fun SignUp(
         val password = remember { mutableStateOf(TextFieldValue()) }
 
         Text(
-            text = "Sign up\nand\njoin our community!",
-            style = TextStyle(fontSize = 36.sp, fontFamily = FontFamily.Cursive),
+            text = "Utwórz konto\ni dziel się promocjami!",
+            style = TextStyle(fontSize = 36.sp, fontFamily = FontFamily.Default),
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(30.dp))
-        TextField(
-            label = { Text(text = "Username", fontFamily = fontFamily) },
-            value = username.value,
-            onValueChange = { username.value = it },
-        )
         Spacer(modifier = Modifier.height(20.dp))
         TextField(
             label = { Text(text = "Email", fontFamily = fontFamily) },
@@ -56,14 +51,14 @@ fun SignUp(
 
         Spacer(modifier = Modifier.height(20.dp))
         TextField(
-            label = { Text(text = "Password", fontFamily = fontFamily) },
+            label = { Text(text = "Hasło", fontFamily = fontFamily) },
             value = password.value,
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             onValueChange = { password.value = it })
         Spacer(modifier = Modifier.height(20.dp))
         TextField(
-            label = { Text(text = "Confirm password", fontFamily = fontFamily) },
+            label = { Text(text = "Potwierdź hasło", fontFamily = fontFamily) },
             value = password.value,
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -97,17 +92,17 @@ fun SignUp(
 
 @Composable
 fun SignUpText() {
-    Text("SIGN UP", fontSize = 20.sp, fontFamily = fontFamily)
+    Text("ZAREJESTRUJ SIĘ", fontSize = 20.sp, fontFamily = fontFamily)
 }
 
 @Composable
 fun AdultText() {
-    Text("I am over 18 years old", fontSize = 20.sp, fontFamily = fontFamily)
+    Text("Jestem osobą pełnoletnią", fontSize = 20.sp, fontFamily = fontFamily)
 }
 
 @Composable
 fun AcceptTermsText() {
-    Text("I accept Terms and Conditions", fontSize = 20.sp, fontFamily = fontFamily)
+    Text("Akceptuję regulamin", fontSize = 20.sp, fontFamily = fontFamily)
 }
 
 @Composable

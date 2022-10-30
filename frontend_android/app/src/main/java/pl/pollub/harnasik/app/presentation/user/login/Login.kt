@@ -40,16 +40,16 @@ fun LoginPage(navController: NavHostController) {
         val password = remember { mutableStateOf(TextFieldValue()) }
 
         Text(
-            text = "Welcome back!",
+            text = "Witaj ponownie!",
             style = TextStyle(fontSize = 50.sp, fontFamily = FontFamily.Cursive)
         )
         Spacer(modifier = Modifier.height(60.dp))
-        TextField(label = { Text(text = "Username", fontFamily = fontFamily) },
+        TextField(label = { Text(text = "Nazwa użytkownika", fontFamily = fontFamily) },
             value = username.value,
             onValueChange = { username.value = it })
 
         Spacer(modifier = Modifier.height(20.dp))
-        TextField(label = { Text(text = "Password", fontFamily = fontFamily) },
+        TextField(label = { Text(text = "Hasło", fontFamily = fontFamily) },
             value = password.value,
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -83,7 +83,7 @@ fun LoginPage(navController: NavHostController) {
         }
         Spacer(modifier = Modifier.height(60.dp))
         ClickableText(
-            text = AnnotatedString("Forgot password?"), onClick = {
+            text = AnnotatedString("Nie pamiętam hasła"), onClick = {
                 navController.navigate(Screen.ForgotPassword.route)
             }, style = TextStyle(
                 fontSize = 20.sp, fontFamily = fontFamily
@@ -94,17 +94,17 @@ fun LoginPage(navController: NavHostController) {
 
 @Composable
 fun LogInText() {
-    Text("Log in", fontFamily = fontFamily, fontSize = 22.sp)
+    Text("Zaloguj się", fontFamily = fontFamily, fontSize = 22.sp)
 }
 
 @Composable
 fun SignUpText() {
-    Text("Sign up", fontFamily = fontFamily, fontSize = 22.sp)
+    Text("Zarejestruj się", fontFamily = fontFamily, fontSize = 22.sp)
 }
 
 @Composable
 fun OrText() {
     Spacer(modifier = Modifier.height(10.dp))
-    Text(" OR ", fontFamily = fontFamily, fontSize = 16.sp)
+    Text(" LUB ", fontFamily = fontFamily, fontSize = 16.sp)
     Spacer(modifier = Modifier.height(10.dp))
 }

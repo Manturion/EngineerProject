@@ -16,28 +16,28 @@ class AddEditOfferViewModel @Inject constructor(
 
     private val _offerTitle = mutableStateOf(
         OfferTextFieldState(
-            hint = "Enter title"
+            hint = "Tytuł"
         )
     )
     val offerTitle: State<OfferTextFieldState> = _offerTitle
 
     private val _offerDescription = mutableStateOf(
         OfferTextFieldState(
-            hint = "Enter description"
+            hint = "Opis"
         )
     )
     val offerDescription: State<OfferTextFieldState> = _offerDescription
 
     private val _offerOldPrice = mutableStateOf(
         OfferTextFieldState(
-            hint = "Enter old price"
+            hint = "Stara cena"
         )
     )
     val offerOldPrice: State<OfferTextFieldState> = _offerOldPrice
 
     private val _offerNewPrice = mutableStateOf(
         OfferTextFieldState(
-            hint = "Enter new price"
+            hint = "Nowa cena"
         )
     )
     val offerNewPrice: State<OfferTextFieldState> = _offerNewPrice

@@ -85,7 +85,7 @@ fun SingleOfferScreen(
                                 .padding(start = 116.dp),
                             colors = ButtonDefaults.buttonColors(Color.Red),
                         ) {
-                            Text(text = "Report this offer")
+                            Text(text = "Zgłoś")
                         }
                     }
                     Row(

@@ -51,7 +51,7 @@ fun AddEditOfferScreen(
             ) {
                 Icon(
                     imageVector = Icons.Filled.Save,
-                    contentDescription = "Add offer"
+                    contentDescription = "Dodaj ofertę"
                 )
             }
         }, scaffoldState = scaffoldState
@@ -74,7 +74,7 @@ fun AddEditOfferScreen(
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "Add new offer",
+                    text = "Dodaj ofertę",
                     modifier = Modifier,
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold
@@ -101,7 +101,7 @@ fun AddEditOfferScreen(
             //dropdown categories
             val contextForToast = LocalContext.current.applicationContext
 
-            val listItems = arrayOf("Food", "Drinks", "Candies", "Snacks")
+            val listItems = arrayOf("Jedzenie", "Napoje", "Słodycze", "Przekąski", "Alkohole", "Inne")
 
             var selectedItem by remember {
                 mutableStateOf(listItems[0])
@@ -128,7 +128,7 @@ fun AddEditOfferScreen(
                     readOnly = true,
                     label = {
                         Text(
-                            text = "Category",
+                            text = "Kategoria",
                             modifier = Modifier,
                             style = MaterialTheme.typography.labelSmall
                         )
@@ -195,8 +195,8 @@ fun AddEditOfferScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
             TransparentHintTextField(
-                text = "Expires: $date",
-                hint = "Expiration date",
+                text = "Data ważności: $date",
+                hint = "Data terminu spożycia",
                 onValueChange = { },
                 onFocusChange = { },
                 isHintVisible = false,
@@ -210,7 +210,7 @@ fun AddEditOfferScreen(
                         backgroundColor = MaterialTheme.colorScheme.onPrimary
                     )
             ) {
-                Text(text = "Pick expire date")
+                Text(text = "Wybierz datę ważności")
             }
 
 

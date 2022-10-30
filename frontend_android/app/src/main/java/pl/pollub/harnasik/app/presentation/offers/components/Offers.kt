@@ -20,7 +20,7 @@ import coil.compose.rememberImagePainter
 import pl.pollub.harnasik.app.util.Screen
 
 @Composable
-fun CategorySlideBar(categories: List<String> = listOf<String>("Food","Drinks","Candies","Snacks")) {
+fun CategorySlideBar(categories: List<String> = listOf<String>("Jedzenie","Napoje","Słodycze","Przekąski", "Alkohole", "Inne")) {
     LazyRow() {
         items(items = categories) { category ->
             SingleCategoryButton(name = category)
@@ -57,7 +57,7 @@ fun GenerateListOfAllOffersLoaded(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Nothing to show or connection refused",
+                text = "Brak ofert lub błąd połączenia",
                 modifier = Modifier,
                 style = MaterialTheme.typography.titleLarge
             )
