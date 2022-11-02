@@ -18,8 +18,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import kotlinx.coroutines.launch
-import pl.pollub.harnasik.app.core.BottomBar.BottomBar
 import pl.pollub.harnasik.app.presentation.upsertOffer.components.TransparentHintTextField
 import pl.pollub.harnasik.ui.theme.HarnasikTheme
 import java.util.*
@@ -33,21 +31,12 @@ fun AddEditOfferScreen(
 
     HarnasikTheme {
 
-        val scaffoldState = rememberScaffoldState()
         val titleState = viewModel.offerTitle.value
         val descriptionState = viewModel.offerDescription.value
         val oldPriceState = viewModel.offerOldPrice.value
         val newPriceState = viewModel.offerNewPrice.value
-        val scope = rememberCoroutineScope()
+
         Scaffold(
-            scaffoldState = scaffoldState,
-            topBar = {
-                pl.pollub.harnasik.app.presentation.offers.AppBar(onNavigationIconClick = {
-                    scope.launch {
-                        scaffoldState.drawerState.open()
-                    }
-                })
-            },
 
             floatingActionButton = {
                 FloatingActionButton(
@@ -62,10 +51,8 @@ fun AddEditOfferScreen(
                         contentDescription = "Dodaj ofertę"
                     )
                 }
-            },
-            bottomBar = { BottomBar() }
+            }
         ) {
-
 
             Column(
                 modifier = Modifier
