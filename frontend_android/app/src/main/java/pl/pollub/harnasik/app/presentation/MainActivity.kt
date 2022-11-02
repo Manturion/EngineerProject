@@ -76,7 +76,7 @@ class MainActivity : ComponentActivity() {
                             }
                         )
                     ) {
-                        MapDisplayScreen()
+                        MapDisplayScreen(navController)
                     }
                     composable(
                         route = Screen.MapDisplay.route
