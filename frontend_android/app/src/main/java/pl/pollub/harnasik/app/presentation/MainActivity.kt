@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
 import pl.pollub.harnasik.app.presentation.add_edit_offer.AddEditOfferScreen
+import pl.pollub.harnasik.app.presentation.map.MapScreen
 import pl.pollub.harnasik.app.presentation.user.login.Login
 import pl.pollub.harnasik.app.presentation.user.offerSingle.SingleOfferScreen
 import pl.pollub.harnasik.app.util.Screen
@@ -61,6 +62,11 @@ class MainActivity : ComponentActivity() {
                         route = Screen.Login.route
                     ) {
                         Login()
+                    }
+                    composable(
+                        route = Screen.Map.route
+                    ){
+                        MapScreen()
                     }
                 }
             }

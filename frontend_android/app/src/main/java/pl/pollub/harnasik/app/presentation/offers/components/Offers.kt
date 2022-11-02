@@ -45,7 +45,7 @@ fun GetAllOffers(state: OffersState, navController: NavController) {
     GenerateListOfAllOffersLoaded(state, navController)
 }
 
-@OptIn(ExperimentalCoilApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GenerateListOfAllOffersLoaded(
     state: OffersState,
