@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 
@@ -15,7 +16,9 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import pl.pollub.harnasik.app.presentation.user.offerSingle.SingleOfferViewModel
 
 @Composable
-fun MapDisplayScreen() {
+fun MapDisplayScreen(
+    navController: NavController
+) {
     val viewModel = hiltViewModel<SingleOfferViewModel>()
     val state = viewModel.state
 
@@ -28,14 +31,15 @@ fun MapDisplayScreen() {
         point = LatLng(lat, long)
     }
 
+
     val lublin = LatLng(51.23426942850275, 22.539411038160324)
 
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(lublin, 18f)
     }
     GoogleMap(
-    modifier = Modifier.fillMaxSize(),
-    cameraPositionState = cameraPositionState
+        modifier = Modifier.fillMaxSize(),
+        cameraPositionState = cameraPositionState
     ) {
         Marker(
             state = MarkerState(position = lublin),
