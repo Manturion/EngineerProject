@@ -26,6 +26,7 @@ import pl.pollub.harnasik.app.core.BottomBar.BottomBar
 import pl.pollub.harnasik.app.core.Drawer.DrawerBody
 import pl.pollub.harnasik.app.core.Drawer.DrawerHeader
 import pl.pollub.harnasik.app.presentation.offers.AppBar
+import pl.pollub.harnasik.app.util.Screen
 import pl.pollub.harnasik.ui.theme.HarnasikTheme
 
 
@@ -86,6 +87,14 @@ fun SingleOfferScreen(
                             colors = ButtonDefaults.buttonColors(Color.Red),
                         ) {
                             Text(text = "Zgłoś")
+                        }
+                        Button(
+                            onClick = { navController.navigate(Screen.Map.route) },
+                            modifier = Modifier
+                                .padding(start = 116.dp),
+                            colors = ButtonDefaults.buttonColors(Color.Red),
+                        ) {
+                            Text(text = "Mapa")
                         }
                     }
                     Row(
