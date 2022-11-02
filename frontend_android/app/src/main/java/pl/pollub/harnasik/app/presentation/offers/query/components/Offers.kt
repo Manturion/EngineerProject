@@ -15,8 +15,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import pl.pollub.harnasik.app.presentation.offers.query.OffersState
 import pl.pollub.harnasik.app.util.Screen
 
 @Composable

@@ -1,4 +1,4 @@
-package pl.pollub.harnasik.app.presentation.upsertOffer.components
+package pl.pollub.harnasik.app.presentation.offers.command.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

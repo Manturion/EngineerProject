@@ -1,4 +1,4 @@
-package pl.pollub.harnasik.app.presentation
+package pl.pollub.harnasik.app.presentation.offers.query
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
@@ -14,7 +14,6 @@ import androidx.navigation.NavController
 import pl.pollub.harnasik.R
 import pl.pollub.harnasik.app.presentation.offers.CategorySlideBar
 import pl.pollub.harnasik.app.presentation.offers.GetAllOffers
-import pl.pollub.harnasik.app.presentation.offers.OffersViewModel
 import pl.pollub.harnasik.app.util.Screen
 
 

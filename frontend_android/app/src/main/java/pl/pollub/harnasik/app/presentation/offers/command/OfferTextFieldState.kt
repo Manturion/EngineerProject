@@ -1,4 +1,4 @@
-package pl.pollub.harnasik.app.presentation.upsertOffer
+package pl.pollub.harnasik.app.presentation.offers.command
 
 data class OfferTextFieldState(
     val text: String = "",

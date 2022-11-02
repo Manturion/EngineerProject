@@ -1,4 +1,4 @@
-package pl.pollub.harnasik.app.presentation.offers
+package pl.pollub.harnasik.app.presentation.offers.query
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf

@@ -26,7 +26,8 @@ import pl.pollub.harnasik.app.core.Drawer.DrawerHeader
 import pl.pollub.harnasik.app.presentation.map.MapDisplayScreen
 import pl.pollub.harnasik.app.presentation.map.MapSelectScreen
 import pl.pollub.harnasik.app.presentation.offers.AppBar
-import pl.pollub.harnasik.app.presentation.upsertOffer.AddEditOfferScreen
+import pl.pollub.harnasik.app.presentation.offers.query.AllOffersScreen
+import pl.pollub.harnasik.app.presentation.offers.command.AddEditOfferScreen
 import pl.pollub.harnasik.app.presentation.user.login.Login
 import pl.pollub.harnasik.app.presentation.user.offerSingle.SingleOfferScreen
 import pl.pollub.harnasik.app.util.Screen

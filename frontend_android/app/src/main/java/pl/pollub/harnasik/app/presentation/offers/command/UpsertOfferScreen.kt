@@ -1,4 +1,4 @@
-package pl.pollub.harnasik.app.presentation.upsertOffer
+package pl.pollub.harnasik.app.presentation.offers.command
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
@@ -18,7 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import pl.pollub.harnasik.app.presentation.upsertOffer.components.TransparentHintTextField
+import pl.pollub.harnasik.app.presentation.offers.command.upsertOffer.components.TransparentHintTextField
 import pl.pollub.harnasik.ui.theme.HarnasikTheme
 import java.util.*
 
