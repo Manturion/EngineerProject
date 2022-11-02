@@ -44,7 +44,6 @@ fun SingleOfferScreen(
     val state = viewModel.state
 
     HarnasikTheme {
-
         val scaffoldState = rememberScaffoldState()
         val scope = rememberCoroutineScope()
         Scaffold(scaffoldState = scaffoldState, topBar = {
@@ -84,7 +83,7 @@ fun SingleOfferScreen(
                         Text(text = "Zgłoś")
                     }
                     Button(
-                        onClick = { navController.navigate(Screen.Map.route) },
+                        onClick = { navController.navigate(Screen.Map.route+"?offerId=${state.value.offerId}") },
                         modifier = Modifier.padding(start = 5.dp),
                         colors = ButtonDefaults.buttonColors(Color.Cyan),
                     ) {

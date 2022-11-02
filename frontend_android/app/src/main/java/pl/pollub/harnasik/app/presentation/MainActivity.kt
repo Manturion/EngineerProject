@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
         setContent {
 
 
-            HarnasikTheme() {
+            HarnasikTheme {
 
                 val navController = rememberNavController()
                 NavHost(
@@ -64,9 +64,16 @@ class MainActivity : ComponentActivity() {
                         Login()
                     }
                     composable(
-                        route = Screen.Map.route
-                    ){
-                        MapScreen()
+                        route = Screen.Map.route + "?offerId={offerId}",
+                        arguments = listOf(
+                            navArgument(
+                                name = "offerId"
+                            ) {
+                                type = NavType.LongType
+                            }
+                        )
+                    ) {
+                        MapScreen(navController)
                     }
                 }
             }
