@@ -1,4 +1,4 @@
-package pl.pollub.harnasik.app.presentation.add_edit_offer;
+package pl.pollub.harnasik.app.presentation.upsertOffer;
 
-public class AddEditOfferState {
+public class UpsertOfferState {
 }

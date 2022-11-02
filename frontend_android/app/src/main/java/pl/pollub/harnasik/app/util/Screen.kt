@@ -9,5 +9,6 @@ sealed class Screen(
     object SignUp : Screen("signup_screen")
     object ForgotPassword : Screen("forgotpassword_screen")
     object AddEditOfferScreen : Screen("add_edit_offer_screen")
-    object Map : Screen("map_screen")
+    object MapDisplay : Screen("map_display_screen")
+    object MapSelect : Screen("map_select_screen")
 }

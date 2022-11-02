@@ -1,4 +1,4 @@
-package pl.pollub.harnasik.app.presentation.add_edit_offer
+package pl.pollub.harnasik.app.presentation.upsertOffer
 
 import androidx.compose.ui.focus.FocusState
 
