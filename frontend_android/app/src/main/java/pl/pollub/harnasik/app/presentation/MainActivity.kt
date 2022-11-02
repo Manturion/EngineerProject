@@ -65,8 +65,7 @@ class MainActivity : ComponentActivity() {
                         Login()
                     }
                     composable(
-                        route = Screen.MapDisplay.route+
-                                "?offerId={offerId}",
+                        route = Screen.MapDisplay.route + "?offerId={offerId}",
                         arguments = listOf(
                             navArgument(
                                 name = "offerId"
