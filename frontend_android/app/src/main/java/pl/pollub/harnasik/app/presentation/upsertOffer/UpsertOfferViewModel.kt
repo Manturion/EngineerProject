@@ -1,4 +1,4 @@
-package pl.pollub.harnasik.app.presentation.add_edit_offer
+package pl.pollub.harnasik.app.presentation.upsertOffer
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class AddEditOfferViewModel @Inject constructor(
+class UpsertOfferViewModel @Inject constructor(
     repository: OfferRepository
 ) : ViewModel() {
 

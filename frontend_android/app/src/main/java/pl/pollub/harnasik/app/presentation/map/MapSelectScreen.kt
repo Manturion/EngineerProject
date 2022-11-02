@@ -13,9 +13,10 @@ import com.google.maps.android.compose.MarkerState
 
 import com.google.maps.android.compose.rememberCameraPositionState
 import pl.pollub.harnasik.app.presentation.user.offerSingle.SingleOfferViewModel
+import pl.pollub.harnasik.ui.theme.HarnasikTheme
 
 @Composable
-fun MapScreen() {
+fun MapSelectScreen() {
     val viewModel = hiltViewModel<SingleOfferViewModel>()
     val state = viewModel.state
 
@@ -33,14 +34,17 @@ fun MapScreen() {
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(lublin, 18f)
     }
-    GoogleMap(
-    modifier = Modifier.fillMaxSize(),
-    cameraPositionState = cameraPositionState
-    ) {
-        Marker(
-            state = MarkerState(position = lublin),
-            title = state.value.offer?.title,
-            snippet = "Cena promocyjna: ${state.value.offer?.newPrice} zł"
-        )
+
+    HarnasikTheme {
+        GoogleMap(
+            modifier = Modifier.fillMaxSize(),
+            cameraPositionState = cameraPositionState
+        ) {
+            Marker(
+                state = MarkerState(position = lublin),
+                title = state.value.offer?.title,
+                snippet = "Cena promocyjna: ${state.value.offer?.newPrice} zł"
+            )
+        }
     }
 }

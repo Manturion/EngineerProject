@@ -84,7 +84,12 @@ fun SingleOfferScreen(
                         Text(text = "Zgłoś")
                     }
                     Button(
-                        onClick = { navController.navigate(Screen.Map.route) },
+                        onClick = {
+                            navController.navigate(
+                                Screen.MapDisplay.route +
+                                        "?offerId= ${state.value.offerId}"
+                            )
+                        },
                         modifier = Modifier.padding(start = 5.dp),
                         colors = ButtonDefaults.buttonColors(Color.Cyan),
                     ) {

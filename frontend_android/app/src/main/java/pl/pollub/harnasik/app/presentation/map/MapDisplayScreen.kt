@@ -15,7 +15,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import pl.pollub.harnasik.app.presentation.user.offerSingle.SingleOfferViewModel
 
 @Composable
-fun MapScreen() {
+fun MapDisplayScreen() {
     val viewModel = hiltViewModel<SingleOfferViewModel>()
     val state = viewModel.state
 
