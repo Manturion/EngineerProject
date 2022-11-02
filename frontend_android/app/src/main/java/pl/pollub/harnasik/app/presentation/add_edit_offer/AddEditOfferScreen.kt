@@ -1,5 +1,6 @@
 package pl.pollub.harnasik.app.presentation.add_edit_offer
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -11,9 +12,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberScaffoldState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,6 +24,7 @@ import androidx.navigation.NavController
 import pl.pollub.harnasik.app.presentation.add_edit_offer.components.TransparentHintTextField
 import java.util.*
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun AddEditOfferScreen(
