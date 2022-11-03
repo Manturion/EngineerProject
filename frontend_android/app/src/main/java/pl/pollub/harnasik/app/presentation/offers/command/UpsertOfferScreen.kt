@@ -3,7 +3,6 @@ package pl.pollub.harnasik.app.presentation.offers.command
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.widget.Toast
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -18,7 +17,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -168,7 +166,6 @@ fun AddEditOfferScreen(
                     modifier = Modifier.height(144.dp)
                 )
 
-
                 //Calendar setup
                 val c = Calendar.getInstance()
                 val year = c.get(Calendar.YEAR)
@@ -204,25 +201,26 @@ fun AddEditOfferScreen(
 
                 Row(modifier = Modifier.padding(8.dp)) {
                     Button(
-                        onClick = { datePickerDialog.show() }, colors = ButtonDefaults.buttonColors(
-                            backgroundColor = MaterialTheme.colorScheme.onPrimary
+                        onClick = { datePickerDialog.show() },
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = MaterialTheme.colorScheme.inversePrimary
                         ),
                         modifier = Modifier
                             .width(164.dp)
-                            .padding(end = 16.dp)
-                            .background(color = MaterialTheme.colorScheme.onPrimary)
-                    ) {
+                            .padding(end = 16.dp),
+
+                        ) {
                         Text(text = "Wybierz datę ważności", textAlign = TextAlign.Center)
                     }
 
                     Button(
                         onClick = { datePickerDialog.show() }, colors = ButtonDefaults.buttonColors(
-                            backgroundColor = MaterialTheme.colorScheme.onPrimary
+                            backgroundColor = MaterialTheme.colorScheme.inversePrimary
                         ),
                         modifier = Modifier
                             .width(164.dp)
                             .padding(start = 16.dp)
-                            .background(color = MaterialTheme.colorScheme.onPrimary)
+
                     ) {
                         Text(text = "Wybierz na mapie", textAlign = TextAlign.Center)
                     }
@@ -230,8 +228,6 @@ fun AddEditOfferScreen(
 
 
                 //Old price
-
-
                 var oldPrice by rememberSaveable { mutableStateOf("") }
                 val validateOldPriceMessage = "Opis nie może być pusty"
                 var validateOldPrice by rememberSaveable { mutableStateOf(true) }
