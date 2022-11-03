@@ -12,7 +12,6 @@ import pl.pollub.inzynierka.infrastructure.Offer.CreateOfferDto;
 import pl.pollub.inzynierka.infrastructure.Offer.OfferDto;
 import pl.pollub.inzynierka.infrastructure.Offer.OfferPort;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -80,18 +79,6 @@ public class OfferAdapter implements OfferPort {
             offerRepository.save(offer);
             return offer.getId();
         });
-
-//        OfferEntity offerEntity = mapToEntity(offerDto);
-//
-//        customerRepository.findById(1L)
-//                .ifPresent(offerEntity::setCreatedBy);
-//        statusRepository.findById(1L)
-//                .ifPresent(offerEntity::setStatusByStatusId);
-//        categoryRepository.findById(1L)
-//                .ifPresent(offerEntity::setCategoryByCategoryId);
-//        OfferEntity savedEntity = offerRepository.getById(id);
-//        savedEntity = offerRepository.save(offerEntity);
-//        return savedEntity.getId();
     }
 
     private OfferEntity mapToEntity(CreateOfferDto offerDto) {
