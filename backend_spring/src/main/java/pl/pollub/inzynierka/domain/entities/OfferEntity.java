@@ -3,11 +3,13 @@ package pl.pollub.inzynierka.domain.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -15,6 +17,8 @@ import java.util.Set;
 @Table(name = "offer", schema = "public", catalog = "inzynierka")
 @AllArgsConstructor
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE offer SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 public class OfferEntity {
     @Basic
     @Column(name = "title", nullable = false, length = 255)
@@ -32,17 +36,23 @@ public class OfferEntity {
     @Column(name = "new_price", nullable = true , precision = 9, scale = 2)
     private BigDecimal newPrice;
     @Basic
-    @Column(name = "gps", nullable = false, precision = 12, scale = 2)
-    private BigDecimal gps;
+    @Column(name = "latitude", nullable = false, precision = 19, scale = 16)
+    private BigDecimal latitude;
+    @Basic
+    @Column(name = "longtitude", nullable = false, precision = 19, scale = 16)
+    private BigDecimal longtitude;
     @Basic
     @Column(name = "start_date", nullable = false)
-    private Timestamp startDate;
+    private Date startDate;
     @Basic
     @Column(name = "expire_date", nullable = true)
-    private Timestamp expireDate;
+    private Date expireDate;
     @Basic
     @Column(name = "is_available", nullable = false)
     private boolean isAvailable;
+    @Basic
+    @Column(name = "deleted")
+    private boolean deleted = Boolean.FALSE;
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

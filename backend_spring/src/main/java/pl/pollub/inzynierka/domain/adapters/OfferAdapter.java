@@ -37,14 +37,14 @@ public class OfferAdapter implements OfferPort {
     }
 
     @Override
-    public Long createOffer(CreateOfferDto offerDto) {
-        OfferEntity offerEntity = mapToEntity(offerDto);
+    public Long createOffer(CreateOfferDto createOfferDto) {
+        OfferEntity offerEntity = mapToEntity(createOfferDto);
 
-        customerRepository.findById(offerEntity.getCreatedBy().getId())
+        customerRepository.findById(1L)
                 .ifPresent(offerEntity::setCreatedBy);
-        statusRepository.findById(offerEntity.getStatusByStatusId().getId())
+        statusRepository.findById(1L)
                 .ifPresent(offerEntity::setStatusByStatusId);
-        categoryRepository.findById(offerEntity.getCategoryByCategoryId().getId())
+        categoryRepository.findById(1L)
                 .ifPresent(offerEntity::setCategoryByCategoryId);
 
         OfferEntity savedEntity = offerRepository.save(offerEntity);
@@ -64,7 +64,29 @@ public class OfferAdapter implements OfferPort {
         return null;
     }
 
+    @Override
+    public Optional<Long> editOffer(Long id, CreateOfferDto createOfferDto) {
+
+        return offerRepository.findById(id).map(offer -> {
+            offer.setTitle(createOfferDto.getTitle());
+            offer.setDescription(createOfferDto.getDescription());
+            offer.setImage(createOfferDto.getImage());
+            offer.setOldPrice(createOfferDto.getOldPrice());
+            offer.setNewPrice(createOfferDto.getNewPrice());
+            offer.setLatitude(createOfferDto.getLatitude());
+            offer.setLongtitude(createOfferDto.getLongtitude());
+            offer.setStartDate( createOfferDto.getStartDate());
+            offer.setExpireDate(createOfferDto.getExpireDate());
+            offerRepository.save(offer);
+            return offer.getId();
+        });
+    }
+
     private OfferEntity mapToEntity(CreateOfferDto offerDto) {
+        return offerMapper.mapToEntity(offerDto);
+    }
+
+    private OfferEntity mapToEntity(OfferDto offerDto) {
         return offerMapper.mapToEntity(offerDto);
     }
 }
