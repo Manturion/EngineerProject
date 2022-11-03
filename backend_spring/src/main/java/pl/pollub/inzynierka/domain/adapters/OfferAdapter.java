@@ -73,7 +73,8 @@ public class OfferAdapter implements OfferPort {
             offer.setImage(createOfferDto.getImage());
             offer.setOldPrice(createOfferDto.getOldPrice());
             offer.setNewPrice(createOfferDto.getNewPrice());
-            offer.setGps(createOfferDto.getGps());
+            offer.setLatitude(createOfferDto.getLatitude());
+            offer.setLongtitude(createOfferDto.getLongtitude());
             offer.setStartDate( createOfferDto.getStartDate());
             offer.setExpireDate(createOfferDto.getExpireDate());
             offerRepository.save(offer);

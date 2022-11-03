@@ -36,8 +36,11 @@ public class OfferEntity {
     @Column(name = "new_price", nullable = true , precision = 9, scale = 2)
     private BigDecimal newPrice;
     @Basic
-    @Column(name = "gps", nullable = false, precision = 12, scale = 2)
-    private BigDecimal gps;
+    @Column(name = "latitude", nullable = false, precision = 19, scale = 16)
+    private BigDecimal latitude;
+    @Basic
+    @Column(name = "longtitude", nullable = false, precision = 19, scale = 16)
+    private BigDecimal longtitude;
     @Basic
     @Column(name = "start_date", nullable = false)
     private Date startDate;
