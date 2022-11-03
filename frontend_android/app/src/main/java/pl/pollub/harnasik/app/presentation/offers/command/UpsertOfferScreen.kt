@@ -3,22 +3,31 @@ package pl.pollub.harnasik.app.presentation.offers.command
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Save
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.ArrowDropUp
+import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import pl.pollub.harnasik.app.presentation.offers.command.upsertOffer.components.TransparentHintTextField
+import pl.pollub.harnasik.app.presentation.offers.command.components.CustomOutlinedTextField
 import pl.pollub.harnasik.ui.theme.HarnasikTheme
 import java.util.*
 
@@ -47,12 +56,10 @@ fun AddEditOfferScreen(
                     ) {
 
                     Icon(
-                        imageVector = Icons.Rounded.Save,
-                        contentDescription = "Dodaj ofertę"
+                        imageVector = Icons.Rounded.Save, contentDescription = "Dodaj ofertę"
                     )
                 }
-            }
-        ) {
+            }) {
 
             Column(
                 modifier = Modifier
@@ -75,23 +82,25 @@ fun AddEditOfferScreen(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(12.dp))
-                TransparentHintTextField(
-                    text = titleState.text,
-                    hint = titleState.hint,
-                    onValueChange = {
-                        viewModel.onEvent(AddEditOfferEvent.EnteredTitle(it))
-                    },
-                    onFocusChange = {
-                        viewModel.onEvent(AddEditOfferEvent.ChangeFocusTitle(it))
-                    },
-                    isHintVisible = titleState.isHintVisible,
-                    singleLine = true,
+
+                var title by rememberSaveable { mutableStateOf("") }
+                val validateTitleMessage = "Tytuł nie może być pusty"
+                var validateTitle by rememberSaveable { mutableStateOf(true) }
+
+                CustomOutlinedTextField(
+                    value = title,
+                    onValueChange = { title = it },
+                    label = "Tytuł oferty",
+                    showError = !validateTitle,
+                    leadingIconImageVector = Icons.Rounded.Title,
+                    errorMessage = validateTitleMessage,
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
+                    )
                 )
-                Spacer(modifier = Modifier.height(12.dp))
 
 
-                //dropdown categories
+//                //dropdown categories
                 val contextForToast = LocalContext.current.applicationContext
 
                 val listItems =
@@ -105,36 +114,26 @@ fun AddEditOfferScreen(
                     mutableStateOf(false)
                 }
                 // the box
-                ExposedDropdownMenuBox(
-                    modifier = Modifier
-                        .fillMaxWidth(),
+                ExposedDropdownMenuBox(modifier = Modifier.fillMaxWidth(),
                     expanded = expanded,
                     onExpandedChange = {
                         expanded = !expanded
                     }) {
 
-                    TextField(
+                    val icon = if (expanded) Icons.Filled.ArrowDropUp
+                    else Icons.Filled.ArrowDropDown
+
+                    CustomOutlinedTextField(
                         value = selectedItem,
-                        modifier = Modifier
-                            .fillMaxWidth(),
                         onValueChange = {},
-                        readOnly = true,
-                        label = {
-                            Text(
-                                text = "Kategoria",
-                                modifier = Modifier,
-                                style = MaterialTheme.typography.labelSmall
-                            )
-                        }, trailingIcon = {
-                            ExposedDropdownMenuDefaults.TrailingIcon(
-                                expanded = expanded
-                            )
-                        }, colors = ExposedDropdownMenuDefaults.textFieldColors()
+                        label = "Kategoria",
+                        leadingIconImageVector = icon,
+                        errorMessage = "",
+                        modifier = Modifier.height(64.dp)
                     )
 
                     // menu
-                    ExposedDropdownMenu(
-                        expanded = expanded,
+                    ExposedDropdownMenu(expanded = expanded,
                         onDismissRequest = { expanded = false }) {
                         listItems.forEach { selectedOption ->
                             // menu item
@@ -152,19 +151,23 @@ fun AddEditOfferScreen(
                 //End of dropdown categories
 
 
-                Spacer(modifier = Modifier.height(12.dp))
-                TransparentHintTextField(
-                    text = descriptionState.text,
-                    hint = descriptionState.hint,
-                    onValueChange = {
-                        viewModel.onEvent(AddEditOfferEvent.EnteredDescription(it))
-                    },
-                    onFocusChange = {
-                        viewModel.onEvent(AddEditOfferEvent.ChangeFocusDescription(it))
-                    },
-                    isHintVisible = descriptionState.isHintVisible,
-                    modifier = Modifier.height(256.dp)
+                var description by rememberSaveable { mutableStateOf("") }
+                val validateDescriptionMessage = "Opis nie może być pusty"
+                var validateDescription by rememberSaveable { mutableStateOf(true) }
+
+                CustomOutlinedTextField(
+                    value = description,
+                    onValueChange = { description = it },
+                    label = "Opis oferty",
+                    showError = !validateTitle,
+                    leadingIconImageVector = Icons.Rounded.Description,
+                    errorMessage = validateDescriptionMessage,
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
+                    ),
+                    modifier = Modifier.height(144.dp)
                 )
+
 
                 //Calendar setup
                 val c = Calendar.getInstance()
@@ -172,74 +175,95 @@ fun AddEditOfferScreen(
                 val month = c.get(Calendar.MONTH)
                 val day = c.get(Calendar.DAY_OF_MONTH)
                 val context = LocalContext.current
-                var date by remember {
+                var expireDate by rememberSaveable {
                     mutableStateOf("")
                 }
                 val datePickerDialog = DatePickerDialog(
                     context,
                     { d, year, month1, day ->
                         val month = month + 1
-                        date = "$day/$month/$year"
+                        expireDate = "$day/$month/$year"
                     },
                     year, month, day,
                 )
 
-                Spacer(modifier = Modifier.height(12.dp))
-                TransparentHintTextField(
-                    text = "Data ważności: $date",
-                    hint = "Data terminu spożycia",
-                    onValueChange = { },
-                    onFocusChange = { },
-                    isHintVisible = false,
+
+                var validateExpireDate by rememberSaveable { mutableStateOf(true) }
+
+                CustomOutlinedTextField(
+                    value = expireDate,
+                    onValueChange = { expireDate = it },
+                    label = "Data ważności oferty",
+                    leadingIconImageVector = Icons.Rounded.DateRange,
+                    errorMessage = validateTitleMessage,
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
+                    )
                 )
+                Spacer(modifier = Modifier.height(2.dp))
 
-                Button(
-                    onClick = { datePickerDialog.show() },
-                    colors = ButtonDefaults
-                        .buttonColors(
+                Row(modifier = Modifier.padding(8.dp)) {
+                    Button(
+                        onClick = { datePickerDialog.show() }, colors = ButtonDefaults.buttonColors(
                             backgroundColor = MaterialTheme.colorScheme.onPrimary
-                        )
-                ) {
-                    Text(text = "Wybierz datę ważności")
+                        ),
+                        modifier = Modifier
+                            .width(164.dp)
+                            .padding(end = 16.dp)
+                            .background(color = MaterialTheme.colorScheme.onPrimary)
+                    ) {
+                        Text(text = "Wybierz datę ważności", textAlign = TextAlign.Center)
+                    }
+
+                    Button(
+                        onClick = { datePickerDialog.show() }, colors = ButtonDefaults.buttonColors(
+                            backgroundColor = MaterialTheme.colorScheme.onPrimary
+                        ),
+                        modifier = Modifier
+                            .width(164.dp)
+                            .padding(start = 16.dp)
+                            .background(color = MaterialTheme.colorScheme.onPrimary)
+                    ) {
+                        Text(text = "Wybierz na mapie", textAlign = TextAlign.Center)
+                    }
                 }
 
-                Button(
-                    onClick = { datePickerDialog.show() },
-                    colors = ButtonDefaults
-                        .buttonColors(
-                            backgroundColor = MaterialTheme.colorScheme.onPrimary
-                        )
-                ) {
-                    Text(text = "Wybierz na mapie")
-                }
 
                 //Old price
-                Spacer(modifier = Modifier.height(12.dp))
-                TransparentHintTextField(
-                    text = oldPriceState.text,
-                    hint = oldPriceState.hint,
-                    onValueChange = {
-                        viewModel.onEvent(AddEditOfferEvent.EnteredOldPrice(it))
-                    },
-                    onFocusChange = {
-                        viewModel.onEvent(AddEditOfferEvent.ChangeFocusOldPrice(it))
-                    },
-                    isHintVisible = oldPriceState.isHintVisible,
+
+
+                var oldPrice by rememberSaveable { mutableStateOf("") }
+                val validateOldPriceMessage = "Opis nie może być pusty"
+                var validateOldPrice by rememberSaveable { mutableStateOf(true) }
+
+                CustomOutlinedTextField(
+                    value = oldPrice,
+                    onValueChange = { oldPrice = it },
+                    label = "Stara cena",
+                    showError = !validateOldPrice,
+                    leadingIconImageVector = Icons.Rounded.MoneyOff,
+                    errorMessage = validateOldPriceMessage,
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Number, imeAction = ImeAction.Next
+                    )
                 )
 
                 //New price
-                Spacer(modifier = Modifier.height(16.dp))
-                TransparentHintTextField(
-                    text = newPriceState.text,
-                    hint = newPriceState.hint,
-                    onValueChange = {
-                        viewModel.onEvent(AddEditOfferEvent.EnteredNewPrice(it))
-                    },
-                    onFocusChange = {
-                        viewModel.onEvent(AddEditOfferEvent.ChangeFocusNewPrice(it))
-                    },
-                    isHintVisible = newPriceState.isHintVisible,
-//                textStyle = MaterialTheme.typography.titleLarge,
+
+                var newPrice by rememberSaveable { mutableStateOf("") }
+                val validateNewPriceMessage = "Opis nie może być pusty"
+                var validateNewPrice by rememberSaveable { mutableStateOf(true) }
+
+                CustomOutlinedTextField(
+                    value = newPrice,
+                    onValueChange = { newPrice = it },
+                    label = "Nowa cena",
+                    showError = !validateNewPrice,
+                    leadingIconImageVector = Icons.Rounded.MonetizationOn,
+                    errorMessage = validateNewPriceMessage,
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Number, imeAction = ImeAction.Next
+                    )
                 )
             }
         }
