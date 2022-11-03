@@ -11,5 +11,6 @@ data class OfferModel(
     val expireDate: String,
     val categoryId: Long,
     val id: Long,
-    val available: Boolean
+    val available: Boolean,
+    val geolocation: OfferSpot? = null
 )

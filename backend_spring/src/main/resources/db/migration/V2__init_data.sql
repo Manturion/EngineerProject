@@ -33,7 +33,17 @@ values (1, 1);
 --Przykladowe dane dla tabeli offer
 insert into offer (id,title, description, image, old_price, new_price, latitude, longtitude, start_date, expire_date, is_available,
                    created_by_customer_id, status_id, category_id)
+<<<<<<< HEAD
 values (1,'pizzunia', 'wloska pizzunia', 'image nie wiem', 18.20, 32.80, 51.23426942850, 22.539411038160, '2021-01-01 00:00:01',
+=======
+values (1,'eGift card to spend on pizza making', 'From fresh dough bases, tomato sauce, cheese, ham and even pineapple chunks (go on, we won’t judge), you can make the pizza of your dreams in the comfort of your own home.
+
+Grab your Morrisons eGift Card today.
+
+What you need to know
+
+Free £5 Morrisons eGift Card to spend on pizza-making essentials', 'https://images.hotukdeals.com/threads/raw/8I41h/4014506_1/re/1024x1024/qt/60/4014506_1.jpg', 18.20, 32.80, 5923.56, '2021-01-01 00:00:01',
+>>>>>>> develop
         '2022-01-01 00:00:01', true, 1, 1, 1);
 
 --Przykladowe dane dla tabeli banned_customer

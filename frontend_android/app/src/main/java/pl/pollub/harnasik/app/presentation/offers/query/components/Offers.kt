@@ -11,15 +11,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import pl.pollub.harnasik.R
+import coil.compose.rememberImagePainter
+import pl.pollub.harnasik.app.presentation.offers.query.OffersState
 import pl.pollub.harnasik.app.util.Screen
 
 @Composable
-fun CategorySlideBar(categories: List<String> = List(10) { "Category $it" }) {
+fun CategorySlideBar(categories: List<String> = listOf<String>("Jedzenie","Napoje","Słodycze","Przekąski", "Alkohole", "Inne")) {
     LazyRow() {
         items(items = categories) { category ->
             SingleCategoryButton(name = category)
@@ -39,24 +40,24 @@ fun SingleCategoryButton(name: String) {
 }
 
 @Composable
-fun getAllOffers(state: OffersState, navController: NavController) {
+fun GetAllOffers(state: OffersState, navController: NavController) {
 
     GenerateListOfAllOffersLoaded(state, navController)
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GenerateListOfAllOffersLoaded(
     state: OffersState,
     navController: NavController
 ) {
-
     if (state.offers == null) {
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Nothing to show or connection refused",
+                text = "Brak ofert lub błąd połączenia",
                 modifier = Modifier,
                 style = MaterialTheme.typography.titleLarge
             )
@@ -65,11 +66,9 @@ fun GenerateListOfAllOffersLoaded(
 
         LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
 
-
             items(state.offers) {
 
                 val expanded = remember { mutableStateOf(false) }
-
                 Surface(
                     onClick = {
                         navController.navigate(
@@ -77,13 +76,17 @@ fun GenerateListOfAllOffersLoaded(
                                     "?offerId=${it.id}"
                         )
                     },
-                    modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+                    modifier = Modifier
+                        .padding(vertical = 4.dp, horizontal = 8.dp)
                 ) {
-                    Row(modifier = Modifier.padding(24.dp)) {
-
+                    Row(
+                        modifier = Modifier
+                            .padding(24.dp)
+                    ) {
                         Image(
-                            painter = painterResource(id = R.drawable.ic_launcher_background),
-                            contentDescription = "Offer description",
+                            contentScale = ContentScale.Crop,
+                            painter = rememberImagePainter("${it.image}"),
+                            contentDescription = it.image,
                             modifier = Modifier
                                 .height(75.dp)
                                 .width(75.dp)
@@ -91,12 +94,13 @@ fun GenerateListOfAllOffersLoaded(
                         Column(
                             modifier = Modifier
                                 .weight(1f)
+                                .padding(4.dp)
                         ) {
                             Text(
-                                text = "Oferta ${it.title}",
+                                text = "Offer ${it.title}",
                                 fontWeight = FontWeight.Bold
+
                             )
-                            Text(text = it.description)
                         }
                         Column() {
                             OutlinedButton(
