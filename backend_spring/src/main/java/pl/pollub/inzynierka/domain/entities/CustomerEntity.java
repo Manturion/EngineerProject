@@ -1,6 +1,10 @@
 package pl.pollub.inzynierka.domain.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -9,6 +13,10 @@ import java.util.Set;
 @Entity
 @Data
 @Table(name = "customer", schema = "public", catalog = "inzynierka")
+@AllArgsConstructor
+@NoArgsConstructor
+@SQLDelete(sql = "UPDATE offer SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 public class CustomerEntity {
     @Basic
     @Column(name = "email", nullable = false, length = 255)
@@ -37,6 +45,9 @@ public class CustomerEntity {
     @Basic
     @Column(name = "token", nullable = false, length = 255)
     private String token;
+    @Basic
+    @Column(name = "deleted")
+    private boolean deleted = Boolean.FALSE;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)

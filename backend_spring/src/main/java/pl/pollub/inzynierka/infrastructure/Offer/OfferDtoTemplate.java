@@ -19,14 +19,16 @@ public abstract class OfferDtoTemplate {
     protected String image;
     protected BigDecimal oldPrice;
     protected BigDecimal newPrice;
-    protected BigDecimal gps;
-    @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss")
+    protected BigDecimal latitude;
+    protected BigDecimal longtitude;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     protected Date startDate;
-    @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     protected Date expireDate;
     protected boolean isAvailable;
-    //    private int createdBy;
-//    private int statusId;
+    //private int createdBy;
+    //private int statusId;
     private Long categoryId;
+    private boolean deleted;
 
 }

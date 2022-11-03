@@ -32,4 +32,8 @@ public class OfferService {
         return offerPort.deleteOffer(id);
     }
 
+    public Optional<Long> editOffer(CreateOfferDto createOfferDto, Long id){
+        return offerPort.editOffer(id, createOfferDto);
+    }
+
 }
