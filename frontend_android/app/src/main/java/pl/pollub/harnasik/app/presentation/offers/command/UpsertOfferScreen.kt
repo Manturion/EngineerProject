@@ -25,8 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import pl.pollub.harnasik.app.presentation.offers.command.components.CustomOutlinedTextField
-import pl.pollub.harnasik.app.util.Screen
+import pl.pollub.harnasik.app.presentation.offers.command.components.TransparentHintTextField
 import pl.pollub.harnasik.ui.theme.HarnasikTheme
 import java.util.*
 
