@@ -4,23 +4,19 @@ import android.util.Patterns
 import android.view.Gravity
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Error
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.material.icons.rounded.AccountCircle
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -51,7 +47,8 @@ fun CustomOutlinedTextField(
     showDataError: Boolean = false,
     showBlankError: Boolean = false,
     dataErrorMessage: String,
-    blankErrorMessage: String
+    blankErrorMessage: String,
+    hintMessage: String
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -103,19 +100,23 @@ fun CustomOutlinedTextField(
             singleLine = true
         )
         if (showBlankError) {
-            Text(
-                text = blankErrorMessage,
-                color = MaterialTheme.colors.error,
-                style = MaterialTheme.typography.caption
-            )
+            showTextUnderField(text = blankErrorMessage, color = MaterialTheme.colors.error)
         } else if (showDataError) {
-            Text(
-                text = dataErrorMessage,
-                color = MaterialTheme.colors.error,
-                style = MaterialTheme.typography.caption
-            )
+            showTextUnderField(text = dataErrorMessage, color = MaterialTheme.colors.error)
+        } else {
+            showTextUnderField(text = hintMessage, color = MaterialTheme.colors.onSecondary)
         }
     }
+}
+
+@Composable
+fun showTextUnderField(text: String, color: Color) {
+    Text(
+        text = text,
+        color = color,
+        style = MaterialTheme.typography.caption,
+        fontSize = 20.sp, fontFamily = fontFamily
+    )
 }
 
 @Composable
@@ -123,8 +124,6 @@ fun SignUp(
     navController: NavHostController,
 ) {
     val context = LocalContext.current.applicationContext
-    val focusManager = LocalFocusManager.current
-    val scrollState = rememberScrollState()
 
     var username by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
@@ -138,13 +137,13 @@ fun SignUp(
     var validatePasswordIsBlank by rememberSaveable { mutableStateOf(true) }
     var validateConfirmPasswordIsBlank by rememberSaveable { mutableStateOf(true) }
 
-    var isPasswordVisible by rememberSaveable { mutableStateOf(false) }
-    var isConfirmPasswordVisible by rememberSaveable { mutableStateOf(false) }
-
     val validateUsernameErrorMessage = "Wprowadź prawidłowy email"
     val validatePasswordErrorMessage = "Wprowadź prawidłowe hasło"
     val validateEqualPasswordErrorMessage = "Hasła muszą być takie same"
     val validateBlankFieldErrorMessage = "To pole nie może być puste"
+
+    val hintMessageUsername = "To będzie Twój login"
+    val hintMessagePassword = "Hasło min x znaków"
 
     fun validateIfFieldsAreBlank(
         username: String,
@@ -199,8 +198,8 @@ fun SignUp(
         CustomOutlinedTextField(
             value = username,
             onValueChange = { username = it },
-            label = "Nazwa użytkownika",
-            leadingIconImageVector = Icons.Rounded.AccountCircle,
+            label = "Email",
+            leadingIconImageVector = Icons.Default.Email,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,
                 imeAction = ImeAction.Next
@@ -208,14 +207,15 @@ fun SignUp(
             showBlankError = !validateUsernameIsBlank,
             blankErrorMessage = validateBlankFieldErrorMessage,
             showDataError = !validateUsername,
-            dataErrorMessage = validateUsernameErrorMessage
+            dataErrorMessage = validateUsernameErrorMessage,
+            hintMessage = hintMessageUsername
         )
         Spacer(modifier = Modifier.height(20.dp))
         CustomOutlinedTextField(
             value = password,
             onValueChange = { password = it },
             label = "Hasło",
-            leadingIconImageVector = Icons.Default.VisibilityOff,
+            leadingIconImageVector = Icons.Default.Password,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,
                 imeAction = ImeAction.Next
@@ -223,14 +223,16 @@ fun SignUp(
             showBlankError = !validatePasswordIsBlank,
             blankErrorMessage = validateBlankFieldErrorMessage,
             showDataError = !validatePassword,
-            dataErrorMessage = validatePasswordErrorMessage
+            dataErrorMessage = validatePasswordErrorMessage,
+            isPasswordField = true,
+            hintMessage = hintMessagePassword
         )
         Spacer(modifier = Modifier.height(20.dp))
         CustomOutlinedTextField(
             value = confirmPassword,
             onValueChange = { confirmPassword = it },
             label = "Powtórz hasło",
-            leadingIconImageVector = Icons.Default.VisibilityOff,
+            leadingIconImageVector = Icons.Default.Password,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,
                 imeAction = ImeAction.Next
@@ -238,7 +240,9 @@ fun SignUp(
             showBlankError = !validateConfirmPasswordIsBlank,
             blankErrorMessage = validateBlankFieldErrorMessage,
             showDataError = !validatePasswordEqual,
-            dataErrorMessage = validateEqualPasswordErrorMessage
+            dataErrorMessage = validateEqualPasswordErrorMessage,
+            isPasswordField = true,
+            hintMessage = ""
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -246,9 +250,9 @@ fun SignUp(
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.Start,
         ) {
-            AdultCheckbox()
+            CheckboxPersonalised(text = "Jestem osobą pełnoletnią")
             Spacer(modifier = Modifier.height(20.dp))
-            TermsCheckbox()
+            CheckboxPersonalised(text = "Akceptuję regulamin")
         }
         Spacer(modifier = Modifier.height(20.dp))
         Box(
@@ -275,17 +279,7 @@ fun SignUpText() {
 }
 
 @Composable
-fun AdultText() {
-    Text("Jestem osobą pełnoletnią", fontSize = 20.sp, fontFamily = fontFamily)
-}
-
-@Composable
-fun AcceptTermsText() {
-    Text("Akceptuję regulamin", fontSize = 20.sp, fontFamily = fontFamily)
-}
-
-@Composable
-fun AdultCheckbox() {
+fun CheckboxPersonalised(text: String) {
     Row(modifier = Modifier.padding(0.dp)) {
         val isChecked = remember { mutableStateOf(false) }
         Checkbox(
@@ -294,20 +288,6 @@ fun AdultCheckbox() {
             enabled = true,
             colors = CheckboxDefaults.colors(MaterialTheme.colors.primary)
         )
-        AdultText()
-    }
-}
-
-@Composable
-fun TermsCheckbox() {
-    Row(modifier = Modifier.padding(0.dp)) {
-        val isChecked = remember { mutableStateOf(false) }
-        Checkbox(
-            checked = isChecked.value,
-            onCheckedChange = { isChecked.value = it },
-            enabled = true,
-            colors = CheckboxDefaults.colors(MaterialTheme.colors.primary)
-        )
-        AcceptTermsText()
+        Text(text, fontSize = 20.sp, fontFamily = fontFamily)
     }
 }
