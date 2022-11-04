@@ -31,9 +31,9 @@ insert into customer_shop (customer_id, shop_id)
 values (1, 1);
 
 --Przykladowe dane dla tabeli offer
-insert into offer (id,title, description, image, old_price, new_price, gps, start_date, expire_date, is_available,
+insert into offer (id,title, description, image, old_price, new_price,latitude,longitude, start_date, expire_date, is_available,
                    created_by_customer_id, status_id, category_id)
-values (1,'pizzunia', 'wloska pizzunia', 'image nie wiem', 18.20, 32.80, 5923.56, '2021-01-01 00:00:01',
+values (1,'pizzunia', 'wloska pizzunia', 'image nie wiem', 18.20, 32.80, 51.23426942850275,22.539411038160324,'2021-01-01 00:00:01',
         '2022-01-01 00:00:01', true, 1, 1, 1);
 
 --Przykladowe dane dla tabeli banned_customer

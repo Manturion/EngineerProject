@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class CreateOfferDto extends OfferDtoTemplate {
 
-    public CreateOfferDto(String title, String description, String image, BigDecimal oldPrice, BigDecimal newPrice, BigDecimal latitude, BigDecimal longtitude, Date startDate, Date expireDate, boolean isAvailable, Long categoryId, boolean deleted) {
-        super(title, description, image, oldPrice, newPrice, latitude, longtitude, startDate, expireDate, isAvailable, categoryId, deleted);
+    public CreateOfferDto(String title, String description, String image, BigDecimal oldPrice, BigDecimal newPrice, BigDecimal latitude, BigDecimal longitude, Date startDate, Date expireDate, boolean isAvailable, Long categoryId, boolean deleted) {
+        super(title, description, image, oldPrice, newPrice, latitude, longitude, startDate, expireDate, isAvailable, categoryId, deleted);
     }
 }

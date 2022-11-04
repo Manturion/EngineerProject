@@ -20,7 +20,7 @@ public abstract class OfferDtoTemplate {
     protected BigDecimal oldPrice;
     protected BigDecimal newPrice;
     protected BigDecimal latitude;
-    protected BigDecimal longtitude;
+    protected BigDecimal longitude;
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     protected Date startDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING)

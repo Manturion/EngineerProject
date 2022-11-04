@@ -215,7 +215,7 @@ fun AddEditOfferScreen(
                     }
 
                     Button(
-                        onClick = {  navController.navigate(Screen.Login.route) }, colors = ButtonDefaults.buttonColors(
+                        onClick = {  navController.navigate(Screen.MapSelect.route) }, colors = ButtonDefaults.buttonColors(
                             backgroundColor = MaterialTheme.colorScheme.inversePrimary
                         ),
                         modifier = Modifier
