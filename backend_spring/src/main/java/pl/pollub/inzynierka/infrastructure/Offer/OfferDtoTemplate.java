@@ -26,9 +26,7 @@ public abstract class OfferDtoTemplate {
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     protected Date expireDate;
     protected boolean isAvailable;
-    //private int createdBy;
-    //private int statusId;
     private Long categoryId;
-    private boolean deleted;
+
 
 }
