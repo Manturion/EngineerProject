@@ -2,6 +2,7 @@ package pl.pollub.harnasik.app.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -26,8 +27,8 @@ import pl.pollub.harnasik.app.core.Drawer.DrawerHeader
 import pl.pollub.harnasik.app.presentation.map.MapDisplayScreen
 import pl.pollub.harnasik.app.presentation.map.MapSelectScreen
 import pl.pollub.harnasik.app.presentation.offers.AppBar
-import pl.pollub.harnasik.app.presentation.offers.query.AllOffersScreen
 import pl.pollub.harnasik.app.presentation.offers.command.AddEditOfferScreen
+import pl.pollub.harnasik.app.presentation.offers.query.AllOffersScreen
 import pl.pollub.harnasik.app.presentation.user.login.Login
 import pl.pollub.harnasik.app.presentation.user.offerSingle.SingleOfferScreen
 import pl.pollub.harnasik.app.util.Screen
@@ -73,11 +74,9 @@ class MainActivity : ComponentActivity() {
                             }
                             composable(
                                 route = Screen.SingleOfferScreen.route + "?offerId={offerId}",
-                                arguments = listOf(navArgument(
-                                    name = "offerId"
-                                ) {
-                                    type = NavType.LongType
-                                })
+                                arguments = listOf(
+                                    navArgument(name = "offerId") { type = NavType.LongType }
+                                )
                             ) {
                                 SingleOfferScreen(navController)
                             }
@@ -92,13 +91,16 @@ class MainActivity : ComponentActivity() {
                                 Login()
                             }
                             composable(
-                                route = Screen.MapDisplay.route + "?offerId={offerId}",
-                                arguments = listOf(navArgument(
-                                    name = "offerId"
-                                ) {
-                                    type = NavType.LongType
-                                })
+                                route = Screen.MapDisplay.route,
+                                arguments = listOf(
+                                    navArgument(name = "title") { type = NavType.StringType },
+                                    navArgument(name = "latitude") { type = NavType.LongType },
+                                    navArgument(name = "longitude") { type = NavType.LongType }
+                                )
                             ) {
+                                Log.d("Args",it.arguments?.getInt("title").toString())
+                                Log.d("Args",it.arguments?.getInt("latitude").toString())
+                                Log.d("Args",it.arguments?.getInt("longitude").toString())
                                 MapDisplayScreen(navController)
                             }
                             composable(

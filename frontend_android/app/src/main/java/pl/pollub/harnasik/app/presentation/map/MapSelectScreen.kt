@@ -26,7 +26,7 @@ fun MapSelectScreen() {
     if (geolocation != null) {
         val lat = geolocation.lat
         val long = geolocation.lng
-        point = LatLng(lat, long)
+        point = LatLng(lat.toDouble(), long.toDouble())
     }
 
     val lublin = LatLng(51.23426942850275, 22.539411038160324)
