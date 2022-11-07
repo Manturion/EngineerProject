@@ -67,8 +67,8 @@ fun SingleOfferScreen(
                                 navController.navigate(
                                     Screen.MapDisplay.passArgs(
                                         state.value.offer?.title,
-                                        state.value.offer?.latitude,
-                                        state.value.offer?.longitude,
+                                        state.value.offer?.latitude.toString(),
+                                        state.value.offer?.longitude.toString(),
                                     )
                                 )
                             },

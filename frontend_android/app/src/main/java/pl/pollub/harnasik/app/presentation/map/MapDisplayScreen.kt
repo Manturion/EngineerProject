@@ -3,7 +3,7 @@ package pl.pollub.harnasik.app.presentation.map
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -11,44 +11,39 @@ import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
-import pl.pollub.harnasik.app.presentation.map.MapDisplayViewModel.MapDisplayViewModel
-import pl.pollub.harnasik.app.presentation.user.offerSingle.SingleOfferViewModel
+import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_LAT
+import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_LONG
+import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_TITLE
 
 @Composable
 fun MapDisplayScreen(
-    navController: NavController
+    backStackEntry: NavBackStackEntry
 ) {
-    val viewModel = hiltViewModel<MapDisplayViewModel>()
-    val state = viewModel.state
-
-    val latitude = state.value.latitude
-    val longitude = state.value.longitude
-    var point = LatLng(51.23426942850275, 22.539411038160324)
-
-//    if (geolocation != null) {
-//        val lat = geolocation.lat
-//        val long = geolocation.lng
-//        point = LatLng(lat, long)
-//    }
-
-    println("XXXXXXXXXXXXXXX :${state.value.title}")
-    println("XXXXXXXXXXXXXXX :${state.value.latitude}")
-    println("XXXXXXXXXXXXXXX :${state.value.longitude}")
 
 
-    val lublin = LatLng(51.23426942850275, 22.539411038160324)
+    val title = backStackEntry.arguments?.getString(DETAIL_ARGUMENT_TITLE).toString()
+    val lat = backStackEntry.arguments?.getString(DETAIL_ARGUMENT_LAT)?.toDouble()
+    val long = backStackEntry.arguments?.getString(DETAIL_ARGUMENT_LONG)?.toDouble()
 
-    val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(lublin, 18f)
+
+    if(lat!=null && long!=null){
+        val lublin = LatLng(lat, long)
+
+        val cameraPositionState = rememberCameraPositionState {
+            position = CameraPosition.fromLatLngZoom(lublin, 18f)
+        }
+        GoogleMap(
+            modifier = Modifier.fillMaxSize(),
+            cameraPositionState = cameraPositionState
+        ) {
+            Marker(
+                state = MarkerState(position = lublin),
+                title = title,
+                snippet = ""
+            )
+        }
     }
-    GoogleMap(
-        modifier = Modifier.fillMaxSize(),
-        cameraPositionState = cameraPositionState
-    ) {
-        Marker(
-            state = MarkerState(position = lublin),
-            title = state.value.title,
-            snippet = ""
-        )
-    }
+
+
+
 }

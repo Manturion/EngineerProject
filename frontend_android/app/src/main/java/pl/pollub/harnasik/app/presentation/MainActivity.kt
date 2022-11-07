@@ -2,7 +2,6 @@ package pl.pollub.harnasik.app.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -31,6 +30,9 @@ import pl.pollub.harnasik.app.presentation.offers.command.AddEditOfferScreen
 import pl.pollub.harnasik.app.presentation.offers.query.AllOffersScreen
 import pl.pollub.harnasik.app.presentation.user.login.Login
 import pl.pollub.harnasik.app.presentation.user.offerSingle.SingleOfferScreen
+import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_LAT
+import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_LONG
+import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_TITLE
 import pl.pollub.harnasik.app.util.Screen
 import pl.pollub.harnasik.ui.theme.HarnasikTheme
 
@@ -72,11 +74,10 @@ class MainActivity : ComponentActivity() {
                             ) {
                                 AllOffersScreen(navController = navController)
                             }
-                            composable(
-                                route = Screen.SingleOfferScreen.route + "?offerId={offerId}",
-                                arguments = listOf(
-                                    navArgument(name = "offerId") { type = NavType.LongType }
-                                )
+                            composable(route = Screen.SingleOfferScreen.route + "?offerId={offerId}",
+                                arguments = listOf(navArgument(name = "offerId") {
+                                    type = NavType.LongType
+                                })
                             ) {
                                 SingleOfferScreen(navController)
                             }
@@ -90,18 +91,16 @@ class MainActivity : ComponentActivity() {
                             ) {
                                 Login()
                             }
-                            composable(
-                                route = Screen.MapDisplay.route,
-                                arguments = listOf(
-                                    navArgument(name = "title") { type = NavType.StringType },
-                                    navArgument(name = "latitude") { type = NavType.LongType },
-                                    navArgument(name = "longitude") { type = NavType.LongType }
-                                )
-                            ) {
-                                Log.d("Args",it.arguments?.getInt("title").toString())
-                                Log.d("Args",it.arguments?.getInt("latitude").toString())
-                                Log.d("Args",it.arguments?.getInt("longitude").toString())
-                                MapDisplayScreen(navController)
+                            composable(route = Screen.MapDisplay.route,
+                                arguments = listOf(navArgument(DETAIL_ARGUMENT_TITLE) {
+                                    type = NavType.StringType
+                                }, navArgument(DETAIL_ARGUMENT_LAT) {
+                                    type = NavType.StringType
+                                }, navArgument(DETAIL_ARGUMENT_LONG) {
+                                    type = NavType.StringType
+                                })
+                            ) { backStackEntry ->
+                                MapDisplayScreen(backStackEntry)
                             }
                             composable(
                                 route = Screen.MapSelect.route

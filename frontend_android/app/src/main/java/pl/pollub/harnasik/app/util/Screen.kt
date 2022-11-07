@@ -1,5 +1,9 @@
 package pl.pollub.harnasik.app.util
 
+const val DETAIL_ARGUMENT_TITLE = "Title"
+const val DETAIL_ARGUMENT_LAT = "Lat"
+const val DETAIL_ARGUMENT_LONG = "Long"
+
 sealed class Screen(
     val route: String
 ) {
@@ -9,11 +13,12 @@ sealed class Screen(
     object SignUp : Screen("signup_screen")
     object ForgotPassword : Screen("forgotpassword_screen")
     object AddEditOfferScreen : Screen("add_edit_offer_screen")
-    object MapDisplay : Screen("map_display_screen/{title}/{latitude}/{longitude}") {
+    object MapDisplay :
+        Screen("map_display_screen/{$DETAIL_ARGUMENT_TITLE}/{$DETAIL_ARGUMENT_LAT}/{$DETAIL_ARGUMENT_LONG}") {
         fun passArgs(
             title: String? = "",
-            latitude: Long? = 0,
-            longitude: Long? = 0
+            latitude: String? = "",
+            longitude: String? = ""
         ): String {
             return "map_display_screen/$title/$latitude/$longitude"
         }

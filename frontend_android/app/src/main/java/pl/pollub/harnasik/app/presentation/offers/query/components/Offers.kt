@@ -19,6 +19,7 @@ import coil.compose.rememberImagePainter
 import pl.pollub.harnasik.app.presentation.offers.query.OffersState
 import pl.pollub.harnasik.app.util.Screen
 
+
 @Composable
 fun CategorySlideBar(categories: List<String> = listOf<String>("Jedzenie","Napoje","Słodycze","Przekąski", "Alkohole", "Inne")) {
     LazyRow() {
