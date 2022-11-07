@@ -3,6 +3,7 @@ package pl.pollub.harnasik.app.presentation.user.signUp
 import android.util.Patterns
 import android.view.Gravity
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -244,16 +245,20 @@ fun SignUp(
             isPasswordField = true,
             hintMessage = ""
         )
-
         Spacer(modifier = Modifier.height(20.dp))
-        Column(
-            verticalArrangement = Arrangement.Bottom,
-            horizontalAlignment = Alignment.Start,
+        Box(
+            modifier = Modifier
+                .background(color = Color.DarkGray)
         ) {
-            CheckboxPersonalised(text = "Jestem osobą pełnoletnią")
-            Spacer(modifier = Modifier.height(20.dp))
-            CheckboxPersonalised(text = "Akceptuję regulamin")
+            Text(
+                text = "Rejestrując się potwierdzasz,\nże jesteś osobą pełnoletnią\n" +
+                        "oraz akceptujesz regulamin.",
+                textAlign = TextAlign.Center,
+                color = Color.White,
+                fontSize = 20.sp
+            )
         }
+
         Spacer(modifier = Modifier.height(20.dp))
         Box(
             modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)
@@ -267,27 +272,8 @@ fun SignUp(
                     .fillMaxWidth()
                     .height(50.dp)
             ) {
-                SignUpText()
+                Text("ZAREJESTRUJ SIĘ", fontSize = 25.sp, fontFamily = fontFamily)
             }
         }
-    }
-}
-
-@Composable
-fun SignUpText() {
-    Text("ZAREJESTRUJ SIĘ", fontSize = 20.sp, fontFamily = fontFamily)
-}
-
-@Composable
-fun CheckboxPersonalised(text: String) {
-    Row(modifier = Modifier.padding(0.dp)) {
-        val isChecked = remember { mutableStateOf(false) }
-        Checkbox(
-            checked = isChecked.value,
-            onCheckedChange = { isChecked.value = it },
-            enabled = true,
-            colors = CheckboxDefaults.colors(MaterialTheme.colors.primary)
-        )
-        Text(text, fontSize = 20.sp, fontFamily = fontFamily)
     }
 }
