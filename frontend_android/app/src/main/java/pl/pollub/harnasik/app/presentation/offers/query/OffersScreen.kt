@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
@@ -24,29 +25,28 @@ fun AllOffersScreen(navController: NavController) {
     val viewModel = hiltViewModel<OffersViewModel>()
     val state = viewModel.state.value
 
-    Scaffold(
-        content = {
-            Column {
-                CategorySlideBar()
-                GetAllOffers(state, navController)
-            }
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    navController.navigate(
-                        Screen.AddEditOfferScreen.route
-                    )
-                },
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.Add,
-                    contentDescription = stringResource(R.string.label_continue_to_courses)
-                )
-            }
+    Scaffold(content = {
+        Column {
+            CategorySlideBar()
+            GetAllOffers(state, navController)
         }
-    )
-
+    }, floatingActionButton = {
+        FloatingActionButton(
+            onClick = {
+                navController.navigate(
+                    Screen.AddEditOfferScreen.route
+                )
+            },
+            contentColor = MaterialTheme.colors.primary,
+            backgroundColor = MaterialTheme.colors.primary
+        ) {
+            Icon(
+                imageVector = Icons.Rounded.Add,
+                contentDescription = stringResource(R.string.label_continue_to_courses),
+                tint = MaterialTheme.colors.onPrimary,
+            )
+        }
+    })
 }
 
 
