@@ -33,8 +33,13 @@ values (1, 1);
 --Przykladowe dane dla tabeli offer
 insert into offer (id,title, description, image, old_price, new_price,latitude,longitude, start_date, expire_date, is_available,
                    created_by_customer_id, status_id, category_id)
-values (1,'pizzunia', 'wloska pizzunia', 'image nie wiem', 18.20, 32.80, 51.23426942850275,22.539411038160324,'2021-01-01 00:00:01',
-        '2022-01-01 00:00:01', true, 1, 1, 1);
+values (1, 'Jabłka 1,5kg za 2,89zł @Biedronka',
+        'Jabłka 1,5 kg za 2,89zł.' ||
+        'za 1 kg wychodzi 1,93 zł',
+        'https://static.pepper.pl/threads/raw/S5ObU/595605_1/fs/895x577/qt/65/595605_1.jpg',
+        4.27, 2.89, 51.238474743519305, 22.52365631601052,
+        '2021-11-07 00:00:01',
+        '2022-01-09 00:00:01', true, 1, 1, 1);
 
 --Przykladowe dane dla tabeli banned_customer
 insert into banned_customer (id,ban_date, expire_date, reason, banned_by, customer_id)

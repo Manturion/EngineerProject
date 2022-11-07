@@ -124,7 +124,7 @@ fun SingleOfferScreen(
                     ) {
                         Text(
                             modifier = Modifier.padding(4.dp),
-                            text = "${state.value.offer?.description} " + "${state.value.offer?.image}"
+                            text = "${state.value.offer?.description} "
                         )
                     }
 
