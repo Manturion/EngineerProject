@@ -35,7 +35,7 @@ fun TransparentHintTextField(
 ) {
     Box(
         modifier = Modifier
-            .background(color = MaterialTheme.colorScheme.onPrimary),
+            .background(color = MaterialTheme.colorScheme.primary),
 
 
         ) {

@@ -2,17 +2,15 @@ package pl.pollub.harnasik.app.presentation.offers.command
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.ArrowDropUp
 import androidx.compose.material.icons.rounded.*
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -26,13 +24,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import pl.pollub.harnasik.app.presentation.offers.command.components.CustomOutlinedTextField
-import pl.pollub.harnasik.app.presentation.offers.command.components.TransparentHintTextField
 import pl.pollub.harnasik.app.util.Screen
 import pl.pollub.harnasik.ui.theme.HarnasikTheme
 import java.util.*
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterialApi::class)
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddEditOfferScreen(
     navController: NavController, viewModel: UpsertOfferViewModel = hiltViewModel()
@@ -52,14 +49,20 @@ fun AddEditOfferScreen(
                     onClick = {
 
                     },
-
+                    contentColor = MaterialTheme.colorScheme.onPrimary,
+                    containerColor = MaterialTheme.colorScheme.primary
                     ) {
-
                     Icon(
-                        imageVector = Icons.Rounded.Save, contentDescription = "Dodaj ofertę"
+                        imageVector = Icons.Rounded.Save,
+                        contentDescription = "Dodaj ofertę",
+
                     )
+
                 }
-            }) {
+            }
+
+
+        ) {
 
             Column(
                 modifier = Modifier
@@ -99,52 +102,70 @@ fun AddEditOfferScreen(
                     )
                 )
 
+                val galleryLauncher =
+                    rememberLauncherForActivityResult(ActivityResultContracts.GetMultipleContents()) { uriList ->
+                        // process eith the received image uri
+                    }
 
-//                //dropdown categories
-                val contextForToast = LocalContext.current.applicationContext
+                Button(
+                    onClick = { galleryLauncher.launch("image/*") },
+                    modifier = Modifier
+//                        .wrapContentSize()
+                        .padding(10.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        contentColor = MaterialTheme.colorScheme.onPrimary,
+                        containerColor = MaterialTheme.colorScheme.primary,
+                    ),
 
-                val listItems =
-                    arrayOf("Jedzenie", "Napoje", "Słodycze", "Przekąski", "Alkohole", "Inne")
-
-                var selectedItem by remember {
-                    mutableStateOf(listItems[0])
+                    ) {
+                    Text(text = "Wybierz zdjęcie")
                 }
 
-                var expanded by remember {
-                    mutableStateOf(false)
-                }
-                // the box
-                ExposedDropdownMenuBox(modifier = Modifier.fillMaxWidth(),
+//                //dropdown categorie
+
+
+                val options = listOf("Jedzenie", "Napoje", "Słodycze", "Przekąski", "Alkohole")
+                var expanded by remember { mutableStateOf(false) }
+                var selectedOptionText by remember { mutableStateOf(options[0]) }
+
+                ExposedDropdownMenuBox(
                     expanded = expanded,
-                    onExpandedChange = {
-                        expanded = !expanded
-                    }) {
+                    onExpandedChange = { expanded = !expanded },
 
-                    val icon = if (expanded) Icons.Filled.ArrowDropUp
-                    else Icons.Filled.ArrowDropDown
-
-                    CustomOutlinedTextField(
-                        value = selectedItem,
+                ) {
+                    OutlinedTextField(
+                        // The `menuAnchor` modifier must be passed to the text field for correctness.
+                        modifier = Modifier
+                            .menuAnchor()
+                            .fillMaxWidth(),
+                        readOnly = true,
+                        value = selectedOptionText,
                         onValueChange = {},
-                        label = "Kategoria",
-                        leadingIconImageVector = icon,
-                        errorMessage = "",
-                        modifier = Modifier.height(64.dp)
-                    )
+                        label = { Text("Kategoria") },
+                        trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+                        colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(
+                            cursorColor = MaterialTheme.colorScheme.primary,
+                            containerColor = MaterialTheme.colorScheme.onPrimary,
+                            focusedLabelColor = MaterialTheme.colorScheme.primary,
+                        ),
 
-                    // menu
-                    ExposedDropdownMenu(expanded = expanded,
-                        onDismissRequest = { expanded = false }) {
-                        listItems.forEach { selectedOption ->
-                            // menu item
-                            DropdownMenuItem(onClick = {
-                                selectedItem = selectedOption
-                                Toast.makeText(contextForToast, selectedOption, Toast.LENGTH_SHORT)
-                                    .show()
-                                expanded = false
-                            }) {
-                                Text(text = selectedOption)
-                            }
+
+                        )
+                    ExposedDropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false },
+                        Modifier.background(MaterialTheme.colorScheme.onPrimary)
+
+                    ) {
+                        options.forEach { selectionOption ->
+                            DropdownMenuItem(
+                                text = { Text(selectionOption) },
+                                onClick = {
+                                    selectedOptionText = selectionOption
+                                    expanded = false
+                                },
+                                contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,
+                            )
                         }
                     }
                 }
@@ -205,7 +226,8 @@ fun AddEditOfferScreen(
                     Button(
                         onClick = { datePickerDialog.show() },
                         colors = ButtonDefaults.buttonColors(
-                            backgroundColor = MaterialTheme.colorScheme.inversePrimary
+                            contentColor = MaterialTheme.colorScheme.onPrimary,
+                            containerColor = MaterialTheme.colorScheme.primary,
                         ),
                         modifier = Modifier
                             .width(164.dp)
@@ -216,8 +238,10 @@ fun AddEditOfferScreen(
                     }
 
                     Button(
-                        onClick = {  navController.navigate(Screen.MapSelect.route) }, colors = ButtonDefaults.buttonColors(
-                            backgroundColor = MaterialTheme.colorScheme.inversePrimary
+                        onClick = { navController.navigate(Screen.MapSelect.route) },
+                        colors = ButtonDefaults.buttonColors(
+                            contentColor = MaterialTheme.colorScheme.onPrimary,
+                            containerColor = MaterialTheme.colorScheme.primary,
                         ),
                         modifier = Modifier
                             .width(164.dp)

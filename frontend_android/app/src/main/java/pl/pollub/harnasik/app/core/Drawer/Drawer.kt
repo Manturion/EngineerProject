@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.LocalOffer
 import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -41,6 +42,7 @@ fun DrawerHeader() {
             text = "Harnasik", fontSize = 36.sp, fontWeight = FontWeight.Bold
         )
         Icon(imageVector = Icons.Rounded.AccountCircle, contentDescription = "LOGO")
+
     }
 
     Row(
@@ -83,7 +85,8 @@ fun DrawerBody(
                 }
                 .padding(16.dp)) {
                 Icon(
-                    imageVector = item.icon, contentDescription = item.title
+                    imageVector = item.icon, contentDescription = item.title,
+
                 )
                 Spacer(modifier = Modifier.width(16.dp))
                 Text(

@@ -14,9 +14,9 @@ val Typography = Typography(
     bodyLarge = TextStyle(
         fontFamily = FontFamily(Font(R.font.opensans)),
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
+        fontSize = 14.sp,
+        lineHeight = 22.sp,
+        letterSpacing = 0.2.sp
     ),
     titleMedium = TextStyle(
         fontFamily = FontFamily(Font(R.font.opensans))
@@ -25,8 +25,8 @@ val Typography = Typography(
         fontFamily = FontFamily(Font(R.font.opensans))
     ),
     titleLarge = TextStyle(
-        fontWeight = FontWeight.W900,
-        fontSize = 24.sp,
+        fontWeight = FontWeight.W600,
+        fontSize = 20.sp,
         fontFamily = FontFamily(Font(R.font.opensans))
 
     )

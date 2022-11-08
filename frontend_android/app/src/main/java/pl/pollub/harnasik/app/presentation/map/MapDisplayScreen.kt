@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavController
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
@@ -26,24 +25,20 @@ fun MapDisplayScreen(
     val long = backStackEntry.arguments?.getString(DETAIL_ARGUMENT_LONG)?.toDouble()
 
 
-    if(lat!=null && long!=null){
-        val lublin = LatLng(lat, long)
+    if (lat != null && long != null) {
+        val point = LatLng(lat, long)
 
         val cameraPositionState = rememberCameraPositionState {
-            position = CameraPosition.fromLatLngZoom(lublin, 18f)
+            position = CameraPosition.fromLatLngZoom(point, 18f)
         }
         GoogleMap(
-            modifier = Modifier.fillMaxSize(),
-            cameraPositionState = cameraPositionState
+            modifier = Modifier.fillMaxSize(), cameraPositionState = cameraPositionState
         ) {
             Marker(
-                state = MarkerState(position = lublin),
-                title = title,
-                snippet = ""
+                state = MarkerState(position = point), title = title, snippet = ""
             )
         }
     }
-
 
 
 }

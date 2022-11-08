@@ -16,7 +16,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -66,9 +65,12 @@ fun SingleOfferScreen(
                     Button(
                         onClick = { /*TODO*/ },
                         modifier = Modifier.padding(start = 116.dp),
-                        colors = ButtonDefaults.buttonColors(Color.Red),
+                        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.error),
                     ) {
-                        Text(text = "Zgłoś")
+                        Text(
+                            text = "Zgłoś",
+                            color = androidx.compose.material3.MaterialTheme.colorScheme.onError
+                        )
                     }
                     Button(
                         onClick = {
@@ -81,7 +83,7 @@ fun SingleOfferScreen(
                             )
                         },
                         modifier = Modifier.padding(start = 5.dp),
-                        colors = ButtonDefaults.buttonColors(Color.Cyan),
+                        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onTertiary),
                     ) {
                         Text(text = "Mapa")
                     }
@@ -101,8 +103,7 @@ fun SingleOfferScreen(
 
                     ) {
                         Icon(
-                            imageVector = Icons.Rounded.PinDrop,
-                            contentDescription = "GeoLocation"
+                            imageVector = Icons.Rounded.PinDrop, contentDescription = "GeoLocation"
                         )
                     }
                 }
@@ -137,8 +138,7 @@ fun SingleOfferScreen(
                 }
 
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
+                    modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
                 ) {
                     IconButton(onClick = { /*TODO*/ }) {
                         Icon(
@@ -147,8 +147,7 @@ fun SingleOfferScreen(
                     }
                     IconButton(onClick = { /*TODO*/ }) {
                         Icon(
-                            imageVector = Icons.Rounded.ThumbDown,
-                            contentDescription = "ThumbUp"
+                            imageVector = Icons.Rounded.ThumbDown, contentDescription = "ThumbUp"
                         )
                     }
                 }

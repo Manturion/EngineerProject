@@ -3,17 +3,17 @@ package pl.pollub.harnasik.app.presentation.user
 import android.annotation.SuppressLint
 import android.util.Patterns
 import android.widget.Toast
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -32,12 +32,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import pl.pollub.harnasik.R
 import pl.pollub.harnasik.app.auth.AuthResult
-import pl.pollub.harnasik.app.core.Drawer.DrawerBody
-import pl.pollub.harnasik.app.core.Drawer.DrawerHeader
 import pl.pollub.harnasik.app.util.Screen
 
 var fontFamily: FontFamily = FontFamily(Font(R.font.opensans))
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CustomOutlinedTextField(
     value: String,
@@ -64,16 +63,21 @@ fun CustomOutlinedTextField(
         OutlinedTextField(
             value = value,
             onValueChange = { onValueChange(it) },
-            modifier = Modifier.padding(bottom = 10.dp),
-            label = { Text(text = (label)) },
+            modifier = Modifier
+                .padding(bottom = 10.dp),
+            label = {
+                Text(
+                    text = (label),
+                    fontSize = 12.sp
+                ) },
             leadingIcon = {
                 Icon(
                     imageVector = leadingIconImageVector,
                     contentDescription = leadingIconDescription,
                     tint = if (showBlankError || showDataError) {
-                        MaterialTheme.colors.error
+                        MaterialTheme.colorScheme.error
                     } else {
-                        MaterialTheme.colors.onSurface
+                        MaterialTheme.colorScheme.onSurface
                     }
                 )
             },
@@ -104,11 +108,17 @@ fun CustomOutlinedTextField(
             singleLine = true
         )
         if (showBlankError) {
-            showTextUnderField(text = blankErrorMessage, color = MaterialTheme.colors.error)
+            showTextUnderField(
+                text = blankErrorMessage,
+                color = MaterialTheme.colorScheme.error)
         } else if (showDataError) {
-            showTextUnderField(text = dataErrorMessage, color = MaterialTheme.colors.error)
+            showTextUnderField(
+                text = dataErrorMessage,
+                color = MaterialTheme.colorScheme.error)
         } else {
-            showTextUnderField(text = hintMessage, color = MaterialTheme.colors.onSecondary)
+            showTextUnderField(
+                text = hintMessage,
+                color = MaterialTheme.colorScheme.onSecondary)
         }
     }
 }
@@ -118,13 +128,14 @@ fun showTextUnderField(text: String, color: Color) {
     Text(
         text = text,
         color = color,
-        style = MaterialTheme.typography.caption,
-        fontSize = 20.sp,
+        style = MaterialTheme.typography.labelSmall,
+        fontSize = 12.sp,
         fontFamily = fontFamily
     )
 }
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SignUp(
     navController: NavHostController, viewModel: AuthViewModel = hiltViewModel()
@@ -210,14 +221,7 @@ fun SignUp(
         }
     }
 
-    Scaffold(drawerContent = {
-        DrawerHeader()
-        DrawerBody(
-            onItemClick = {
-                println("Clicked on ${it.title}")
-            }, navController = navController
-        )
-    }, content = {
+    Scaffold(content = {
 
 
         Column(
@@ -227,7 +231,7 @@ fun SignUp(
         ) {
             Text(
                 text = "Utwórz konto\ni dziel się promocjami!",
-                style = TextStyle(fontSize = 36.sp, fontFamily = FontFamily.Default),
+                style = TextStyle(fontSize = 26.sp, fontFamily = FontFamily.Default),
                 textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.height(30.dp))
@@ -287,13 +291,15 @@ fun SignUp(
             )
             Spacer(modifier = Modifier.height(20.dp))
             Box(
-                modifier = Modifier.background(color = Color.DarkGray)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(CenterHorizontally)
+                    .padding(start = 20.dp, end = 20.dp)
             ) {
                 Text(
-                    text = "Rejestrując się potwierdzasz,\nże jesteś osobą pełnoletnią\n" + "oraz akceptujesz regulamin.",
+                    text = "Rejestrując się potwierdzasz,że jesteś osobą pełnoletnią oraz akceptujesz regulamin",
                     textAlign = TextAlign.Center,
-                    color = Color.White,
-                    fontSize = 20.sp
+                    color = MaterialTheme.colorScheme.primary, fontSize = 12.sp
                 )
             }
 
@@ -310,7 +316,7 @@ fun SignUp(
                         .fillMaxWidth()
                         .height(50.dp)
                 ) {
-                    Text("ZAREJESTRUJ SIĘ", fontSize = 25.sp, fontFamily = fontFamily)
+                    Text("Utwórz konto", fontSize = 16.sp, fontFamily = fontFamily)
                 }
             }
         }

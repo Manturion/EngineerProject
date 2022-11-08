@@ -3,11 +3,11 @@ package pl.pollub.harnasik.app.presentation.offers.command.components
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,6 +17,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CustomOutlinedTextField(
     value: String,
@@ -52,9 +53,9 @@ fun CustomOutlinedTextField(
                     imageVector = leadingIconImageVector,
                     contentDescription = leadingIconDescription,
                     tint = if (showError) {
-                        MaterialTheme.colors.error
+                        MaterialTheme.colorScheme.error
                     } else {
-                        MaterialTheme.colors.onSurface
+                        MaterialTheme.colorScheme.onSurface
                     }
                 )
             },
@@ -88,8 +89,8 @@ fun CustomOutlinedTextField(
         if (showError) {
             Text(
                 text = errorMessage,
-                color = MaterialTheme.colors.error,
-                style = MaterialTheme.typography.caption,
+                color = MaterialTheme.colorScheme.primary,
+                style = MaterialTheme.typography.labelSmall,
                 modifier = Modifier
                     .padding(start = 8.dp)
                     .offset(y = (-8).dp)

@@ -6,10 +6,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -38,6 +37,7 @@ import pl.pollub.harnasik.app.util.Screen
 
 var fontFamily: FontFamily = FontFamily(Font(R.font.opensans))
 
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun LoginPage(
@@ -91,7 +91,21 @@ fun LoginPage(
                 style = TextStyle(fontSize = 50.sp, fontFamily = FontFamily.Cursive)
             )
             Spacer(modifier = Modifier.height(60.dp))
-            TextField(label = { Text(text = "Nazwa użytkownika", fontFamily = fontFamily) },
+            TextField(colors = TextFieldDefaults.textFieldColors(
+                cursorColor = MaterialTheme.colorScheme.primary,
+                containerColor = MaterialTheme.colorScheme.onPrimary,
+                focusedLabelColor = MaterialTheme.colorScheme.primary
+            ),
+                label = {
+                    Text(
+                        text = "Nazwa użytkownika",
+                        fontFamily = fontFamily,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(bottom = 15.dp),
+                        fontSize = 16.sp
+                    )
+                },
+                textStyle = TextStyle(fontSize = 14.sp),
                 value = username.value,
                 onValueChange = {
                     username.value = it
@@ -99,7 +113,21 @@ fun LoginPage(
                 })
 
             Spacer(modifier = Modifier.height(20.dp))
-            TextField(label = { Text(text = "Hasło", fontFamily = fontFamily) },
+            TextField(colors = TextFieldDefaults.textFieldColors(
+                cursorColor = MaterialTheme.colorScheme.primary,
+                containerColor = MaterialTheme.colorScheme.onPrimary,
+                focusedLabelColor = MaterialTheme.colorScheme.primary
+            ),
+                label = {
+                    Text(
+                        text = "Hasło",
+                        fontFamily = fontFamily,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(bottom = 15.dp),
+                        fontSize = 16.sp
+                    )
+                },
+                textStyle = TextStyle(fontSize = 14.sp),
                 value = password.value,
                 visualTransformation = PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -117,8 +145,9 @@ fun LoginPage(
                     shape = RoundedCornerShape(50.dp),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(50.dp)
-                ) {
+                        .height(50.dp),
+
+                    ) {
                     LogInText()
                 }
             }
@@ -128,6 +157,10 @@ fun LoginPage(
                     onClick = {
                         navController.navigate(Screen.SignUp.route)
                     },
+                    colors = ButtonDefaults.buttonColors(
+                        contentColor = MaterialTheme.colorScheme.onPrimary,
+                        containerColor = MaterialTheme.colorScheme.primary,
+                    ),
                     shape = RoundedCornerShape(50.dp),
                     modifier = Modifier
                         .fillMaxWidth()
@@ -135,13 +168,14 @@ fun LoginPage(
                 ) {
                     SignUpText()
                 }
+
             }
             Spacer(modifier = Modifier.height(60.dp))
             ClickableText(
                 text = AnnotatedString("Nie pamiętam hasła"), onClick = {
                     navController.navigate(Screen.ForgotPassword.route)
                 }, style = TextStyle(
-                    fontSize = 20.sp, fontFamily = fontFamily
+                    fontSize = 16.sp, fontFamily = fontFamily
                 )
             )
         }
@@ -150,12 +184,22 @@ fun LoginPage(
 
 @Composable
 fun LogInText() {
-    Text("Zaloguj się", fontFamily = fontFamily, fontSize = 22.sp)
+    Text(
+        "Zaloguj się",
+        fontFamily = fontFamily,
+        fontSize = 16.sp,
+        color = MaterialTheme.colorScheme.onPrimary
+    )
 }
 
 @Composable
 fun SignUpText() {
-    Text("Zarejestruj się", fontFamily = fontFamily, fontSize = 22.sp)
+    Text(
+        "Zarejestruj się",
+        fontFamily = fontFamily,
+        fontSize = 16.sp,
+        color = MaterialTheme.colorScheme.onPrimary
+    )
 }
 
 @Composable
