@@ -29,7 +29,7 @@ import pl.pollub.harnasik.app.presentation.offers.AppBar
 import pl.pollub.harnasik.app.presentation.offers.command.AddEditOfferScreen
 import pl.pollub.harnasik.app.presentation.offers.query.AllOffersScreen
 import pl.pollub.harnasik.app.presentation.user.login.Login
-import pl.pollub.harnasik.app.presentation.user.offerSingle.SingleOfferScreen
+import pl.pollub.harnasik.app.presentation.offers.offerSingle.SingleOfferScreen
 import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_LAT
 import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_LONG
 import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_TITLE

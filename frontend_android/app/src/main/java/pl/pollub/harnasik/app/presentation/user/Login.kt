@@ -1,5 +1,6 @@
 package pl.pollub.harnasik.app.presentation.user.login
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
@@ -8,10 +9,12 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -21,14 +24,54 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import pl.pollub.harnasik.R
+import pl.pollub.harnasik.app.auth.AuthResult
+import pl.pollub.harnasik.app.presentation.user.AuthUiEvent
+import pl.pollub.harnasik.app.presentation.user.AuthViewModel
 import pl.pollub.harnasik.app.util.Screen
 
 var fontFamily: FontFamily = FontFamily(Font(R.font.opensans))
 
 @Composable
-fun LoginPage(navController: NavHostController) {
+fun LoginPage(
+    navController: NavController,
+    viewModel: AuthViewModel = hiltViewModel()
+) {
+    val state = viewModel.state
+    val context = LocalContext.current
+    LaunchedEffect(viewModel, context) {
+        viewModel.authResults.collect { result ->
+            when (result) {
+                is AuthResult.Authorized -> {
+                    Toast.makeText(
+                        context,
+                        "Pomyślnie zalogowano",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                    navController.navigate(Screen.AllOffersScreen.route)
+                }
+                is AuthResult.Unauthorized -> {
+                    Toast.makeText(
+                        context,
+                        "Nie pomyślne logowanie",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                is AuthResult.UnknownError -> {
+//                    Toast.makeText(
+//                        context,
+//                        "Wystąpił nieznany błąd",
+//                        Toast.LENGTH_LONG
+//                    ).show()
+                }
+            }
+        }
+    }
+
+
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -46,19 +89,27 @@ fun LoginPage(navController: NavHostController) {
         Spacer(modifier = Modifier.height(60.dp))
         TextField(label = { Text(text = "Nazwa użytkownika", fontFamily = fontFamily) },
             value = username.value,
-            onValueChange = { username.value = it })
+            onValueChange = {
+                username.value = it
+                viewModel.onEvent(AuthUiEvent.SignInUsernameChanged(username.value.text))
+            })
 
         Spacer(modifier = Modifier.height(20.dp))
         TextField(label = { Text(text = "Hasło", fontFamily = fontFamily) },
             value = password.value,
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            onValueChange = { password.value = it })
+            onValueChange = {
+                password.value = it
+                viewModel.onEvent(AuthUiEvent.SignInPasswordChanged(password.value.text))
+            })
 
         Spacer(modifier = Modifier.height(40.dp))
         Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
             Button(
-                onClick = {},
+                onClick = {
+                    viewModel.onEvent(AuthUiEvent.SignIn)
+                },
                 shape = RoundedCornerShape(50.dp),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -72,6 +123,7 @@ fun LoginPage(navController: NavHostController) {
             Button(
                 onClick = {
                     navController.navigate(Screen.SignUp.route)
+
                 },
                 shape = RoundedCornerShape(50.dp),
                 modifier = Modifier

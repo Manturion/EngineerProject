@@ -26,15 +26,8 @@ import pl.pollub.harnasik.R
 import pl.pollub.harnasik.app.util.Screen
 
 
-var loggedIn = true
-var username = ""
-
 @Composable
 fun DrawerHeader() {
-    if(loggedIn){
-        username = "Witaj, PromoHunterUserName"
-    }
-
 
     Row(
         modifier = Modifier
@@ -59,10 +52,6 @@ fun DrawerHeader() {
         horizontalArrangement = Arrangement.Center
 
     ) {
-
-            Text(text = "$username", fontSize = 20.sp)
-//        Icon(imageVector = Icons.Rounded.AccountCircle, contentDescription = "LOGO")
-
     }
 
 }
@@ -108,27 +97,26 @@ fun DrawerBody(
     }
 
 
-    if (loggedIn) {
-        Button(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(100.dp),
-            onClick = {
-                navController.navigate(Screen.Login.route)
-            }) {
-            Text(text = "Wyloguj się")
 
-        }
-    } else {
-        Button(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(100.dp),
-            onClick = {
-                navController.navigate(Screen.Login.route)
-            }) {
-            Text(text = "Zaloguj się")
-        }
+    Button(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(100.dp),
+        onClick = {
+            navController.navigate(Screen.Login.route)
+        }) {
+        Text(text = "Wyloguj się")
+
+    }
+
+    Button(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(100.dp),
+        onClick = {
+            navController.navigate(Screen.Login.route)
+        }) {
+        Text(text = "Zaloguj się")
     }
 
 

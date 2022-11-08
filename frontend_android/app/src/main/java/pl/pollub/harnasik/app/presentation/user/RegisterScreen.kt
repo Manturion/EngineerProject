@@ -1,4 +1,4 @@
-package pl.pollub.harnasik.app.presentation.user.signUp
+package pl.pollub.harnasik.app.presentation.user
 
 import android.util.Patterns
 import android.view.Gravity
@@ -28,8 +28,10 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import pl.pollub.harnasik.R
+import pl.pollub.harnasik.app.auth.AuthResult
 
 var fontFamily: FontFamily = FontFamily(Font(R.font.opensans))
 
@@ -123,8 +125,37 @@ fun showTextUnderField(text: String, color: Color) {
 @Composable
 fun SignUp(
     navController: NavHostController,
+    viewModel: AuthViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current.applicationContext
+    val state = viewModel.state
+    val context = LocalContext.current
+
+    LaunchedEffect(viewModel, context) {
+        viewModel.authResults.collect { result ->
+            when (result) {
+                is AuthResult.Authorized -> {
+//                    navController.navigate(Screen.AllOffersScreen.route)
+                }
+                is AuthResult.Unauthorized -> {
+                    Toast.makeText(
+                        context,
+                        "You're not authorized",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                is AuthResult.UnknownError -> {
+                    Toast.makeText(
+                        context,
+                        "An unknown error occurred",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+    }
+
+
+//    val context = LocalContext.current.applicationContext
 
     var username by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
@@ -198,7 +229,10 @@ fun SignUp(
 
         CustomOutlinedTextField(
             value = username,
-            onValueChange = { username = it },
+            onValueChange = {
+                username = it
+                viewModel.onEvent(AuthUiEvent.SignUpUsernameChanged(username))
+            },
             label = "Email",
             leadingIconImageVector = Icons.Default.Email,
             keyboardOptions = KeyboardOptions(
@@ -214,7 +248,10 @@ fun SignUp(
         Spacer(modifier = Modifier.height(20.dp))
         CustomOutlinedTextField(
             value = password,
-            onValueChange = { password = it },
+            onValueChange = {
+                password = it
+                viewModel.onEvent(AuthUiEvent.SignUpPasswordChanged(password))
+            },
             label = "Hasło",
             leadingIconImageVector = Icons.Default.Password,
             keyboardOptions = KeyboardOptions(
@@ -265,7 +302,8 @@ fun SignUp(
         ) {
             Button(
                 onClick = {
-                    register(username, password, confirmPassword)
+//                    register(username, password, confirmPassword)
+                    viewModel.onEvent(AuthUiEvent.SignUp)
                 },
                 shape = RoundedCornerShape(50.dp),
                 modifier = Modifier

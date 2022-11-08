@@ -1,4 +1,4 @@
-package pl.pollub.harnasik.app.presentation.user.offerSingle
+package pl.pollub.harnasik.app.presentation.offers.offerSingle
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image

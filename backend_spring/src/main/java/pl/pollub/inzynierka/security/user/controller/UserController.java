@@ -24,20 +24,25 @@ public class UserController {
 
     @PostMapping("/register")
     public void registerUser(@RequestBody UserRequestDto user) {
+        System.out.println(user.getUsername());
+        System.out.println(user.getPassword());
         userService.registerUser(user);
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody UserRequestDto user) {
         final String username = user.getUsername();
-
+        System.out.println(user.getUsername());
+        System.out.println(user.getPassword());
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, user.getPassword())
         );
         final MyUserDetails myUserDetails = (MyUserDetails) myUserDetailsService
                 .loadUserByUsername(username);
         final String jwt = jwtUtil.generateToken(myUserDetails);
-
+        System.out.println(jwt);
         return ResponseEntity.ok(new UserResponseDto(jwt));
     }
+
+    
 }
