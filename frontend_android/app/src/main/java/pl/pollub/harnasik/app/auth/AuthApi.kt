@@ -23,5 +23,4 @@ interface AuthApi {
         @Header("Authorization") jwt: String
     )
 
-    @
 }
