@@ -66,15 +66,11 @@ class AuthViewModel @Inject constructor(
         viewModelScope.launch {
             state = state.copy(isLoading = true)
 
-            println(state.signInUsername)
-            println(state.signInPassword)
-
             val result = repository.signIn(
                 username = state.signInUsername,
                 password = state.signInPassword
             )
 
-            println(result)
             resultChannel.send(result)
             state = state.copy(isLoading = false)
         }

@@ -1,4 +1,4 @@
-package pl.pollub.harnasik.app.presentation.offers.offerSingle
+package pl.pollub.harnasik.app.presentation.offers.query.offerSingle
 
 import pl.pollub.harnasik.app.domain.model.OfferModel
 

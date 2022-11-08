@@ -5,4 +5,13 @@ import dagger.hilt.android.HiltAndroidApp
 
 
 @HiltAndroidApp
-class App: Application()
+class App: Application(){
+    companion object {
+        var AuthUser: String? = null
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+
+    }
+}

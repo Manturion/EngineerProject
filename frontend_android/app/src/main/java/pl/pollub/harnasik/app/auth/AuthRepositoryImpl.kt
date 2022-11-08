@@ -1,12 +1,13 @@
 package pl.pollub.harnasik.app.auth
 
 import android.content.SharedPreferences
+import pl.pollub.harnasik.app.di.App.Companion.AuthUser
 import retrofit2.HttpException
 
 class AuthRepositoryImpl(
     private val api: AuthApi,
     private val prefs: SharedPreferences
-): AuthRepository {
+) : AuthRepository {
 
     override suspend fun signUp(username: String, password: String): AuthResult<Unit> {
         return try {
@@ -17,8 +18,8 @@ class AuthRepositoryImpl(
                 )
             )
             signIn(username, password)
-        } catch(e: HttpException) {
-            if(e.code() == 401) {
+        } catch (e: HttpException) {
+            if (e.code() == 401) {
                 AuthResult.Unauthorized()
             } else {
                 AuthResult.UnknownError()
@@ -36,12 +37,19 @@ class AuthRepositoryImpl(
                     password = password
                 )
             )
+            println("TOKEN SIGN IN LOGIN : ${response.jwt}")
+            AuthUser = response.username
+            println("TOKEN SIGN IN LOGIN : ${AuthUser}")
+
+
+
+
             prefs.edit()
                 .putString("jwt", response.jwt)
                 .apply()
             AuthResult.Authorized()
-        } catch(e: HttpException) {
-            if(e.code() == 401) {
+        } catch (e: HttpException) {
+            if (e.code() == 401) {
                 AuthResult.Unauthorized()
             } else {
                 AuthResult.UnknownError()
@@ -56,8 +64,8 @@ class AuthRepositoryImpl(
             val jwt = prefs.getString("jwt", null) ?: return AuthResult.Unauthorized()
             api.authenticate("Bearer $jwt")
             AuthResult.Authorized()
-        } catch(e: HttpException) {
-            if(e.code() == 401) {
+        } catch (e: HttpException) {
+            if (e.code() == 401) {
                 AuthResult.Unauthorized()
             } else {
                 AuthResult.UnknownError()

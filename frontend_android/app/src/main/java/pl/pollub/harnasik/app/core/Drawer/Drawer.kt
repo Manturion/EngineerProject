@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import pl.pollub.harnasik.R
+import pl.pollub.harnasik.app.di.App.Companion.AuthUser
 import pl.pollub.harnasik.app.util.Screen
 
 
@@ -37,9 +38,7 @@ fun DrawerHeader() {
 
     ) {
         Text(
-            text = "Harnasik",
-            fontSize = 36.sp,
-            fontWeight = FontWeight.Bold
+            text = "Harnasik", fontSize = 36.sp, fontWeight = FontWeight.Bold
         )
         Icon(imageVector = Icons.Rounded.AccountCircle, contentDescription = "LOGO")
     }
@@ -52,6 +51,9 @@ fun DrawerHeader() {
         horizontalArrangement = Arrangement.Center
 
     ) {
+        if (AuthUser != null) {
+            Text(text = "Witaj $AuthUser!")
+        }
     }
 
 }
@@ -72,18 +74,16 @@ fun DrawerBody(
     )
 
     LazyColumn(modifier) {
+
         items(menuItems) { item ->
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable {
-                        onItemClick(item)
-                    }
-                    .padding(16.dp)
-            ) {
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    onItemClick(item)
+                }
+                .padding(16.dp)) {
                 Icon(
-                    imageVector = item.icon,
-                    contentDescription = item.title
+                    imageVector = item.icon, contentDescription = item.title
                 )
                 Spacer(modifier = Modifier.width(16.dp))
                 Text(
@@ -97,26 +97,24 @@ fun DrawerBody(
     }
 
 
-
-    Button(
-        modifier = Modifier
+    if (AuthUser == null) {
+        Button(modifier = Modifier
             .fillMaxWidth()
-            .padding(100.dp),
-        onClick = {
+            .padding(100.dp), onClick = {
             navController.navigate(Screen.Login.route)
         }) {
-        Text(text = "Wyloguj się")
-
-    }
-
-    Button(
-        modifier = Modifier
+            Text(text = "Zaloguj się")
+        }
+    } else {
+        Button(modifier = Modifier
             .fillMaxWidth()
-            .padding(100.dp),
-        onClick = {
+            .padding(90.dp), onClick = {
+            AuthUser = null
             navController.navigate(Screen.Login.route)
         }) {
-        Text(text = "Zaloguj się")
+            Text(text = "Wyloguj się")
+
+        }
     }
 
 

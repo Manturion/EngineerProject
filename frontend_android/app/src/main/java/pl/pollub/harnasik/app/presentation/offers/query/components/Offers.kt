@@ -15,14 +15,24 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
+import pl.pollub.harnasik.app.di.App.Companion.AuthUser
 import pl.pollub.harnasik.app.presentation.offers.query.OffersState
 import pl.pollub.harnasik.app.util.Screen
 
 
 @Composable
-fun CategorySlideBar(categories: List<String> = listOf<String>("Jedzenie","Napoje","Słodycze","Przekąski", "Alkohole", "Inne")) {
-    LazyRow() {
+fun CategorySlideBar(
+    categories: List<String> = listOf<String>(
+        "Jedzenie",
+        "Napoje",
+        "Słodycze",
+        "Przekąski",
+        "Alkohole",
+        "Inne"
+    )
+) {
+    LazyRow {
         items(items = categories) { category ->
             SingleCategoryButton(name = category)
         }
@@ -71,6 +81,7 @@ fun GenerateListOfAllOffersLoaded(
 
                 val expanded = remember { mutableStateOf(false) }
                 Surface(
+
                     onClick = {
                         navController.navigate(
                             Screen.SingleOfferScreen.route +
@@ -86,7 +97,7 @@ fun GenerateListOfAllOffersLoaded(
                     ) {
                         Image(
                             contentScale = ContentScale.Crop,
-                            painter = rememberImagePainter("${it.image}"),
+                            painter = rememberAsyncImagePainter("${it.image}"),
                             contentDescription = it.image,
                             modifier = Modifier
                                 .height(75.dp)
@@ -103,7 +114,7 @@ fun GenerateListOfAllOffersLoaded(
 
                             )
                         }
-                        Column() {
+                        Column {
                             OutlinedButton(
                                 onClick = { expanded.value = !expanded.value }
                             ) {

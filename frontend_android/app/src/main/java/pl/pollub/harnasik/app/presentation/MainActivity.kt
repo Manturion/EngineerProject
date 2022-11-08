@@ -28,8 +28,11 @@ import pl.pollub.harnasik.app.presentation.map.MapSelectScreen
 import pl.pollub.harnasik.app.presentation.offers.AppBar
 import pl.pollub.harnasik.app.presentation.offers.command.AddEditOfferScreen
 import pl.pollub.harnasik.app.presentation.offers.query.AllOffersScreen
+import pl.pollub.harnasik.app.presentation.offers.query.offerSingle.SingleOfferScreen
+import pl.pollub.harnasik.app.presentation.user.SignUp
+import pl.pollub.harnasik.app.presentation.user.forgotPassword.ForgotPassword
 import pl.pollub.harnasik.app.presentation.user.login.Login
-import pl.pollub.harnasik.app.presentation.offers.offerSingle.SingleOfferScreen
+import pl.pollub.harnasik.app.presentation.user.login.LoginPage
 import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_LAT
 import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_LONG
 import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_TITLE
@@ -44,8 +47,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
-
             HarnasikTheme {
                 val navController = rememberNavController()
                 val scaffoldState = rememberScaffoldState()
@@ -56,13 +57,6 @@ class MainActivity : ComponentActivity() {
                             scaffoldState.drawerState.open()
                         }
                     })
-                }, drawerContent = {
-                    DrawerHeader()
-                    DrawerBody(
-                        onItemClick = {
-                            println("Clicked on ${it.title}")
-                        }, navController = navController
-                    )
                 }, content = {
                     Box(modifier = Modifier.padding(bottom = 48.dp)) {
                         NavHost(
@@ -106,6 +100,17 @@ class MainActivity : ComponentActivity() {
                                 route = Screen.MapSelect.route
                             ) {
                                 MapSelectScreen()
+                            }
+                            composable(Screen.Login.route) {
+                                LoginPage(navController = navController)
+                            }
+
+                            composable(Screen.SignUp.route) {
+                                SignUp(navController = navController)
+                            }
+
+                            composable(Screen.ForgotPassword.route) { navBackStack ->
+                                ForgotPassword(navController = navController)
                             }
                         }
                     }

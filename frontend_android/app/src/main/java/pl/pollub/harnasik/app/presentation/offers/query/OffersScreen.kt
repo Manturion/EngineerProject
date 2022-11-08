@@ -13,6 +13,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import pl.pollub.harnasik.R
+import pl.pollub.harnasik.app.core.Drawer.DrawerBody
+import pl.pollub.harnasik.app.core.Drawer.DrawerHeader
 import pl.pollub.harnasik.app.presentation.offers.CategorySlideBar
 import pl.pollub.harnasik.app.presentation.offers.GetAllOffers
 import pl.pollub.harnasik.app.util.Screen
@@ -30,6 +32,13 @@ fun AllOffersScreen(navController: NavController) {
             CategorySlideBar()
             GetAllOffers(state, navController)
         }
+    }, drawerContent = {
+        DrawerHeader()
+        DrawerBody(
+            onItemClick = {
+                println("Clicked on ${it.title}")
+            }, navController = navController
+        )
     }, floatingActionButton = {
         FloatingActionButton(
             onClick = {
