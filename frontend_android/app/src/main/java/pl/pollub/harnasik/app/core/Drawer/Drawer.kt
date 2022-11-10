@@ -33,8 +33,8 @@ fun DrawerHeader() {
 
     Row(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 64.dp),
+                .fillMaxWidth()
+                .padding(top = 64.dp),
         horizontalArrangement = Arrangement.Center
 
     ) {
@@ -47,9 +47,9 @@ fun DrawerHeader() {
 
     Row(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(all = 20.dp)
-            .padding(bottom = 36.dp),
+                .fillMaxWidth()
+                .padding(all = 20.dp)
+                .padding(bottom = 36.dp),
         horizontalArrangement = Arrangement.Center
 
     ) {
@@ -67,58 +67,40 @@ fun DrawerBody(
     onItemClick: (MenuItem) -> Unit,
     navController: NavController
 ) {
-
-    val menuItems = listOf(
-        MenuItem(id = "myOffers", title = "Moje oferty", icon = Icons.Default.LocalOffer),
-        MenuItem(id = "help", title = "Pomoc", icon = Icons.Default.Help),
-        MenuItem(id = "aboutUs", title = "O nas", icon = Icons.Default.Book),
-        MenuItem(id = "contact", title = "Kontakt", icon = Icons.Default.Contacts),
-    )
-
-    LazyColumn(modifier) {
-
-        items(menuItems) { item ->
-            Row(modifier = Modifier
-                .fillMaxWidth()
-                .clickable {
-                    onItemClick(item)
-                }
-                .padding(16.dp)) {
-                Icon(
-                    imageVector = item.icon, contentDescription = item.title,
-
-                )
-                Spacer(modifier = Modifier.width(16.dp))
-                Text(
-                    text = item.title,
-                    style = itemTextStyle,
-                    modifier = Modifier.weight(1f),
-                    fontFamily = FontFamily(Font(R.font.opensans))
-                )
-            }
-        }
-    }
-
-
-    if (AuthUser == null) {
-        Button(modifier = Modifier
-            .fillMaxWidth()
-            .padding(100.dp), onClick = {
-            navController.navigate(Screen.Login.route)
-        }) {
-            Text(text = "Zaloguj się")
-        }
-    } else {
-        Button(modifier = Modifier
-            .fillMaxWidth()
-            .padding(90.dp), onClick = {
-            AuthUser = null
-            navController.navigate(Screen.Login.route)
-        }) {
-            Text(text = "Wyloguj się")
-
-        }
-    }
-
+//
+//    val menuItems = listOf(
+//        MenuItem(id = "myOffers", title = "Moje oferty", icon = Icon(imageVector = , contentDescription = )),
+//        MenuItem(id = "help", title = "Pomoc", icon = Icons.Default.Help),
+//        MenuItem(id = "aboutUs", title = "O nas", icon = Icons.Default.Book),
+//        MenuItem(id = "contact", title = "Kontakt", icon = Icons.Default.Contacts),
+//    )
+//
+//    LazyColumn(modifier) {
+//
+//
+//
+//        items(menuItems) { item ->
+//            Row(modifier = Modifier
+//                    .fillMaxWidth()
+//                    .clickable {
+//                        onItemClick(item)
+//                    }
+//                    .padding(16.dp)) {
+//                Icon(
+//                    imageVector = item.icon, contentDescription = item.title,
+//
+//                )
+//                Spacer(modifier = Modifier.width(16.dp))
+//                Text(
+//                    text = item.title,
+//                    style = itemTextStyle,
+//                    modifier = Modifier.weight(1f),
+//                    fontFamily = FontFamily(Font(R.font.opensans))
+//                )
+//            }
+//        }
+//    }
+//
+//
 
 }

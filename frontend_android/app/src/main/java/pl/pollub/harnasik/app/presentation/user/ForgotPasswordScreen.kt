@@ -1,10 +1,16 @@
 package pl.pollub.harnasik.app.presentation.user.forgotPassword
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material3.Button
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,56 +25,86 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import pl.pollub.harnasik.R
+import pl.pollub.harnasik.app.core.Drawer.drawerContent
 
 var fontFamily: FontFamily = FontFamily(Font(R.font.opensans))
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ForgotPassword(navController: NavHostController) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
 
-        val username = remember { mutableStateOf(TextFieldValue()) }
-        val password = remember { mutableStateOf(TextFieldValue()) }
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
 
-        Text(
-            text = "Możesz zresetować swoje hasło poniżej", fontFamily = fontFamily,
-            style = TextStyle(fontSize = 40.sp, fontFamily = FontFamily.Default),
-            textAlign = TextAlign.Center
-        )
-        Spacer(modifier = Modifier.height(60.dp))
+    ModalNavigationDrawer(
+            modifier = Modifier.background(MaterialTheme.colorScheme.surface),
+            drawerState = drawerState,
+            drawerContent = {
+                drawerContent(navController = navController)
+            },
+            content = {
+                Column(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
 
-        Spacer(modifier = Modifier.height(20.dp))
-        TextField(
-            label = { Text(text = "Twój email (login)", fontFamily = fontFamily) },
-            value = username.value,
-            onValueChange = { username.value = it })
+                    val username = remember { mutableStateOf(TextFieldValue()) }
+                    
+                    Text(
+                            text = "Możesz zresetować swoje hasło poniżej",
+                            fontFamily = fontFamily,
+                            style = TextStyle(
+                                    fontSize = 26.sp,
+                                    fontFamily = FontFamily.Default
+                            ),
+                            textAlign = TextAlign.Center)
+                    Spacer(modifier = Modifier.height(60.dp))
 
-        Spacer(modifier = Modifier.height(20.dp))
-        PasswordWillBeSentOnEmailText()
-        Spacer(modifier = Modifier.height(40.dp))
-        Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
-            Button(
-                onClick = {},
-                shape = RoundedCornerShape(50.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp)
-            ) {
-                PasswordResetText()
-            }
-        }
-    }
+                    Spacer(modifier = Modifier.height(20.dp))
+                    TextField(
+                            label = {
+                                Text(
+                                        text = "Twój email (login)",
+                                        fontFamily = fontFamily)
+                            },
+                            value = username.value,
+                            onValueChange = { username.value = it })
+
+                    Spacer(
+                            modifier = Modifier.height(20.dp))
+                    PasswordWillBeSentOnEmailText()
+                    Spacer(
+                            modifier = Modifier.height(40.dp))
+                    Box(
+                            modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
+                        Button(
+                                onClick = {},
+                                shape = RoundedCornerShape(50.dp),
+                                modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(50.dp),
+
+
+                                ) {
+                            PasswordResetText()
+                        }
+                    }
+                }
+            })
 }
 
 @Composable
 fun PasswordResetText() {
-    Text("Resetuj hasło", fontSize = 22.sp, fontFamily = fontFamily)
+    Text(
+            "Resetuj hasło",
+            fontSize = 16.sp,
+            fontFamily = fontFamily)
 }
 
 @Composable
 fun PasswordWillBeSentOnEmailText() {
-    Text("Hasło zostanie wysłane na ten email", fontSize = 22.sp, fontFamily = fontFamily)
+    Text(
+            "Hasło zostanie wysłane na ten email",
+            fontSize = 16.sp,
+            fontFamily = fontFamily)
 }
