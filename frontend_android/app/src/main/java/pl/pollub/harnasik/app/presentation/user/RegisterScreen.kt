@@ -138,10 +138,6 @@ fun SignUp(
     ) {
         if (!validateIfFieldsAreBlank(username, password, confirmPassword)) {
             if (validateData(username, password, confirmPassword)) {
-//                val toast = Toast.makeText(context, "Zarejestrowano!", Toast.LENGTH_LONG)
-//                toast.setGravity(Gravity.CENTER, 0, 0)
-//                toast.show()
-
                 viewModel.onEvent(AuthUiEvent.SignUp)
             }
         }

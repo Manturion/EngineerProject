@@ -30,7 +30,6 @@ import coil.compose.rememberAsyncImagePainter
 import pl.pollub.harnasik.app.presentation.offers.query.OffersState
 import pl.pollub.harnasik.app.util.Screen
 
-
 @Composable
 fun CategorySlideBar(
     categories: List<String> = listOf<String>(
@@ -62,7 +61,6 @@ fun SingleCategoryButton(name: String) {
 
 @Composable
 fun GetAllOffers(state: OffersState, navController: NavController) {
-
     GenerateListOfAllOffersLoaded(state, navController)
 }
 
@@ -72,8 +70,6 @@ fun GenerateListOfAllOffersLoaded(
     state: OffersState,
     navController: NavController
 ) {
-
-
     if (state.offers == null) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -86,15 +82,12 @@ fun GenerateListOfAllOffersLoaded(
             )
         }
     } else {
-
         LazyColumn {
-
             items(state.offers) {
-
                 val expanded = remember { mutableStateOf(false) }
 
                 Surface(
-                    tonalElevation = 1.dp,
+                    tonalElevation = 3.dp,
                     shape = RoundedCornerShape(16.dp),
                     color = MaterialTheme.colorScheme.surface,
                     onClick = {
@@ -105,11 +98,15 @@ fun GenerateListOfAllOffersLoaded(
                     },
                     modifier = Modifier
                         .padding(vertical = 4.dp, horizontal = 8.dp),
-
-                    ) {
+                ) {
                     Row(
                         modifier = Modifier
-                            .padding(24.dp)
+                            .padding(
+                                start = 16.dp,
+                                top = 16.dp,
+                                end = 4.dp,
+                                bottom = 16.dp
+                            )
                     ) {
                         Image(
                             contentScale = ContentScale.Crop,
@@ -125,16 +122,14 @@ fun GenerateListOfAllOffersLoaded(
                                 .padding(4.dp)
                         ) {
                             Text(
-                                text = "Offer ${it.title}",
+                                text = it.title,
                                 fontWeight = FontWeight.Bold
-
                             )
                         }
                         Column {
                             OutlinedButton(
-                                onClick = { expanded.value = !expanded.value }
+                                onClick = { expanded.value = !expanded.value },
                             ) {
-
                                 Text(if (expanded.value) "+15" else "+${15 - 1}")
                             }
                         }
