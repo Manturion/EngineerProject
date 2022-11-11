@@ -39,42 +39,39 @@ fun AllOffersScreen(navController: NavController) {
 
 
     Scaffold(
-            topBar = {
-                AppBar(
-                        navController
+        topBar = {
+            AppBar(
+                navController
+            )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = { navController.navigate(Screen.AddEditOfferScreen.route) },
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+                containerColor = MaterialTheme.colorScheme.primary
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_baseline_add_24),
+                    contentDescription = stringResource(R.string.label_continue_to_courses),
+                    tint = MaterialTheme.colorScheme.onPrimary,
                 )
             }
+        }
     ) {
         ModalNavigationDrawer(
-                modifier = Modifier
-                        .background(MaterialTheme.colorScheme.surface)
-                        .padding(top = 64.dp),
-                drawerState = drawerState,
-                drawerContent = {
-                    DrawerContent(navController = navController)
-
-                },
-                content = {
-
-
-                    Column {
-                        CategorySlideBar()
-                        GetAllOffers(state, navController)
-                    }
-                    FloatingActionButton(
-                            onClick = { navController.navigate(Screen.AddEditOfferScreen.route) },
-                            contentColor = MaterialTheme.colorScheme.onPrimary,
-                            containerColor = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.padding(top = 560.dp, start = 320.dp),
-                    ) {
-                        Icon(
-                                painter = painterResource(id = R.drawable.ic_baseline_add_24),
-                                contentDescription = stringResource(R.string.label_continue_to_courses),
-                                tint = MaterialTheme.colorScheme.onPrimary,
-                        )
-                    }
-                })
-
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.surface)
+                .padding(top = 64.dp),
+            drawerState = drawerState,
+            drawerContent = {
+                DrawerContent(navController = navController)
+            },
+            content = {
+                Column {
+                    CategorySlideBar()
+                    GetAllOffers(state, navController)
+                }
+            })
     }
 
 //    ModalNavigationDrawer(
