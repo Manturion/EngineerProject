@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import pl.pollub.harnasik.R
-import pl.pollub.harnasik.app.core.Drawer.drawerContent
+import pl.pollub.harnasik.app.core.Drawer.DrawerContent
 import pl.pollub.harnasik.app.presentation.offers.AppBar
 import pl.pollub.harnasik.app.presentation.offers.CategorySlideBar
 import pl.pollub.harnasik.app.presentation.offers.GetAllOffers
@@ -51,7 +51,7 @@ fun AllOffersScreen(navController: NavController) {
                         .padding(top = 64.dp),
                 drawerState = drawerState,
                 drawerContent = {
-                    drawerContent(navController = navController)
+                    DrawerContent(navController = navController)
 
                 },
                 content = {

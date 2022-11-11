@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import pl.pollub.harnasik.R
-import pl.pollub.harnasik.app.core.Drawer.drawerContent
+import pl.pollub.harnasik.app.core.Drawer.DrawerContent
 import pl.pollub.harnasik.app.presentation.offers.AppBar
 
 var fontFamily: FontFamily = FontFamily(Font(R.font.opensans))
@@ -49,7 +49,7 @@ fun ForgotPassword(navController: NavHostController) {
                 modifier = Modifier.background(MaterialTheme.colorScheme.surface),
                 drawerState = drawerState,
                 drawerContent = {
-                    drawerContent(navController = navController)
+                    DrawerContent(navController = navController)
                 },
                 content = {
                     Column(

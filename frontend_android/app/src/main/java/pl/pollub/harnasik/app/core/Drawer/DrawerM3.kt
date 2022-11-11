@@ -31,7 +31,7 @@ import pl.pollub.harnasik.app.util.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun drawerContent(navController: NavController) {
+fun DrawerContent(navController: NavController) {
 
     val itemsList = listOf(
         DrawerItem("Moje oferty", R.drawable.ic_round_sell_24),

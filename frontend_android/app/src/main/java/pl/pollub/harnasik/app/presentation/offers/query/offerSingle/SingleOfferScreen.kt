@@ -34,7 +34,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import pl.pollub.harnasik.R
-import pl.pollub.harnasik.app.core.Drawer.drawerContent
+import pl.pollub.harnasik.app.core.Drawer.DrawerContent
 import pl.pollub.harnasik.app.util.Screen
 import pl.pollub.harnasik.ui.theme.HarnasikTheme
 
@@ -65,7 +65,7 @@ fun SingleOfferScreen(
                             .padding(top = 64.dp),
                     drawerState = drawerState,
                     drawerContent = {
-                        drawerContent(navController = navController)
+                        DrawerContent(navController = navController)
                     }, content = {
                 Column(
                         modifier = Modifier

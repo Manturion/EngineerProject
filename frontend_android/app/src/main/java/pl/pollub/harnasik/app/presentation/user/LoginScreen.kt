@@ -28,7 +28,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import pl.pollub.harnasik.R
 import pl.pollub.harnasik.app.auth.AuthResult
-import pl.pollub.harnasik.app.core.Drawer.drawerContent
+import pl.pollub.harnasik.app.core.Drawer.DrawerContent
 import pl.pollub.harnasik.app.presentation.user.AuthUiEvent
 import pl.pollub.harnasik.app.presentation.user.AuthViewModel
 import pl.pollub.harnasik.app.util.Screen
@@ -39,67 +39,66 @@ var fontFamily: FontFamily = FontFamily(Font(R.font.opensans))
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun LoginPage(
-        navController: NavController, viewModel: AuthViewModel = hiltViewModel()
+    navController: NavController, viewModel: AuthViewModel = hiltViewModel()
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
 
-    val state = viewModel.state
     val context = LocalContext.current
     LaunchedEffect(viewModel, context) {
         viewModel.authResults.collect { result ->
             when (result) {
                 is AuthResult.Authorized -> {
                     Toast.makeText(
-                            context, "Pomyślnie zalogowano", Toast.LENGTH_LONG
+                        context, "Pomyślnie zalogowano", Toast.LENGTH_LONG
                     ).show()
 
                     navController.navigate(Screen.AllOffersScreen.route)
                 }
                 is AuthResult.Unauthorized -> {
                     Toast.makeText(
-                            context, "Niepomyślne logowanie", Toast.LENGTH_LONG
+                        context, "Niepomyślne logowanie", Toast.LENGTH_LONG
                     ).show()
                 }
                 is AuthResult.UnknownError -> {
                     Toast.makeText(
-                            context, "Wystąpił nieznany błąd", Toast.LENGTH_LONG
+                        context, "Wystąpił nieznany błąd", Toast.LENGTH_LONG
                     ).show()
                 }
             }
         }
     }
     ModalNavigationDrawer(
-            modifier = Modifier.background(MaterialTheme.colorScheme.surface),
-            drawerState = drawerState,
-            drawerContent = {
-                drawerContent(navController = navController)
-            }, content = {
-        Column(
+        modifier = Modifier.background(MaterialTheme.colorScheme.surface),
+        drawerState = drawerState,
+        drawerContent = {
+            DrawerContent(navController = navController)
+        }, content = {
+            Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+            ) {
 
-            val username = remember { mutableStateOf(TextFieldValue()) }
-            val password = remember { mutableStateOf(TextFieldValue()) }
+                val username = remember { mutableStateOf(TextFieldValue()) }
+                val password = remember { mutableStateOf(TextFieldValue()) }
 
-            Text(
+                Text(
                     text = "Witaj ponownie!",
                     style = TextStyle(fontSize = 50.sp, fontFamily = FontFamily.Cursive)
-            )
-            Spacer(modifier = Modifier.height(60.dp))
-            TextField(colors = TextFieldDefaults.textFieldColors(
+                )
+                Spacer(modifier = Modifier.height(60.dp))
+                TextField(colors = TextFieldDefaults.textFieldColors(
                     cursorColor = MaterialTheme.colorScheme.primary,
                     containerColor = MaterialTheme.colorScheme.onPrimary,
                     focusedLabelColor = MaterialTheme.colorScheme.primary
-            ),
+                ),
                     label = {
                         Text(
-                                text = "Nazwa użytkownika",
-                                fontFamily = fontFamily,
-                                color = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.padding(bottom = 15.dp),
-                                fontSize = 16.sp
+                            text = "Nazwa użytkownika",
+                            fontFamily = fontFamily,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(bottom = 15.dp),
+                            fontSize = 16.sp
                         )
                     },
                     textStyle = TextStyle(fontSize = 14.sp),
@@ -109,19 +108,19 @@ fun LoginPage(
                         viewModel.onEvent(AuthUiEvent.SignInUsernameChanged(username.value.text))
                     })
 
-            Spacer(modifier = Modifier.height(20.dp))
-            TextField(colors = TextFieldDefaults.textFieldColors(
+                Spacer(modifier = Modifier.height(20.dp))
+                TextField(colors = TextFieldDefaults.textFieldColors(
                     cursorColor = MaterialTheme.colorScheme.primary,
                     containerColor = MaterialTheme.colorScheme.onPrimary,
                     focusedLabelColor = MaterialTheme.colorScheme.primary
-            ),
+                ),
                     label = {
                         Text(
-                                text = "Hasło",
-                                fontFamily = fontFamily,
-                                color = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.padding(bottom = 15.dp),
-                                fontSize = 16.sp
+                            text = "Hasło",
+                            fontFamily = fontFamily,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(bottom = 15.dp),
+                            fontSize = 16.sp
                         )
                     },
                     textStyle = TextStyle(fontSize = 14.sp),
@@ -133,69 +132,69 @@ fun LoginPage(
                         viewModel.onEvent(AuthUiEvent.SignInPasswordChanged(password.value.text))
                     })
 
-            Spacer(modifier = Modifier.height(40.dp))
-            Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
-                Button(
+                Spacer(modifier = Modifier.height(40.dp))
+                Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
+                    Button(
                         onClick = {
                             viewModel.onEvent(AuthUiEvent.SignIn)
                         },
                         shape = RoundedCornerShape(50.dp),
                         modifier = Modifier
-                                .fillMaxWidth()
-                                .height(50.dp),
+                            .fillMaxWidth()
+                            .height(50.dp),
 
                         ) {
-                    LogInText()
+                        LogInText()
+                    }
                 }
-            }
-            OrText()
-            Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
-                Button(
+                OrText()
+                Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
+                    Button(
                         onClick = {
                             navController.navigate(Screen.SignUp.route)
                         },
                         colors = ButtonDefaults.buttonColors(
-                                contentColor = MaterialTheme.colorScheme.onPrimary,
-                                containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary,
+                            containerColor = MaterialTheme.colorScheme.primary,
                         ),
                         shape = RoundedCornerShape(50.dp),
                         modifier = Modifier
-                                .fillMaxWidth()
-                                .height(50.dp)
-                ) {
-                    SignUpText()
-                }
+                            .fillMaxWidth()
+                            .height(50.dp)
+                    ) {
+                        SignUpText()
+                    }
 
-            }
-            Spacer(modifier = Modifier.height(60.dp))
-            ClickableText(
+                }
+                Spacer(modifier = Modifier.height(60.dp))
+                ClickableText(
                     text = AnnotatedString("Nie pamiętam hasła"), onClick = {
-                navController.navigate(Screen.ForgotPassword.route)
-            }, style = TextStyle(
-                    fontSize = 16.sp, fontFamily = fontFamily
-            )
-            )
-        }
-    })
+                        navController.navigate(Screen.ForgotPassword.route)
+                    }, style = TextStyle(
+                        fontSize = 16.sp, fontFamily = fontFamily
+                    )
+                )
+            }
+        })
 }
 
 @Composable
 fun LogInText() {
     Text(
-            "Zaloguj się",
-            fontFamily = fontFamily,
-            fontSize = 16.sp,
-            color = MaterialTheme.colorScheme.onPrimary
+        "Zaloguj się",
+        fontFamily = fontFamily,
+        fontSize = 16.sp,
+        color = MaterialTheme.colorScheme.onPrimary
     )
 }
 
 @Composable
 fun SignUpText() {
     Text(
-            "Zarejestruj się",
-            fontFamily = fontFamily,
-            fontSize = 16.sp,
-            color = MaterialTheme.colorScheme.onPrimary
+        "Zarejestruj się",
+        fontFamily = fontFamily,
+        fontSize = 16.sp,
+        color = MaterialTheme.colorScheme.onPrimary
     )
 }
 
