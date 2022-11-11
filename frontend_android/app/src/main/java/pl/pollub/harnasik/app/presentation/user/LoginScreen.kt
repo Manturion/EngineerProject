@@ -69,7 +69,6 @@ fun LoginPage(
             }
         }
     }
-
     ModalNavigationDrawer(
             modifier = Modifier.background(MaterialTheme.colorScheme.surface),
             drawerState = drawerState,

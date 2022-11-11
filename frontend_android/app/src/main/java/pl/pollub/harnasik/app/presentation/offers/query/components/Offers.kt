@@ -108,7 +108,7 @@ fun GenerateListOfAllOffersLoaded(
                     ) {
                         Image(
                             contentScale = ContentScale.Crop,
-                            painter = rememberAsyncImagePainter("${it.image}"),
+                            painter = rememberAsyncImagePainter(it.image),
                             contentDescription = it.image,
                             modifier = Modifier
                                 .height(75.dp)

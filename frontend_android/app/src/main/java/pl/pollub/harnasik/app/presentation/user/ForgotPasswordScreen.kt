@@ -1,5 +1,6 @@
 package pl.pollub.harnasik.app.presentation.user.forgotPassword
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -8,6 +9,7 @@ import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.rememberDrawerState
@@ -26,71 +28,80 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import pl.pollub.harnasik.R
 import pl.pollub.harnasik.app.core.Drawer.drawerContent
+import pl.pollub.harnasik.app.presentation.offers.AppBar
 
 var fontFamily: FontFamily = FontFamily(Font(R.font.opensans))
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ForgotPassword(navController: NavHostController) {
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
+    Scaffold(
+            topBar = {
+                AppBar(
+                        navController
+                )
+            }
+    ) {
+        ModalNavigationDrawer(
+                modifier = Modifier.background(MaterialTheme.colorScheme.surface),
+                drawerState = drawerState,
+                drawerContent = {
+                    drawerContent(navController = navController)
+                },
+                content = {
+                    Column(
+                            modifier = Modifier.fillMaxSize(),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
 
-    ModalNavigationDrawer(
-            modifier = Modifier.background(MaterialTheme.colorScheme.surface),
-            drawerState = drawerState,
-            drawerContent = {
-                drawerContent(navController = navController)
-            },
-            content = {
-                Column(
-                        modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
+                        val username = remember { mutableStateOf(TextFieldValue()) }
 
-                    val username = remember { mutableStateOf(TextFieldValue()) }
-                    
-                    Text(
-                            text = "Możesz zresetować swoje hasło poniżej",
-                            fontFamily = fontFamily,
-                            style = TextStyle(
-                                    fontSize = 26.sp,
-                                    fontFamily = FontFamily.Default
-                            ),
-                            textAlign = TextAlign.Center)
-                    Spacer(modifier = Modifier.height(60.dp))
+                        Text(
+                                text = "Możesz zresetować swoje hasło poniżej",
+                                fontFamily = fontFamily,
+                                style = TextStyle(
+                                        fontSize = 26.sp,
+                                        fontFamily = FontFamily.Default
+                                ),
+                                textAlign = TextAlign.Center)
+                        Spacer(modifier = Modifier.height(60.dp))
 
-                    Spacer(modifier = Modifier.height(20.dp))
-                    TextField(
-                            label = {
-                                Text(
-                                        text = "Twój email (login)",
-                                        fontFamily = fontFamily)
-                            },
-                            value = username.value,
-                            onValueChange = { username.value = it })
+                        Spacer(modifier = Modifier.height(20.dp))
+                        TextField(
+                                label = {
+                                    Text(
+                                            text = "Twój email (login)",
+                                            fontFamily = fontFamily)
+                                },
+                                value = username.value,
+                                onValueChange = { username.value = it })
 
-                    Spacer(
-                            modifier = Modifier.height(20.dp))
-                    PasswordWillBeSentOnEmailText()
-                    Spacer(
-                            modifier = Modifier.height(40.dp))
-                    Box(
-                            modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
-                        Button(
-                                onClick = {},
-                                shape = RoundedCornerShape(50.dp),
-                                modifier = Modifier
-                                        .fillMaxWidth()
-                                        .height(50.dp),
+                        Spacer(
+                                modifier = Modifier.height(20.dp))
+                        PasswordWillBeSentOnEmailText()
+                        Spacer(
+                                modifier = Modifier.height(40.dp))
+                        Box(
+                                modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
+                            Button(
+                                    onClick = {},
+                                    shape = RoundedCornerShape(50.dp),
+                                    modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(50.dp),
 
 
-                                ) {
-                            PasswordResetText()
+                                    ) {
+                                PasswordResetText()
+                            }
                         }
                     }
-                }
-            })
+                })
+    }
 }
 
 @Composable

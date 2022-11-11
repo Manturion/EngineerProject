@@ -1,41 +1,129 @@
 package pl.pollub.harnasik.app.core.BottomBar
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import pl.pollub.harnasik.R
+import pl.pollub.harnasik.app.util.Screen
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BottomBar() {
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(48.dp)
-            .background(color = MaterialTheme.colorScheme.primary)
-            .fillMaxSize()
+fun BottomBar(navController: NavController) {
 
-    ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceAround,
-        ) {
-            Text(
-                text = "Navbar",
-                textAlign = TextAlign.Center,
-                fontFamily = FontFamily(Font(R.font.opensans))
-            )
-        }
-    }
+    val customModifier = Modifier
+            .padding(start = 8.dp, end = 4.dp)
+            .width(64.dp)
+            .height(64.dp)
+
+    BottomAppBar(
+            modifier = Modifier.height(58.dp),
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.onPrimary,
+            actions = {
+                IconButton(
+                        onClick = {
+                                  navController.navigate(Screen.AllOffersScreen.route)
+                                  },
+                        modifier = customModifier
+                ) {
+                    Icon(
+                            painter = painterResource(id = R.drawable.ic_round_home_24),
+                            contentDescription = "Strona_glowna",
+                            tint = MaterialTheme.colorScheme.onPrimary,
+                    )
+                }
+                IconButton(
+                        onClick = { /* doSomething() */ },
+                        modifier = customModifier
+                ) {
+
+                    BadgedBox(
+                            badge = {
+                                Badge {
+                                    val badgeNumber = "8"
+                                    Text(
+                                            badgeNumber,
+                                            modifier = Modifier.semantics {
+                                                contentDescription = "$badgeNumber new notifications"
+                                            }
+                                    )
+                                }
+                            }) {
+                        Icon(
+                                painter = painterResource(id = R.drawable.ic_round_notifications_24),
+                                contentDescription = "powiadomienie",
+                                tint = MaterialTheme.colorScheme.onPrimary,
+                        )
+                    }
+
+
+                }
+                IconButton(
+                        onClick = { /* doSomething() */ },
+                        modifier = customModifier
+                ) {
+                    Icon(
+                            painter = painterResource(id = R.drawable.ic_round_search_24),
+                            contentDescription = "Szukaj",
+                            tint = MaterialTheme.colorScheme.onPrimary,
+                    )
+                }
+                IconButton(
+                        onClick = { /* doSomething() */ },
+                        modifier = customModifier
+                )
+                {
+                    BadgedBox(
+                            badge = {
+                                Badge {
+                                    val badgeNumber = "1"
+                                    Text(
+                                            badgeNumber,
+                                            modifier = Modifier.semantics {
+                                                contentDescription = "$badgeNumber nowa waid"
+                                            }
+                                    )
+                                }
+                            }
+                    ) {
+
+                        Icon(
+                                painter = painterResource(id = R.drawable.ic_round_email_24),
+                                contentDescription = "wiadomosci",
+                                tint = MaterialTheme.colorScheme.onPrimary,
+                        )
+                    }
+                }
+            },
+            floatingActionButton = {
+                FloatingActionButton(
+                        onClick = { /* do something */ },
+                        containerColor = MaterialTheme.colorScheme.onPrimary,
+                        elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation(),
+                        modifier = Modifier.padding(bottom = 8.dp)
+                ) {
+                    Icon(
+                            painter = painterResource(id = R.drawable.ic_round_person_24),
+                            contentDescription = stringResource(R.string.label_continue_to_courses),
+                            tint = MaterialTheme.colorScheme.primary,
+                    )
+                }
+            }
+    )
 }

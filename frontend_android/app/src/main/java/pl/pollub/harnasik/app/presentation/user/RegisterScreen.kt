@@ -34,6 +34,7 @@ import androidx.navigation.NavHostController
 import pl.pollub.harnasik.R
 import pl.pollub.harnasik.app.auth.AuthResult
 import pl.pollub.harnasik.app.core.Drawer.drawerContent
+import pl.pollub.harnasik.app.presentation.offers.AppBar
 import pl.pollub.harnasik.app.util.Screen
 
 var fontFamily: FontFamily = FontFamily(Font(R.font.opensans))
@@ -225,108 +226,116 @@ fun SignUp(
     }
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
-    ModalNavigationDrawer(
-            modifier = Modifier.background(MaterialTheme.colorScheme.surface),
-            drawerState = drawerState,
-            drawerContent = {
-                drawerContent(navController = navController)
-            },
-            content = {
-                Column(
-                        modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Text(
-                            text = "Utwórz konto\ni dziel się promocjami!",
-                            style = TextStyle(fontSize = 26.sp, fontFamily = FontFamily.Default),
-                            textAlign = TextAlign.Center
-                    )
-                    Spacer(modifier = Modifier.height(30.dp))
-                    Spacer(modifier = Modifier.height(20.dp))
-
-                    CustomOutlinedTextField(
-                            value = username,
-                            onValueChange = {
-                                username = it
-                                viewModel.onEvent(AuthUiEvent.SignUpUsernameChanged(username))
-                            },
-                            label = "Email",
-                            leadingIconImageVector = Icons.Default.Email,
-                            keyboardOptions = KeyboardOptions(
-                                    keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
-                            ),
-                            showBlankError = !validateUsernameIsBlank,
-                            blankErrorMessage = validateBlankFieldErrorMessage,
-                            showDataError = !validateUsername,
-                            dataErrorMessage = validateUsernameErrorMessage,
-                            hintMessage = hintMessageUsername
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    CustomOutlinedTextField(
-                            value = password,
-                            onValueChange = {
-                                password = it
-                                viewModel.onEvent(AuthUiEvent.SignUpPasswordChanged(password))
-                            },
-                            label = "Hasło",
-                            leadingIconImageVector = Icons.Default.Password,
-                            keyboardOptions = KeyboardOptions(
-                                    keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
-                            ),
-                            showBlankError = !validatePasswordIsBlank,
-                            blankErrorMessage = validateBlankFieldErrorMessage,
-                            showDataError = !validatePassword,
-                            dataErrorMessage = validatePasswordErrorMessage,
-                            isPasswordField = true,
-                            hintMessage = hintMessagePassword
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    CustomOutlinedTextField(
-                            value = confirmPassword,
-                            onValueChange = { confirmPassword = it },
-                            label = "Powtórz hasło",
-                            leadingIconImageVector = Icons.Default.Password,
-                            keyboardOptions = KeyboardOptions(
-                                    keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
-                            ),
-                            showBlankError = !validateConfirmPasswordIsBlank,
-                            blankErrorMessage = validateBlankFieldErrorMessage,
-                            showDataError = !validatePasswordEqual,
-                            dataErrorMessage = validateEqualPasswordErrorMessage,
-                            isPasswordField = true,
-                            hintMessage = ""
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    Box(
-                            modifier = Modifier
-                                    .fillMaxWidth()
-                                    .align(CenterHorizontally)
-                                    .padding(start = 20.dp, end = 20.dp)
+    Scaffold(
+            topBar = {
+                AppBar(
+                        navController
+                )
+            }
+    ) {
+        ModalNavigationDrawer(
+                modifier = Modifier.background(MaterialTheme.colorScheme.surface),
+                drawerState = drawerState,
+                drawerContent = {
+                    drawerContent(navController = navController)
+                },
+                content = {
+                    Column(
+                            modifier = Modifier.fillMaxSize(),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
                         Text(
-                                text = "Rejestrując się potwierdzasz,że jesteś osobą pełnoletnią oraz akceptujesz regulamin",
-                                textAlign = TextAlign.Center,
-                                color = MaterialTheme.colorScheme.primary, fontSize = 12.sp
+                                text = "Utwórz konto\ni dziel się promocjami!",
+                                style = TextStyle(fontSize = 26.sp, fontFamily = FontFamily.Default),
+                                textAlign = TextAlign.Center
                         )
-                    }
+                        Spacer(modifier = Modifier.height(30.dp))
+                        Spacer(modifier = Modifier.height(20.dp))
 
-                    Spacer(modifier = Modifier.height(20.dp))
-                    Box(
-                            modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)
-                    ) {
-                        Button(
-                                onClick = {
-                                    register(username, password, confirmPassword)
+                        CustomOutlinedTextField(
+                                value = username,
+                                onValueChange = {
+                                    username = it
+                                    viewModel.onEvent(AuthUiEvent.SignUpUsernameChanged(username))
                                 },
-                                shape = RoundedCornerShape(50.dp),
+                                label = "Email",
+                                leadingIconImageVector = Icons.Default.Email,
+                                keyboardOptions = KeyboardOptions(
+                                        keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
+                                ),
+                                showBlankError = !validateUsernameIsBlank,
+                                blankErrorMessage = validateBlankFieldErrorMessage,
+                                showDataError = !validateUsername,
+                                dataErrorMessage = validateUsernameErrorMessage,
+                                hintMessage = hintMessageUsername
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        CustomOutlinedTextField(
+                                value = password,
+                                onValueChange = {
+                                    password = it
+                                    viewModel.onEvent(AuthUiEvent.SignUpPasswordChanged(password))
+                                },
+                                label = "Hasło",
+                                leadingIconImageVector = Icons.Default.Password,
+                                keyboardOptions = KeyboardOptions(
+                                        keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
+                                ),
+                                showBlankError = !validatePasswordIsBlank,
+                                blankErrorMessage = validateBlankFieldErrorMessage,
+                                showDataError = !validatePassword,
+                                dataErrorMessage = validatePasswordErrorMessage,
+                                isPasswordField = true,
+                                hintMessage = hintMessagePassword
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        CustomOutlinedTextField(
+                                value = confirmPassword,
+                                onValueChange = { confirmPassword = it },
+                                label = "Powtórz hasło",
+                                leadingIconImageVector = Icons.Default.Password,
+                                keyboardOptions = KeyboardOptions(
+                                        keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
+                                ),
+                                showBlankError = !validateConfirmPasswordIsBlank,
+                                blankErrorMessage = validateBlankFieldErrorMessage,
+                                showDataError = !validatePasswordEqual,
+                                dataErrorMessage = validateEqualPasswordErrorMessage,
+                                isPasswordField = true,
+                                hintMessage = ""
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Box(
                                 modifier = Modifier
                                         .fillMaxWidth()
-                                        .height(50.dp)
+                                        .align(CenterHorizontally)
+                                        .padding(start = 20.dp, end = 20.dp)
                         ) {
-                            Text("Utwórz konto", fontSize = 16.sp, fontFamily = fontFamily)
+                            Text(
+                                    text = "Rejestrując się potwierdzasz,że jesteś osobą pełnoletnią oraz akceptujesz regulamin",
+                                    textAlign = TextAlign.Center,
+                                    color = MaterialTheme.colorScheme.primary, fontSize = 12.sp
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Box(
+                                modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)
+                        ) {
+                            Button(
+                                    onClick = {
+                                        register(username, password, confirmPassword)
+                                    },
+                                    shape = RoundedCornerShape(50.dp),
+                                    modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(50.dp)
+                            ) {
+                                Text("Utwórz konto", fontSize = 16.sp, fontFamily = fontFamily)
+                            }
                         }
                     }
-                }
-            })
+                })
+    }
 }
