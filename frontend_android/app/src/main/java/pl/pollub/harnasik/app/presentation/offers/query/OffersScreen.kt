@@ -73,33 +73,6 @@ fun AllOffersScreen(navController: NavController) {
                 }
             })
     }
-
-//    ModalNavigationDrawer(
-//            modifier = Modifier.background(MaterialTheme.colorScheme.surface),
-//            drawerState = drawerState,
-//            drawerContent = {
-//                drawerContent(navController = navController)
-//
-//            },
-//            content = {
-//
-//                Column {
-//                    CategorySlideBar()
-//                    GetAllOffers(state, navController)
-//                }
-//                FloatingActionButton(
-//                        onClick = { navController.navigate(Screen.AddEditOfferScreen.route) },
-//                        contentColor = MaterialTheme.colorScheme.onPrimary,
-//                        containerColor = MaterialTheme.colorScheme.primary,
-//                        modifier = Modifier.padding(top = 540.dp, start = 320.dp),
-//                ) {
-//                    Icon(
-//                            painter = painterResource(id = R.drawable.ic_baseline_add_24),
-//                            contentDescription = stringResource(R.string.label_continue_to_courses),
-//                            tint = MaterialTheme.colorScheme.onPrimary,
-//                    )
-//                }
-//            })
 }
 
 
