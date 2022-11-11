@@ -5,7 +5,15 @@ import android.app.DatePickerDialog
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -21,9 +29,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import java.util.*
+import java.util.Calendar
 import pl.pollub.harnasik.R
-import pl.pollub.harnasik.app.presentation.offers.command.components.M3CustomOutlinedTextField
+import pl.pollub.harnasik.app.presentation.offers.command.components.OutlinedTextField
 import pl.pollub.harnasik.app.util.Screen
 import pl.pollub.harnasik.ui.theme.HarnasikTheme
 
@@ -33,7 +41,6 @@ import pl.pollub.harnasik.ui.theme.HarnasikTheme
 fun AddEditOfferScreen(
     navController: NavController, viewModel: UpsertOfferViewModel = hiltViewModel()
 ) {
-
     HarnasikTheme {
         val titleState = viewModel.offerTitle.value
         val descriptionState = viewModel.offerDescription.value
@@ -80,7 +87,7 @@ fun AddEditOfferScreen(
                 val validateTitleMessage = "Tytuł nie może być pusty"
                 val validateTitle by rememberSaveable { mutableStateOf(true) }
 
-                M3CustomOutlinedTextField(
+                OutlinedTextField(
                     value = title,
                     onValueChange = { title = it },
                     label = "Tytuł oferty",
@@ -155,12 +162,11 @@ fun AddEditOfferScreen(
                 }
                 //End of dropdown categories
 
-
                 var description by rememberSaveable { mutableStateOf("") }
                 val validateDescriptionMessage = "Opis nie może być pusty"
                 var validateDescription by rememberSaveable { mutableStateOf(true) }
 
-                M3CustomOutlinedTextField(
+                OutlinedTextField(
                     value = description,
                     onValueChange = { description = it },
                     label = "Opis oferty",
@@ -191,10 +197,7 @@ fun AddEditOfferScreen(
                     year, month, day,
                 )
 
-
-                var validateExpireDate by rememberSaveable { mutableStateOf(true) }
-
-                M3CustomOutlinedTextField(
+                OutlinedTextField(
                     value = expireDate,
                     onValueChange = { expireDate = it },
                     label = "Data ważności oferty",
@@ -242,7 +245,7 @@ fun AddEditOfferScreen(
                 val validateOldPriceMessage = "Opis nie może być pusty"
                 var validateOldPrice by rememberSaveable { mutableStateOf(true) }
 
-                M3CustomOutlinedTextField(
+                OutlinedTextField(
                     value = oldPrice,
                     onValueChange = { oldPrice = it },
                     label = "Stara cena",
@@ -253,14 +256,13 @@ fun AddEditOfferScreen(
                         keyboardType = KeyboardType.Number, imeAction = ImeAction.Next
                     )
                 )
-
                 //New price
 
                 var newPrice by rememberSaveable { mutableStateOf("") }
                 val validateNewPriceMessage = "Opis nie może być pusty"
                 var validateNewPrice by rememberSaveable { mutableStateOf(true) }
 
-                M3CustomOutlinedTextField(
+                OutlinedTextField(
                     value = newPrice,
                     onValueChange = { newPrice = it },
                     label = "Nowa cena",

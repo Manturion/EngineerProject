@@ -26,7 +26,7 @@ import pl.pollub.harnasik.app.presentation.user.ShowTextUnderField
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun M3CustomOutlinedTextFieldReg(
+fun OutlinedTextFieldRegisterValidation(
     value: String,
     onValueChange: (String) -> Unit,
     label: String,
@@ -79,13 +79,13 @@ fun M3CustomOutlinedTextFieldReg(
                 }
                 if (isPasswordField) {
                     IconButton(onClick = { onVisibilityChange(!isPasswordVisible) }) {
-                        if(isPasswordVisible){
+                        if (isPasswordVisible) {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_round_visibility_24),
                                 contentDescription = "toggle_password_visibility",
                                 tint = MaterialTheme.colorScheme.onPrimary,
                             )
-                        }else{
+                        } else {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_round_visibility_off_24),
                                 contentDescription = "toggle_password_visibility",

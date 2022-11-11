@@ -1,6 +1,12 @@
 package pl.pollub.harnasik.app.presentation.offers.command.components
 
-import androidx.compose.foundation.layout.*
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
@@ -69,13 +75,13 @@ fun OutlinedTextField(
                 }
                 if (isPasswordField) {
                     IconButton(onClick = { onVisibilityChange(!isPasswordVisible) }) {
-                        if(isPasswordVisible){
+                        if (isPasswordVisible) {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_round_visibility_24),
                                 contentDescription = "wiadomosci",
                                 tint = MaterialTheme.colorScheme.onPrimary,
                             )
-                        }else{
+                        } else {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_round_visibility_off_24),
                                 contentDescription = "wiadomosci",
