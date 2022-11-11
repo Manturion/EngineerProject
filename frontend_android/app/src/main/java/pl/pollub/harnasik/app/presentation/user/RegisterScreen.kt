@@ -6,10 +6,7 @@ import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -17,15 +14,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,95 +30,10 @@ import pl.pollub.harnasik.R
 import pl.pollub.harnasik.app.auth.AuthResult
 import pl.pollub.harnasik.app.core.Drawer.DrawerContent
 import pl.pollub.harnasik.app.presentation.offers.AppBar
+import pl.pollub.harnasik.app.presentation.offers.command.components.M3CustomOutlinedTextFieldReg
 import pl.pollub.harnasik.app.util.Screen
 
 var fontFamily: FontFamily = FontFamily(Font(R.font.opensans))
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun CustomOutlinedTextField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    label: String,
-    leadingIconImageVector: ImageVector,
-    leadingIconDescription: String = "",
-    isPasswordField: Boolean = false,
-    isPasswordVisible: Boolean = false,
-    onVisibilityChange: (Boolean) -> Unit = {},
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActions: KeyboardActions = KeyboardActions.Default,
-    showDataError: Boolean = false,
-    showBlankError: Boolean = false,
-    dataErrorMessage: String,
-    blankErrorMessage: String,
-    hintMessage: String
-) {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        OutlinedTextField(
-            value = value,
-            onValueChange = { onValueChange(it) },
-            modifier = Modifier.padding(bottom = 10.dp),
-            label = {
-                Text(
-                    text = (label), fontSize = 12.sp
-                )
-            },
-            leadingIcon = {
-                Icon(
-                    imageVector = leadingIconImageVector,
-                    contentDescription = leadingIconDescription,
-                    tint = if (showBlankError || showDataError) {
-                        MaterialTheme.colorScheme.error
-                    } else {
-                        MaterialTheme.colorScheme.onSurface
-                    }
-                )
-            },
-            isError = showBlankError || showDataError,
-            trailingIcon = {
-                if ((showDataError || showBlankError) && !isPasswordField) {
-                    Icon(imageVector = Icons.Filled.Error, contentDescription = "Show error icon")
-                }
-                if (isPasswordField) {
-                    IconButton(onClick = { onVisibilityChange(!isPasswordVisible) }) {
-                        Icon(
-                            imageVector = if (isPasswordVisible) {
-                                Icons.Default.Visibility
-                            } else {
-                                Icons.Default.VisibilityOff
-                            }, contentDescription = "Toggle password visibility"
-                        )
-                    }
-                }
-            },
-            visualTransformation = when {
-                isPasswordField && isPasswordVisible -> VisualTransformation.None
-                isPasswordField -> PasswordVisualTransformation()
-                else -> VisualTransformation.None
-            },
-            keyboardOptions = keyboardOptions,
-            keyboardActions = keyboardActions,
-            singleLine = true
-        )
-        if (showBlankError) {
-            ShowTextUnderField(
-                text = blankErrorMessage, color = MaterialTheme.colorScheme.error
-            )
-        } else if (showDataError) {
-            ShowTextUnderField(
-                text = dataErrorMessage, color = MaterialTheme.colorScheme.error
-            )
-        } else {
-            ShowTextUnderField(
-                text = hintMessage, color = MaterialTheme.colorScheme.onSecondary
-            )
-        }
-    }
-}
 
 @Composable
 fun ShowTextUnderField(text: String, color: Color) {
@@ -248,14 +158,14 @@ fun SignUp(
                     Spacer(modifier = Modifier.height(30.dp))
                     Spacer(modifier = Modifier.height(20.dp))
 
-                    CustomOutlinedTextField(
+                    M3CustomOutlinedTextFieldReg(
                         value = username,
                         onValueChange = {
                             username = it
                             viewModel.onEvent(AuthUiEvent.SignUpUsernameChanged(username))
                         },
                         label = "Email",
-                        leadingIconImageVector = Icons.Default.Email,
+                        leadingIconImageVector = painterResource(id = R.drawable.ic_round_mail_24),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
                         ),
@@ -266,14 +176,14 @@ fun SignUp(
                         hintMessage = hintMessageUsername
                     )
                     Spacer(modifier = Modifier.height(20.dp))
-                    CustomOutlinedTextField(
+                    M3CustomOutlinedTextFieldReg(
                         value = password,
                         onValueChange = {
                             password = it
                             viewModel.onEvent(AuthUiEvent.SignUpPasswordChanged(password))
                         },
                         label = "Hasło",
-                        leadingIconImageVector = Icons.Default.Password,
+                        leadingIconImageVector = painterResource(id = R.drawable.ic_round_password_24),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
                         ),
@@ -285,11 +195,11 @@ fun SignUp(
                         hintMessage = hintMessagePassword
                     )
                     Spacer(modifier = Modifier.height(20.dp))
-                    CustomOutlinedTextField(
+                    M3CustomOutlinedTextFieldReg(
                         value = confirmPassword,
                         onValueChange = { confirmPassword = it },
                         label = "Powtórz hasło",
-                        leadingIconImageVector = Icons.Default.Password,
+                        leadingIconImageVector = painterResource(id = R.drawable.ic_round_password_24),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
                         ),

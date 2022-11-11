@@ -3,27 +3,25 @@ package pl.pollub.harnasik.app.presentation.offers.command.components
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Error
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import pl.pollub.harnasik.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CustomOutlinedTextField(
+fun OutlinedTextField(
     value: String,
     onValueChange: (String) -> Unit,
     label: String,
-    leadingIconImageVector: ImageVector,
+    leadingIconImageVector: Painter,
     leadingIconDescription: String = "",
     isPasswordField: Boolean = false,
     isPasswordVisible: Boolean = false,
@@ -48,9 +46,10 @@ fun CustomOutlinedTextField(
             label = { Text(text = (label)) },
             maxLines = 10,
 
+
             leadingIcon = {
                 Icon(
-                    imageVector = leadingIconImageVector,
+                    painter = leadingIconImageVector,
                     contentDescription = leadingIconDescription,
                     tint = if (showError) {
                         MaterialTheme.colorScheme.error
@@ -62,18 +61,27 @@ fun CustomOutlinedTextField(
             isError = showError,
             trailingIcon = {
                 if (showError && !isPasswordField) {
-                    Icon(imageVector = Icons.Filled.Error, contentDescription = "Show error icon")
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_round_error_24),
+                        contentDescription = "error",
+                        tint = MaterialTheme.colorScheme.onPrimary,
+                    )
                 }
                 if (isPasswordField) {
                     IconButton(onClick = { onVisibilityChange(!isPasswordVisible) }) {
-                        Icon(
-                            imageVector = if (isPasswordVisible) {
-                                Icons.Default.Visibility
-                            } else {
-                                Icons.Default.VisibilityOff
-                            },
-                            contentDescription = "Toggle password visibility"
-                        )
+                        if(isPasswordVisible){
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_round_visibility_24),
+                                contentDescription = "wiadomosci",
+                                tint = MaterialTheme.colorScheme.onPrimary,
+                            )
+                        }else{
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_round_visibility_off_24),
+                                contentDescription = "wiadomosci",
+                                tint = MaterialTheme.colorScheme.onPrimary,
+                            )
+                        }
                     }
                 }
             },

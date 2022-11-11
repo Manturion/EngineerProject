@@ -7,14 +7,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -23,7 +22,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import java.util.*
-import pl.pollub.harnasik.app.presentation.offers.command.components.CustomOutlinedTextField
+import pl.pollub.harnasik.R
+import pl.pollub.harnasik.app.presentation.offers.command.components.M3CustomOutlinedTextField
 import pl.pollub.harnasik.app.util.Screen
 import pl.pollub.harnasik.ui.theme.HarnasikTheme
 
@@ -35,7 +35,6 @@ fun AddEditOfferScreen(
 ) {
 
     HarnasikTheme {
-
         val titleState = viewModel.offerTitle.value
         val descriptionState = viewModel.offerDescription.value
         val oldPriceState = viewModel.offerOldPrice.value
@@ -50,25 +49,19 @@ fun AddEditOfferScreen(
                     },
                     contentColor = MaterialTheme.colorScheme.onPrimary,
                     containerColor = MaterialTheme.colorScheme.primary
-                    ) {
+                ) {
                     Icon(
-                        imageVector = Icons.Rounded.Save,
+                        painter = painterResource(id = R.drawable.ic_round_save_24),
                         contentDescription = "Dodaj ofertę",
-
                     )
-
                 }
             }
-
-
         ) {
-
             Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(start = 24.dp, end = 24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
-
             ) {
                 Row(
                     modifier = Modifier
@@ -83,18 +76,16 @@ fun AddEditOfferScreen(
                         fontWeight = FontWeight.Bold
                     )
                 }
-
-
                 var title by rememberSaveable { mutableStateOf("") }
                 val validateTitleMessage = "Tytuł nie może być pusty"
-                var validateTitle by rememberSaveable { mutableStateOf(true) }
+                val validateTitle by rememberSaveable { mutableStateOf(true) }
 
-                CustomOutlinedTextField(
+                M3CustomOutlinedTextField(
                     value = title,
                     onValueChange = { title = it },
                     label = "Tytuł oferty",
                     showError = !validateTitle,
-                    leadingIconImageVector = Icons.Rounded.Title,
+                    leadingIconImageVector = painterResource(id = R.drawable.ic_round_title_24),
                     errorMessage = validateTitleMessage,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
@@ -105,7 +96,6 @@ fun AddEditOfferScreen(
                     rememberLauncherForActivityResult(ActivityResultContracts.GetMultipleContents()) { uriList ->
                         // process eith the received image uri
                     }
-
                 Button(
                     onClick = { galleryLauncher.launch("image/*") },
                     modifier = Modifier
@@ -119,10 +109,7 @@ fun AddEditOfferScreen(
                     ) {
                     Text(text = "Wybierz zdjęcie")
                 }
-
 //                //dropdown categorie
-
-
                 val options = listOf("Jedzenie", "Napoje", "Słodycze", "Przekąski", "Alkohole")
                 var expanded by remember { mutableStateOf(false) }
                 var selectedOptionText by remember { mutableStateOf(options[0]) }
@@ -131,7 +118,7 @@ fun AddEditOfferScreen(
                     expanded = expanded,
                     onExpandedChange = { expanded = !expanded },
 
-                ) {
+                    ) {
                     OutlinedTextField(
                         // The `menuAnchor` modifier must be passed to the text field for correctness.
                         modifier = Modifier
@@ -147,9 +134,7 @@ fun AddEditOfferScreen(
                             containerColor = MaterialTheme.colorScheme.onPrimary,
                             focusedLabelColor = MaterialTheme.colorScheme.primary,
                         ),
-
-
-                        )
+                    )
                     ExposedDropdownMenu(
                         expanded = expanded,
                         onDismissRequest = { expanded = false },
@@ -175,12 +160,12 @@ fun AddEditOfferScreen(
                 val validateDescriptionMessage = "Opis nie może być pusty"
                 var validateDescription by rememberSaveable { mutableStateOf(true) }
 
-                CustomOutlinedTextField(
+                M3CustomOutlinedTextField(
                     value = description,
                     onValueChange = { description = it },
                     label = "Opis oferty",
                     showError = !validateTitle,
-                    leadingIconImageVector = Icons.Rounded.Description,
+                    leadingIconImageVector = painterResource(id = R.drawable.ic_round_description_24),
                     errorMessage = validateDescriptionMessage,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
@@ -209,11 +194,11 @@ fun AddEditOfferScreen(
 
                 var validateExpireDate by rememberSaveable { mutableStateOf(true) }
 
-                CustomOutlinedTextField(
+                M3CustomOutlinedTextField(
                     value = expireDate,
                     onValueChange = { expireDate = it },
                     label = "Data ważności oferty",
-                    leadingIconImageVector = Icons.Rounded.DateRange,
+                    leadingIconImageVector = painterResource(id = R.drawable.ic_round_calendar_month_24),
                     errorMessage = validateTitleMessage,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
@@ -257,12 +242,12 @@ fun AddEditOfferScreen(
                 val validateOldPriceMessage = "Opis nie może być pusty"
                 var validateOldPrice by rememberSaveable { mutableStateOf(true) }
 
-                CustomOutlinedTextField(
+                M3CustomOutlinedTextField(
                     value = oldPrice,
                     onValueChange = { oldPrice = it },
                     label = "Stara cena",
                     showError = !validateOldPrice,
-                    leadingIconImageVector = Icons.Rounded.MoneyOff,
+                    leadingIconImageVector = painterResource(id = R.drawable.ic_round_money_off_24),
                     errorMessage = validateOldPriceMessage,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number, imeAction = ImeAction.Next
@@ -275,12 +260,12 @@ fun AddEditOfferScreen(
                 val validateNewPriceMessage = "Opis nie może być pusty"
                 var validateNewPrice by rememberSaveable { mutableStateOf(true) }
 
-                CustomOutlinedTextField(
+                M3CustomOutlinedTextField(
                     value = newPrice,
                     onValueChange = { newPrice = it },
                     label = "Nowa cena",
                     showError = !validateNewPrice,
-                    leadingIconImageVector = Icons.Rounded.MonetizationOn,
+                    leadingIconImageVector = painterResource(id = R.drawable.ic_round_attach_money_24),
                     errorMessage = validateNewPriceMessage,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number, imeAction = ImeAction.Next
