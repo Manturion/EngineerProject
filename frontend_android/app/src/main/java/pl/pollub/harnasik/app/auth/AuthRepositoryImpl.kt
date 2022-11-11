@@ -37,11 +37,8 @@ class AuthRepositoryImpl(
                     password = password
                 )
             )
-            println("TOKEN SIGN IN LOGIN : ${response.jwt}")
+
             AuthUser = response.username
-            println("TOKEN SIGN IN LOGIN : ${AuthUser}")
-
-
 
 
             prefs.edit()

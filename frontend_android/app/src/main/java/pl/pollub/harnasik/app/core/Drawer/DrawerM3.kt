@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import pl.pollub.harnasik.R
-import pl.pollub.harnasik.app.di.App
+import pl.pollub.harnasik.app.di.App.Companion.AuthUser
 import pl.pollub.harnasik.app.presentation.offers.query.DrawerItem
 import pl.pollub.harnasik.app.util.Screen
 
@@ -34,60 +34,83 @@ import pl.pollub.harnasik.app.util.Screen
 fun drawerContent(navController: NavController) {
 
     val itemsList = listOf(
-            DrawerItem("Moje oferty", R.drawable.ic_round_sell_24),
-            DrawerItem("Pomoc", R.drawable.ic_baseline_help_24),
-            DrawerItem("O nas", R.drawable.ic_baseline_people_24),
-            DrawerItem("Kontakt", R.drawable.ic_baseline_chat_bubble_24),
+        DrawerItem("Moje oferty", R.drawable.ic_round_sell_24),
+        DrawerItem("Pomoc", R.drawable.ic_baseline_help_24),
+        DrawerItem("O nas", R.drawable.ic_baseline_people_24),
+        DrawerItem("Kontakt", R.drawable.ic_baseline_chat_bubble_24),
     )
 
     ModalDrawerSheet {
 
         Row(
-                modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 64.dp),
-                horizontalArrangement = Arrangement.Center
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 64.dp),
+            horizontalArrangement = Arrangement.Center
 
         ) {
             Text(
-                    text = "Harnasik", fontSize = 36.sp, fontWeight = FontWeight.Bold
+                text = "Harnasik", fontSize = 36.sp, fontWeight = FontWeight.Bold
             )
 //            Icon(painter = painterResource(id = R.drawable.), contentDescription = "LOGO")
 
         }
+        if (AuthUser != null) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 12.dp),
+                horizontalArrangement = Arrangement.Center
+
+            ) {
+                Text(
+                    text = "Witaj $AuthUser!", fontSize = 16.sp, fontWeight = FontWeight.Bold
+                )
+
+            }
+        }
+
+
         Spacer(Modifier.height(60.dp))
 
         itemsList.forEach {
-            NavigationDrawerItem(modifier = Modifier.padding(start = 24.dp, end = 24.dp, top = 8.dp), icon = {
-                Icon(
+            NavigationDrawerItem(
+                modifier = Modifier.padding(
+                    start = 24.dp,
+                    end = 24.dp,
+                    top = 8.dp
+                ), icon = {
+                    Icon(
                         painter = painterResource(id = it.iconPath),
                         contentDescription = stringResource(R.string.label_continue_to_courses),
                         tint = MaterialTheme.colorScheme.onTertiaryContainer,
 
                         )
-            }, label = {
-                Text(
+                }, label = {
+                    Text(
                         text = it.title,
                         modifier = Modifier.weight(1f),
                         fontFamily = FontFamily(Font(R.font.opensans)),
-                        fontSize = 18.sp)
-            }, onClick = {}, selected = false)
+                        fontSize = 18.sp
+                    )
+                }, onClick = {}, selected = false
+            )
         }
 
 
-        if (App.AuthUser == null) {
+        if (AuthUser == null) {
             Button(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(85.dp), onClick = {
+                .fillMaxWidth()
+                .padding(85.dp), onClick = {
                 navController.navigate(Screen.Login.route)
             }) {
                 Text(text = "Zaloguj się")
             }
         } else {
             Button(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(90.dp), onClick = {
-                App.AuthUser = null
+                .fillMaxWidth()
+                .padding(start = 90.dp, top = 40.dp, end = 90.dp), onClick = {
+                AuthUser = null
                 navController.navigate(Screen.Login.route)
             }) {
                 Text(text = "Wyloguj się")
