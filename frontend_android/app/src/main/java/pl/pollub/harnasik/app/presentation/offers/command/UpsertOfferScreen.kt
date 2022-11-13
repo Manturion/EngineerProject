@@ -31,6 +31,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import java.util.Calendar
 import pl.pollub.harnasik.R
+import pl.pollub.harnasik.app.presentation.offers.AppBar
 import pl.pollub.harnasik.app.presentation.offers.command.components.OutlinedTextField
 import pl.pollub.harnasik.app.util.Screen
 import pl.pollub.harnasik.ui.theme.HarnasikTheme
@@ -48,7 +49,11 @@ fun AddEditOfferScreen(
         val newPriceState = viewModel.offerNewPrice.value
 
         Scaffold(
-
+            topBar = {
+                AppBar(
+                    navController
+                )
+            },
             floatingActionButton = {
                 FloatingActionButton(
                     onClick = {
@@ -67,7 +72,7 @@ fun AddEditOfferScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(start = 24.dp, end = 24.dp),
+                    .padding(start = 24.dp, end = 24.dp, top = 64.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Row(

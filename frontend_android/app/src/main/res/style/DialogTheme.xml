@@ -1,0 +1,3 @@
+<style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+    <item name="colorAccent">@android:color/holo_green_dark</item>
+</style>
