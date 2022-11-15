@@ -1,10 +1,10 @@
-package pl.pollub.inzynierka.domain.mappers;
+package pl.pollub.application.domain.mappers;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import pl.pollub.inzynierka.domain.entities.OfferEntity;
-import pl.pollub.inzynierka.infrastructure.Offer.CreateOfferDto;
-import pl.pollub.inzynierka.infrastructure.Offer.OfferDto;
+import pl.pollub.application.domain.entities.OfferEntity;
+import pl.pollub.application.infrastructure.Offer.CreateOfferDto;
+import pl.pollub.application.infrastructure.Offer.OfferDto;
 
 @Mapper(componentModel = "spring")
 public interface OfferMapper {

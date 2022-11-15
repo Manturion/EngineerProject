@@ -1,10 +1,10 @@
-package pl.pollub.inzynierka.domain.adapters;
+package pl.pollub.application.domain.adapters;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.pollub.inzynierka.domain.repositories.AddressRepository;
-import pl.pollub.inzynierka.infrastructure.Address.AddressDto;
-import pl.pollub.inzynierka.infrastructure.Address.AddressPort;
+import pl.pollub.application.domain.repositories.AddressRepository;
+import pl.pollub.application.infrastructure.Address.AddressDto;
+import pl.pollub.application.infrastructure.Address.AddressPort;
 
 import java.util.List;
 

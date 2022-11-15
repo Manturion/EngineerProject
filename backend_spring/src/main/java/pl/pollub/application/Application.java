@@ -1,13 +1,13 @@
-package pl.pollub.inzynierka;
+package pl.pollub.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class InzynierkaApplication {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(InzynierkaApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
 }

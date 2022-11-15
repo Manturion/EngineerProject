@@ -1,4 +1,4 @@
-package pl.pollub.inzynierka.infrastructure.Offer;
+package pl.pollub.application.infrastructure.Offer;
 
 import java.util.List;
 import java.util.Optional;

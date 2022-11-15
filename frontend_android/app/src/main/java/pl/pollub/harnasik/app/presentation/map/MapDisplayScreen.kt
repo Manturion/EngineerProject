@@ -29,7 +29,6 @@ fun MapDisplayScreen(
         navController: NavController
 ) {
 
-
     val title = backStackEntry.arguments?.getString(DETAIL_ARGUMENT_TITLE).toString()
     val lat = backStackEntry.arguments?.getString(DETAIL_ARGUMENT_LAT)?.toDouble()
     val long = backStackEntry.arguments?.getString(DETAIL_ARGUMENT_LONG)?.toDouble()
@@ -49,7 +48,6 @@ fun MapDisplayScreen(
                     )
                 }
         ) {
-
             GoogleMap(
                     modifier = Modifier
                             .fillMaxSize()
@@ -57,7 +55,7 @@ fun MapDisplayScreen(
                     cameraPositionState = cameraPositionState
             ) {
                 Marker(
-                        state = MarkerState(position = point), title = title, snippet = ""
+                        state = MarkerState(position = point), title = title
                 )
             }
         }

@@ -1,4 +1,4 @@
-package pl.pollub.inzynierka.infrastructure.Report;
+package pl.pollub.application.infrastructure.Report;
 
 import lombok.Getter;
 import lombok.Setter;

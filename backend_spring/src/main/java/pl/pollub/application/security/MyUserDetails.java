@@ -1,10 +1,10 @@
-package pl.pollub.inzynierka.security;
+package pl.pollub.application.security;
 
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import pl.pollub.inzynierka.security.user.dto.UserRequestDto;
+import pl.pollub.application.security.user.dto.UserRequestDto;
 
 import java.util.ArrayList;
 import java.util.Collection;

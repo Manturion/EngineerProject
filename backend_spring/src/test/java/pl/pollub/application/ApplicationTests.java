@@ -1,10 +1,10 @@
-package pl.pollub.inzynierka;
+package pl.pollub.application;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class InzynierkaApplicationTests {
+class ApplicationTests {
 
 	@Test
 	void contextLoads() {

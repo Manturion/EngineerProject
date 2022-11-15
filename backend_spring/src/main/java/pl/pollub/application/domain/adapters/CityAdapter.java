@@ -1,11 +1,10 @@
-package pl.pollub.inzynierka.domain.adapters;
+package pl.pollub.application.domain.adapters;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.pollub.inzynierka.domain.repositories.CityRepository;
-import pl.pollub.inzynierka.infrastructure.City.CityDto;
-import pl.pollub.inzynierka.infrastructure.City.CityPort;
-import pl.pollub.inzynierka.infrastructure.Offer.OfferDto;
+import pl.pollub.application.domain.repositories.CityRepository;
+import pl.pollub.application.infrastructure.City.CityDto;
+import pl.pollub.application.infrastructure.City.CityPort;
 
 import java.util.List;
 

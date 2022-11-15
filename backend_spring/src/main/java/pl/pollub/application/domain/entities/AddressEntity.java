@@ -1,4 +1,4 @@
-package pl.pollub.inzynierka.domain.entities;
+package pl.pollub.application.domain.entities;
 
 import lombok.Data;
 

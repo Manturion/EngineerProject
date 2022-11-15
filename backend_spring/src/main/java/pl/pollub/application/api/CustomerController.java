@@ -1,13 +1,13 @@
-package pl.pollub.inzynierka.api;
+package pl.pollub.application.api;
 
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import pl.pollub.inzynierka.infrastructure.Customer.CreateCustomerDto;
-import pl.pollub.inzynierka.infrastructure.Customer.CustomerDto;
-import pl.pollub.inzynierka.infrastructure.Customer.CustomerService;
+import pl.pollub.application.infrastructure.Customer.CreateCustomerDto;
+import pl.pollub.application.infrastructure.Customer.CustomerDto;
+import pl.pollub.application.infrastructure.Customer.CustomerService;
 
 import java.util.List;
 import java.util.Optional;

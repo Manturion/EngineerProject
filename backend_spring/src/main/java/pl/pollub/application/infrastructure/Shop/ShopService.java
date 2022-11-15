@@ -1,4 +1,4 @@
-package pl.pollub.inzynierka.infrastructure.Shop;
+package pl.pollub.application.infrastructure.Shop;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

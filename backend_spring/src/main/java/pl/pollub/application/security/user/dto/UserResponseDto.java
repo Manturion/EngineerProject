@@ -1,4 +1,4 @@
-package pl.pollub.inzynierka.security.user.dto;
+package pl.pollub.application.security.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

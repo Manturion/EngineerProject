@@ -1,10 +1,10 @@
-package pl.pollub.inzynierka.domain.adapters;
+package pl.pollub.application.domain.adapters;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.pollub.inzynierka.domain.repositories.ShopRepository;
-import pl.pollub.inzynierka.infrastructure.Shop.ShopDto;
-import pl.pollub.inzynierka.infrastructure.Shop.ShopPort;
+import pl.pollub.application.domain.repositories.ShopRepository;
+import pl.pollub.application.infrastructure.Shop.ShopDto;
+import pl.pollub.application.infrastructure.Shop.ShopPort;
 
 import java.util.List;
 

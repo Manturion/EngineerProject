@@ -1,8 +1,8 @@
-package pl.pollub.inzynierka.security.exception;
+package pl.pollub.application.security.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import pl.pollub.inzynierka.security.user.dto.UserRequestDto;
+import pl.pollub.application.security.user.dto.UserRequestDto;
 
 @ResponseStatus(HttpStatus.CONFLICT)
 public class UserExistsException extends RuntimeException {

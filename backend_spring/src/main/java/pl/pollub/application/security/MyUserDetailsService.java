@@ -1,12 +1,12 @@
-package pl.pollub.inzynierka.security;
+package pl.pollub.application.security;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.pollub.inzynierka.security.user.dto.UserRequestDto;
-import pl.pollub.inzynierka.security.user.service.UserService;
+import pl.pollub.application.security.user.dto.UserRequestDto;
+import pl.pollub.application.security.user.service.UserService;
 
 @Service
 @AllArgsConstructor

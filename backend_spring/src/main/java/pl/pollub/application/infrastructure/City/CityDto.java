@@ -1,4 +1,4 @@
-package pl.pollub.inzynierka.infrastructure.City;
+package pl.pollub.application.infrastructure.City;
 
 import lombok.Getter;
 import lombok.Setter;

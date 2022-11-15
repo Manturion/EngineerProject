@@ -1,4 +1,4 @@
-package pl.pollub.inzynierka.infrastructure.Customer;
+package pl.pollub.application.infrastructure.Customer;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

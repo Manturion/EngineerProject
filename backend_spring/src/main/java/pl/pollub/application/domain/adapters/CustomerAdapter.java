@@ -1,13 +1,13 @@
-package pl.pollub.inzynierka.domain.adapters;
+package pl.pollub.application.domain.adapters;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.pollub.inzynierka.domain.entities.CustomerEntity;
-import pl.pollub.inzynierka.domain.mappers.CustomerMapper;
-import pl.pollub.inzynierka.domain.repositories.CustomerRepository;
-import pl.pollub.inzynierka.infrastructure.Customer.CreateCustomerDto;
-import pl.pollub.inzynierka.infrastructure.Customer.CustomerDto;
-import pl.pollub.inzynierka.infrastructure.Customer.CustomerPort;
+import pl.pollub.application.domain.entities.CustomerEntity;
+import pl.pollub.application.domain.mappers.CustomerMapper;
+import pl.pollub.application.domain.repositories.CustomerRepository;
+import pl.pollub.application.infrastructure.Customer.CreateCustomerDto;
+import pl.pollub.application.infrastructure.Customer.CustomerDto;
+import pl.pollub.application.infrastructure.Customer.CustomerPort;
 
 import java.util.List;
 import java.util.Optional;

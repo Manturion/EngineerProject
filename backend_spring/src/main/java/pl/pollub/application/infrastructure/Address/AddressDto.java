@@ -1,4 +1,4 @@
-package pl.pollub.inzynierka.infrastructure.Address;
+package pl.pollub.application.infrastructure.Address;
 
 import lombok.Getter;
 import lombok.Setter;

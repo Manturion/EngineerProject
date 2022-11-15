@@ -1,4 +1,4 @@
-package pl.pollub.inzynierka.infrastructure.Address;
+package pl.pollub.application.infrastructure.Address;
 
 import java.util.List;
 

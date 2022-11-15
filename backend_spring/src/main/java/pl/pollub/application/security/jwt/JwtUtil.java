@@ -1,11 +1,11 @@
-package pl.pollub.inzynierka.security.jwt;
+package pl.pollub.application.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import pl.pollub.inzynierka.security.MyUserDetails;
+import pl.pollub.application.security.MyUserDetails;
 
 import java.util.Date;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package pl.pollub.inzynierka.security.user.controller;
+package pl.pollub.application.security.user.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -8,12 +8,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
-import pl.pollub.inzynierka.security.MyUserDetails;
-import pl.pollub.inzynierka.security.MyUserDetailsService;
-import pl.pollub.inzynierka.security.jwt.JwtUtil;
-import pl.pollub.inzynierka.security.user.dto.UserRequestDto;
-import pl.pollub.inzynierka.security.user.dto.UserResponseDto;
-import pl.pollub.inzynierka.security.user.service.UserService;
+import pl.pollub.application.security.MyUserDetails;
+import pl.pollub.application.security.MyUserDetailsService;
+import pl.pollub.application.security.jwt.JwtUtil;
+import pl.pollub.application.security.user.dto.UserRequestDto;
+import pl.pollub.application.security.user.dto.UserResponseDto;
+import pl.pollub.application.security.user.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

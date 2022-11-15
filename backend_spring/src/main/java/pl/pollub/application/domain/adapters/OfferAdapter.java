@@ -1,16 +1,16 @@
-package pl.pollub.inzynierka.domain.adapters;
+package pl.pollub.application.domain.adapters;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.pollub.inzynierka.domain.entities.OfferEntity;
-import pl.pollub.inzynierka.domain.mappers.OfferMapper;
-import pl.pollub.inzynierka.domain.repositories.CategoryRepository;
-import pl.pollub.inzynierka.domain.repositories.CustomerRepository;
-import pl.pollub.inzynierka.domain.repositories.OfferRepository;
-import pl.pollub.inzynierka.domain.repositories.StatusRepository;
-import pl.pollub.inzynierka.infrastructure.Offer.CreateOfferDto;
-import pl.pollub.inzynierka.infrastructure.Offer.OfferDto;
-import pl.pollub.inzynierka.infrastructure.Offer.OfferPort;
+import pl.pollub.application.domain.entities.OfferEntity;
+import pl.pollub.application.domain.mappers.OfferMapper;
+import pl.pollub.application.domain.repositories.CategoryRepository;
+import pl.pollub.application.domain.repositories.CustomerRepository;
+import pl.pollub.application.domain.repositories.OfferRepository;
+import pl.pollub.application.domain.repositories.StatusRepository;
+import pl.pollub.application.infrastructure.Offer.CreateOfferDto;
+import pl.pollub.application.infrastructure.Offer.OfferDto;
+import pl.pollub.application.infrastructure.Offer.OfferPort;
 
 import java.util.List;
 import java.util.Optional;

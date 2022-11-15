@@ -1,4 +1,4 @@
-package pl.pollub.inzynierka.infrastructure.Offer.security;
+package pl.pollub.application.infrastructure.Offer.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

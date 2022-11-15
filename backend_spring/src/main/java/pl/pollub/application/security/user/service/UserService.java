@@ -1,13 +1,13 @@
-package pl.pollub.inzynierka.security.user.service;
+package pl.pollub.application.security.user.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.pollub.inzynierka.security.exception.UserExistsException;
-import pl.pollub.inzynierka.security.exception.UserNotFoundException;
-import pl.pollub.inzynierka.security.user.dto.UserRequestDto;
-import pl.pollub.inzynierka.security.user.entity.User;
-import pl.pollub.inzynierka.security.user.repository.UserRepository;
+import pl.pollub.application.security.exception.UserExistsException;
+import pl.pollub.application.security.exception.UserNotFoundException;
+import pl.pollub.application.security.user.dto.UserRequestDto;
+import pl.pollub.application.security.user.entity.User;
+import pl.pollub.application.security.user.repository.UserRepository;
 
 import java.util.Optional;
 

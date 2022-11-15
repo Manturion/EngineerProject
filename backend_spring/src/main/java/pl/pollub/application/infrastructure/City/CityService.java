@@ -1,8 +1,7 @@
-package pl.pollub.inzynierka.infrastructure.City;
+package pl.pollub.application.infrastructure.City;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.pollub.inzynierka.infrastructure.Offer.OfferDto;
 
 import java.util.List;
 

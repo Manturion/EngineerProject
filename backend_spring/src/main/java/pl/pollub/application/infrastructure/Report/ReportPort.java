@@ -1,4 +1,4 @@
-package pl.pollub.inzynierka.infrastructure.Report;
+package pl.pollub.application.infrastructure.Report;
 
 import java.util.List;
 

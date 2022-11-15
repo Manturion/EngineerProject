@@ -1,4 +1,4 @@
-package pl.pollub.inzynierka.domain.entities;
+package pl.pollub.application.domain.entities;
 
 public enum OfferStatus {
     ACTIVE, INACTIVE

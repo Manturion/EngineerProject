@@ -1,4 +1,4 @@
-package pl.pollub.inzynierka.security.exception;
+package pl.pollub.application.security.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

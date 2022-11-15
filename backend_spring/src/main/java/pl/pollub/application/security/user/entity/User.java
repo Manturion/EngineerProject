@@ -1,9 +1,9 @@
-package pl.pollub.inzynierka.security.user.entity;
+package pl.pollub.application.security.user.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.pollub.inzynierka.security.user.dto.UserRequestDto;
+import pl.pollub.application.security.user.dto.UserRequestDto;
 
 import javax.persistence.*;
 import java.util.ArrayList;
