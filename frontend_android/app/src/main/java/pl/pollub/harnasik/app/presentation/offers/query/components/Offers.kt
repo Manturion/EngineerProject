@@ -13,8 +13,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,11 +23,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Locale
+import pl.pollub.harnasik.R
 import pl.pollub.harnasik.app.presentation.offers.query.OffersState
 import pl.pollub.harnasik.app.util.Screen
 
@@ -70,6 +79,8 @@ fun GenerateListOfAllOffersLoaded(
     state: OffersState,
     navController: NavController
 ) {
+
+
     if (state.offers == null) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -84,7 +95,8 @@ fun GenerateListOfAllOffersLoaded(
     } else {
         LazyColumn {
             items(state.offers) {
-                val expanded = remember { mutableStateOf(false) }
+                val expanded = remember { mutableStateOf(15) }
+
 
                 Surface(
                     tonalElevation = 3.dp,
@@ -104,12 +116,12 @@ fun GenerateListOfAllOffersLoaded(
                             .padding(
                                 start = 16.dp,
                                 top = 16.dp,
-                                end = 4.dp,
+                                end = 0.dp,
                                 bottom = 16.dp
                             )
                     ) {
                         Image(
-                            contentScale = ContentScale.Crop,
+                            contentScale = ContentScale.FillWidth,
                             painter = rememberAsyncImagePainter(it.image),
                             contentDescription = it.image,
                             modifier = Modifier
@@ -119,20 +131,71 @@ fun GenerateListOfAllOffersLoaded(
                         Column(
                             modifier = Modifier
                                 .weight(1f)
-                                .padding(4.dp)
+                                .padding(2.dp)
                         ) {
                             Text(
                                 text = it.title,
                                 fontWeight = FontWeight.Bold
                             )
                         }
-                        Column {
-                            OutlinedButton(
-                                onClick = { expanded.value = !expanded.value },
+                        Column(
+                            modifier = Modifier.padding(end = 2.dp)
+                        ) {
+                            IconButton(
+                                onClick = { expanded.value = expanded.value + 1 },
+                                modifier = Modifier
+                                    .width(30.dp)
+                                    .height(30.dp)
                             ) {
-                                Text(if (expanded.value) "+15" else "+${15 - 1}")
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_round_thumb_up_alt_24),
+                                    contentDescription = stringResource(R.string.label_continue_to_courses),
+                                    tint = Color(0xFF01BB09)
+                                )
+                            }
+                            Text(
+                                text = "${expanded.value}",
+                                modifier = Modifier
+                                    .padding(start = 9.dp, top = 2.dp, bottom = 2.dp),
+                                fontWeight = FontWeight.Bold
+
+
+                            )
+
+                            IconButton(
+                                onClick = { expanded.value = expanded.value - 1 },
+                                modifier = Modifier
+                                    .width(30.dp)
+                                    .height(30.dp)
+                            ) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_round_thumb_down_24),
+                                    contentDescription = stringResource(R.string.label_continue_to_courses),
+                                    tint = Color.Red,
+                                )
                             }
                         }
+                    }
+                    val locale = Locale("pl", "PL")
+                    var formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", locale)
+                    val date = LocalDate.parse(it.expireDate.subSequence(0, 10))
+
+                    Row(
+                        Modifier
+                            .padding(
+                                start = 96.dp,
+                                top = 88.dp,
+                                end = 4.dp,
+                                bottom = 0.dp
+                            )
+                    ) {
+                        Text(
+                            text = "Wygasa: " + date.format(formatter),
+                            fontStyle = FontStyle.Italic,
+                            fontWeight = FontWeight.Thin
+
+                        )
+
                     }
                 }
             }

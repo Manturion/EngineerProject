@@ -23,11 +23,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -43,7 +45,7 @@ import pl.pollub.harnasik.ui.theme.HarnasikTheme
 @ExperimentalMaterial3Api
 @Composable
 fun SingleOfferScreen(
-        navController: NavController,
+    navController: NavController,
 ) {
 
     val viewModel = hiltViewModel<SingleOfferViewModel>()
@@ -52,154 +54,172 @@ fun SingleOfferScreen(
     HarnasikTheme {
 
         androidx.compose.material3.Scaffold(
-                topBar = {
-                    pl.pollub.harnasik.app.presentation.offers.AppBar(
-                            navController
-                    )
-                }
+            topBar = {
+                pl.pollub.harnasik.app.presentation.offers.AppBar(
+                    navController
+                )
+            }
         ) {
 
             ModalNavigationDrawer(
-                    modifier = Modifier
-                            .background(MaterialTheme.colorScheme.surface)
-                            .padding(top = 64.dp),
-                    drawerState = drawerState,
-                    drawerContent = {
-                        DrawerContent(navController = navController)
-                    }, content = {
-                Column(
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.surface)
+                    .padding(top = 64.dp),
+                drawerState = drawerState,
+                drawerContent = {
+                    DrawerContent(navController = navController)
+                }, content = {
+                    Column(
                         modifier = Modifier
-                                .padding(8.dp)
-                                .fillMaxSize()
-                                .background(MaterialTheme.colorScheme.surface)
-                        ,
+                            .padding(8.dp)
+                            .fillMaxSize()
+                            .background(MaterialTheme.colorScheme.surface),
                         horizontalAlignment = CenterHorizontally
-                ) {
-                    Row(
-                            modifier = Modifier.fillMaxWidth()
                     ) {
-                        Icon(
+                        Row(
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Icon(
                                 painter = painterResource(id = R.drawable.ic_round_person_24),
                                 contentDescription = stringResource(R.string.label_continue_to_courses),
                                 tint = MaterialTheme.colorScheme.primary,
-                        )
-                        Text(
-                                text = "username", style = MaterialTheme.typography.titleMedium
-                        )
-                        Button(
+                                modifier = Modifier
+                                    .height(30.dp)
+                                    .width(30.dp)
+                            )
+                            Text(
+                                text = "Autor: ",
+                                style = MaterialTheme.typography.titleMedium,
+                                modifier = Modifier
+                                    .padding(start = 2.dp, top = 7.dp)
+                            )
+                            Text(
+                                text = "Tommy123",
+                                style = MaterialTheme.typography.titleMedium,
+                                fontStyle = FontStyle.Italic,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier
+                                    .padding(top = 7.dp)
+
+                            )
+                            Button(
                                 onClick = { /*TODO*/ },
-                                modifier = Modifier.padding(start = 205.dp),
+                                modifier = Modifier
+                                    .padding(start = 150.dp, end = 0.dp)
+                                    .height(35.dp),
+
 
                                 colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.error),
-                        ) {
-                            Text(
+                            ) {
+                                Text(
                                     text = "Zgłoś",
                                     color = MaterialTheme.colorScheme.onError
-                            )
-                        }
+                                )
+                            }
 
-                    }
-                    Row(
+                        }
+                        Row(
                             modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(
+                        ) {
+                            Text(
                                 text = "${state.value.offer?.title}",
                                 modifier = Modifier.padding(12.dp),
                                 style = MaterialTheme.typography.titleLarge,
                                 fontWeight = FontWeight.Bold
-                        )
+                            )
 
-                        Button(
+                            Button(
                                 onClick = { /*TODO*/ }, Modifier.padding(start = 204.dp)
 
 
-                        ) {
-                            Icon(
+                            ) {
+                                Icon(
                                     painter = painterResource(id = R.drawable.ic_baseline_add_24),
                                     contentDescription = stringResource(R.string.label_continue_to_courses),
                                     tint = MaterialTheme.colorScheme.primary,
-                            )
+                                )
+                            }
                         }
-                    }
 
-                    Row(
+                        Row(
                             modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(top = 16.dp)
-                                    .align(CenterHorizontally)
+                                .fillMaxWidth()
+                                .padding(top = 16.dp)
+                                .align(CenterHorizontally)
 
-                    ) {
-                        Image(
+                        ) {
+                            Image(
                                 contentScale = ContentScale.FillWidth,
                                 painter = rememberAsyncImagePainter("${state.value.offer?.image}"),
                                 contentDescription = state.value.offer?.image,
                                 modifier = Modifier
-                                        .height(200.dp)
-                                        .width(300.dp)
-                        )
-                    }
+                                    .height(200.dp)
+                                    .width(300.dp)
+                            )
+                        }
 
-                    Row(
+                        Row(
                             modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(top = 16.dp)
-                                    .height(176.dp)
-                    ) {
-                        Text(
+                                .fillMaxWidth()
+                                .padding(top = 16.dp)
+                                .height(176.dp)
+                        ) {
+                            Text(
                                 modifier = Modifier.padding(4.dp),
                                 text = "${state.value.offer?.description} "
-                        )
-                    }
+                            )
+                        }
 
-                    Button(
+                        Button(
                             onClick = {
                                 navController.navigate(
-                                        Screen.MapDisplay.passArgs(
-                                                state.value.offer?.title,
-                                                state.value.offer?.latitude.toString(),
-                                                state.value.offer?.longitude.toString(),
-                                        )
+                                    Screen.MapDisplay.passArgs(
+                                        state.value.offer?.title,
+                                        state.value.offer?.latitude.toString(),
+                                        state.value.offer?.longitude.toString(),
+                                    )
                                 )
                             },
                             modifier = Modifier.padding(start = 5.dp),
-                            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.tertiary),
-                    ) {
-                        Icon(
+                            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
+                        ) {
+                            Icon(
                                 painter = painterResource(id = R.drawable.ic_round_map_24),
                                 contentDescription = stringResource(R.string.label_continue_to_courses),
-                                tint = MaterialTheme.colorScheme.onTertiary,
-                        )
-                        Text(
+                                tint = MaterialTheme.colorScheme.onPrimary,
+                            )
+                            Text(
                                 text = "  Pokaż na mapie",
                                 fontFamily = FontFamily(Font(R.font.opensans)),
-                                color = MaterialTheme.colorScheme.onTertiary
+                                color = MaterialTheme.colorScheme.onPrimary
 
-                        )
-                    }
+                            )
+                        }
 
 
 
-                    Row(
-                            modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
-                    ) {
-                        IconButton(onClick = { /*TODO*/ }) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            IconButton(onClick = { /*TODO*/ }) {
 
-                            Icon(
+                                Icon(
                                     painter = painterResource(id = R.drawable.ic_round_thumb_up_24),
                                     contentDescription = stringResource(R.string.label_continue_to_courses),
-                                    tint = MaterialTheme.colorScheme.primary,
-                            )
-                        }
-                        IconButton(onClick = { /*TODO*/ }) {
-                            Icon(
+                                    tint = Color(0xFF01BB09),
+                                )
+                            }
+                            IconButton(onClick = { /*TODO*/ }) {
+                                Icon(
                                     painter = painterResource(id = R.drawable.ic_round_thumb_down_24),
                                     contentDescription = stringResource(R.string.label_continue_to_courses),
-                                    tint = MaterialTheme.colorScheme.primary,
-                            )
+                                    tint = Color.Red,
+                                )
+                            }
                         }
                     }
-                }
-            })
+                })
         }
     }
 }

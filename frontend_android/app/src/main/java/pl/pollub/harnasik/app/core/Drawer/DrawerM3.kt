@@ -50,7 +50,7 @@ fun DrawerContent(navController: NavController) {
 
         ) {
             Text(
-                text = "Harnasik", fontSize = 36.sp, fontWeight = FontWeight.Bold
+                text = "PromoApp", fontSize = 36.sp, fontWeight = FontWeight.Bold
             )
 //            Icon(painter = painterResource(id = R.drawable.), contentDescription = "LOGO")
 

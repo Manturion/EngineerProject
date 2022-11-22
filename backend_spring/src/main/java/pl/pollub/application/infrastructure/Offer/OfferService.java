@@ -35,5 +35,4 @@ public class OfferService {
     public Optional<Long> editOffer(CreateOfferDto createOfferDto, Long id){
         return offerPort.editOffer(id, createOfferDto);
     }
-
 }

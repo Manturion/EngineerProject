@@ -27,6 +27,4 @@ public abstract class OfferDtoTemplate {
     protected Date expireDate;
     protected boolean isAvailable;
     private Long categoryId;
-
-
 }

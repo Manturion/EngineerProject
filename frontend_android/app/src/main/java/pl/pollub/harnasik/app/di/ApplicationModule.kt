@@ -51,7 +51,6 @@ class ApplicationModule {
         return AuthRepositoryImpl(api, prefs)
     }
 
-
     @Provides
     @Singleton
     fun provideHttpClient(): HttpClient = HttpClient(Android) {

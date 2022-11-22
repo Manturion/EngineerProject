@@ -51,7 +51,7 @@ fun MapDisplayScreen(
             GoogleMap(
                     modifier = Modifier
                             .fillMaxSize()
-                            .padding(top = 64.dp),
+                            .padding(top = 64.dp, bottom = 0.dp),
                     cameraPositionState = cameraPositionState
             ) {
                 Marker(
