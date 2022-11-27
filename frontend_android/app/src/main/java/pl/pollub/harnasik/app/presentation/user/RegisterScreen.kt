@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import java.util.regex.Pattern
 import pl.pollub.harnasik.R
 import pl.pollub.harnasik.app.auth.AuthResult
 import pl.pollub.harnasik.app.core.Drawer.DrawerContent
@@ -68,29 +69,6 @@ fun SignUp(
 ) {
     val state = viewModel.state
     val context = LocalContext.current
-
-    LaunchedEffect(viewModel, context) {
-        viewModel.authResults.collect { result ->
-            when (result) {
-                is AuthResult.Authorized -> {
-                    navController.navigate(Screen.AllOffersScreen.route)
-                }
-                is AuthResult.Unauthorized -> {
-                    Toast.makeText(
-                        context, "Niepomyślnie", Toast.LENGTH_LONG
-                    ).show()
-                }
-                is AuthResult.UnknownError -> {
-                    Toast.makeText(
-                        context, "Wystąpił błąd", Toast.LENGTH_LONG
-                    ).show()
-                }
-            }
-        }
-    }
-
-
-//    val context = LocalContext.current.applicationContext
 
     var username by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
@@ -123,11 +101,19 @@ fun SignUp(
     }
 
     fun validateData(username: String, password: String, confirmPassword: String): Boolean {
-//        val passwordRegex = "xxx"
+
         validateUsername = Patterns.EMAIL_ADDRESS.matcher(username).matches()
 
-        validatePassword = true // TODO PASSWORD VALIDATION
-//        validatePassword = passwordRegex.matches(password.)
+        validatePassword = Pattern.compile("^" +
+                "(?=.*[0-9])" +         //at least 1 digit
+                "(?=.*[a-z])" +         //at least 1 lower case letter
+                "(?=.*[A-Z])" +         //at least 1 upper case letter
+                "(?=.*[a-zA-Z])" +      //any letter
+                "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                "(?=\\S+$)" +           //no white spaces
+                ".{3,}" +               //at least x characters
+                "$").matcher(password).matches()
+
         validatePasswordEqual = password == confirmPassword
 
         return validateUsername && validatePassword && validatePasswordEqual
@@ -221,16 +207,17 @@ fun SignUp(
                     )
                     Spacer(modifier = Modifier.height(20.dp))
                     Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .align(CenterHorizontally)
-                            .padding(start = 20.dp, end = 20.dp)
                     ) {
                         Text(
-                            text = "Rejestrując się potwierdzasz,że jesteś osobą pełnoletnią oraz akceptujesz regulamin",
+                            text = "Rejestrując się potwierdzasz, że:\n" +
+                                    "- jesteś osobą pełnoletnią\n" +
+                                    "- akceptujesz regulamin",
                             textAlign = TextAlign.Center,
                             color = MaterialTheme.colorScheme.primary,
-                            fontSize = 12.sp
+                            fontSize = 13.sp,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(60.dp)
                         )
                     }
 
