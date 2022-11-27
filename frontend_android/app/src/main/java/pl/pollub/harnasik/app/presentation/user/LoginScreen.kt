@@ -62,7 +62,7 @@ fun LoginPage(
     val drawerState = rememberDrawerState(DrawerValue.Closed)
 
     val context = LocalContext.current
-    LaunchedEffect(viewModel, context) {
+/*    LaunchedEffect(viewModel, context) {
         viewModel.authResults.collect { result ->
             when (result) {
                 is AuthResult.Authorized -> {
@@ -84,7 +84,7 @@ fun LoginPage(
                 }
             }
         }
-    }
+    } */
     Scaffold(topBar = {
         AppBar(
             navController
