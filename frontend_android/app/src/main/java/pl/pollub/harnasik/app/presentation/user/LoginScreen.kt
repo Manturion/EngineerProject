@@ -1,7 +1,6 @@
 package pl.pollub.harnasik.app.presentation.user.login
 
 import android.annotation.SuppressLint
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,16 +25,21 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
@@ -44,47 +48,65 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import pl.pollub.harnasik.R
-import pl.pollub.harnasik.app.auth.AuthResult
 import pl.pollub.harnasik.app.core.Drawer.DrawerContent
 import pl.pollub.harnasik.app.presentation.offers.AppBar
+import pl.pollub.harnasik.app.presentation.offers.command.components.OutlinedTextFieldRegisterValidation
 import pl.pollub.harnasik.app.presentation.user.AuthUiEvent
 import pl.pollub.harnasik.app.presentation.user.AuthViewModel
 import pl.pollub.harnasik.app.util.Screen
 
 var fontFamily: FontFamily = FontFamily(Font(R.font.opensans))
 
+@Composable
+fun ShowTextUnderField(text: String, color: Color) {
+    Text(
+        text = text,
+        color = color,
+        style = MaterialTheme.typography.labelSmall,
+        fontSize = 12.sp,
+        fontFamily = pl.pollub.harnasik.app.presentation.user.fontFamily
+    )
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun LoginPage(
     navController: NavController, viewModel: AuthViewModel = hiltViewModel()
-) {
-    val drawerState = rememberDrawerState(DrawerValue.Closed)
-
+) { 
     val context = LocalContext.current
-/*    LaunchedEffect(viewModel, context) {
-        viewModel.authResults.collect { result ->
-            when (result) {
-                is AuthResult.Authorized -> {
-                    Toast.makeText(
-                        context, "Pomyślnie zalogowano", Toast.LENGTH_LONG
-                    ).show()
 
-                    navController.navigate(Screen.AllOffersScreen.route)
-                }
-                is AuthResult.Unauthorized -> {
-                    Toast.makeText(
-                        context, "Niepomyślne logowanie", Toast.LENGTH_LONG
-                    ).show()
-                }
-                is AuthResult.UnknownError -> {
-                    Toast.makeText(
-                        context, "Wystąpił nieznany błąd", Toast.LENGTH_LONG
-                    ).show()
-                }
-            }
+    var username by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
+
+    var validateUsername by rememberSaveable { mutableStateOf(true) }
+    var validatePassword by rememberSaveable { mutableStateOf(true) }
+
+    var validateUsernameIsBlank by rememberSaveable { mutableStateOf(true) }
+    var validatePasswordIsBlank by rememberSaveable { mutableStateOf(true) }
+
+    val validateUsernameErrorMessage = "Wprowadź prawidłowy email"
+    val validatePasswordErrorMessage = "Wprowadź prawidłowe hasło"
+    val validateBlankFieldErrorMessage = "To pole nie może być puste"
+
+    fun validateIfFieldsAreBlank(
+        username: String, password: String
+    ): Boolean {
+        validateUsernameIsBlank = username.isNotBlank()
+        validatePasswordIsBlank = password.isNotBlank()
+
+        return validateUsernameIsBlank && validatePasswordIsBlank
+    }
+
+    fun login(
+        username: String, password: String
+    ) {
+        if (!validateIfFieldsAreBlank(username, password)) {
+            viewModel.onEvent(AuthUiEvent.SignUp)
         }
-    } */
+    }
+
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
     Scaffold(topBar = {
         AppBar(
             navController
@@ -101,65 +123,54 @@ fun LoginPage(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-
-                    val username = remember { mutableStateOf(TextFieldValue()) }
-                    val password = remember { mutableStateOf(TextFieldValue()) }
-
                     Text(
                         text = "Witaj ponownie!",
                         style = TextStyle(fontSize = 50.sp, fontFamily = FontFamily.Cursive)
                     )
                     Spacer(modifier = Modifier.height(60.dp))
-                    TextField(colors = TextFieldDefaults.textFieldColors(
-                        cursorColor = MaterialTheme.colorScheme.primary,
-                        containerColor = MaterialTheme.colorScheme.onPrimary,
-                        focusedLabelColor = MaterialTheme.colorScheme.primary
-                    ),
-                        label = {
-                            Text(
-                                text = "Nazwa użytkownika",
-                                fontFamily = fontFamily,
-                                color = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.padding(bottom = 15.dp),
-                                fontSize = 16.sp
-                            )
-                        },
-                        textStyle = TextStyle(fontSize = 14.sp),
-                        value = username.value,
-                        onValueChange = {
-                            username.value = it
-                            viewModel.onEvent(AuthUiEvent.SignInUsernameChanged(username.value.text))
-                        })
 
+                    OutlinedTextFieldRegisterValidation(
+                        value = username,
+                        onValueChange = {
+                            username = it
+                            viewModel.onEvent(AuthUiEvent.SignUpUsernameChanged(username))
+                        },
+                        label = "Email",
+                        leadingIconImageVector = painterResource(id = R.drawable.ic_round_mail_24),
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
+                        ),
+                        showBlankError = !validateUsernameIsBlank,
+                        blankErrorMessage = validateBlankFieldErrorMessage,
+                        showDataError = !validateUsername,
+                        dataErrorMessage = validateUsernameErrorMessage,
+                        hintMessage = ""
+                    )
                     Spacer(modifier = Modifier.height(20.dp))
-                    TextField(colors = TextFieldDefaults.textFieldColors(
-                        cursorColor = MaterialTheme.colorScheme.primary,
-                        containerColor = MaterialTheme.colorScheme.onPrimary,
-                        focusedLabelColor = MaterialTheme.colorScheme.primary
-                    ),
-                        label = {
-                            Text(
-                                text = "Hasło",
-                                fontFamily = fontFamily,
-                                color = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.padding(bottom = 15.dp),
-                                fontSize = 16.sp
-                            )
-                        },
-                        textStyle = TextStyle(fontSize = 14.sp),
-                        value = password.value,
-                        visualTransformation = PasswordVisualTransformation(),
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                    OutlinedTextFieldRegisterValidation(
+                        value = password,
                         onValueChange = {
-                            password.value = it
-                            viewModel.onEvent(AuthUiEvent.SignInPasswordChanged(password.value.text))
-                        })
-
-                    Spacer(modifier = Modifier.height(40.dp))
+                            password = it
+                            viewModel.onEvent(AuthUiEvent.SignUpPasswordChanged(password))
+                        },
+                        label = "Hasło",
+                        leadingIconImageVector = painterResource(id = R.drawable.ic_round_password_24),
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
+                        ),
+                        showBlankError = !validatePasswordIsBlank,
+                        blankErrorMessage = validateBlankFieldErrorMessage,
+                        showDataError = !validatePassword,
+                        dataErrorMessage = validatePasswordErrorMessage,
+                        isPasswordField = true,
+                        hintMessage = ""
+                    )
+                    Spacer(modifier = Modifier.height(20.dp))
                     Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
                         Button(
                             onClick = {
-                                viewModel.onEvent(AuthUiEvent.SignIn)
+                                login(username, password)
+                                //viewModel.onEvent(AuthUiEvent.SignIn)
                             },
                             shape = RoundedCornerShape(50.dp),
                             modifier = Modifier
@@ -174,7 +185,7 @@ fun LoginPage(
                     Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
                         Button(
                             onClick = {
-                                navController.navigate(Screen.SignUp.route)
+                                //navController.navigate(Screen.SignUp.route)
                             },
                             colors = ButtonDefaults.buttonColors(
                                 contentColor = MaterialTheme.colorScheme.onPrimary,
@@ -192,7 +203,7 @@ fun LoginPage(
                     Spacer(modifier = Modifier.height(60.dp))
                     ClickableText(
                         text = AnnotatedString("Nie pamiętam hasła"), onClick = {
-                            navController.navigate(Screen.ForgotPassword.route)
+                           // navController.navigate(Screen.ForgotPassword.route)
                         }, style = TextStyle(
                             fontSize = 16.sp, fontFamily = fontFamily
                         )
