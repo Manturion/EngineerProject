@@ -27,6 +27,8 @@ import pl.pollub.harnasik.app.presentation.user.SignUp
 import pl.pollub.harnasik.app.presentation.user.forgotPassword.ForgotPassword
 import pl.pollub.harnasik.app.presentation.user.login.Login
 import pl.pollub.harnasik.app.presentation.user.login.LoginPage
+import pl.pollub.harnasik.app.presentation.user.UserPanel
+import pl.pollub.harnasik.app.presentation.user.ModeratorPanel
 import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_LAT
 import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_LONG
 import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_TITLE
@@ -100,11 +102,17 @@ class MainActivity : ComponentActivity() {
                             composable(Screen.ForgotPassword.route) { navBackStack ->
                                 ForgotPassword(navController = navController)
                             }
+
+                            composable(Screen.UserPanelScreen.route) { navBackStack ->
+                                UserPanel(navController = navController)
+                            }
+
+                            composable(Screen.ModeratorPanelScreen.route) { navBackStack ->
+                                ModeratorPanel(navController = navController)
+                            }
                         }
                     }
                 }, bottomBar = { BottomBar(navController) })
-
-
             }
         }
     }

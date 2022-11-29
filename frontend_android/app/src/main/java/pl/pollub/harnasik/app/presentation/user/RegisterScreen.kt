@@ -2,7 +2,6 @@ package pl.pollub.harnasik.app.presentation.user
 
 import android.annotation.SuppressLint
 import android.util.Patterns
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,7 +24,6 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -42,11 +40,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import java.util.regex.Pattern
 import pl.pollub.harnasik.R
-import pl.pollub.harnasik.app.auth.AuthResult
 import pl.pollub.harnasik.app.core.Drawer.DrawerContent
 import pl.pollub.harnasik.app.presentation.offers.AppBar
-import pl.pollub.harnasik.app.presentation.offers.command.components.OutlinedTextFieldRegisterValidation
-import pl.pollub.harnasik.app.util.Screen
+import pl.pollub.harnasik.app.presentation.offers.command.components.CustomOutlinedTextField
 
 var fontFamily: FontFamily = FontFamily(Font(R.font.opensans))
 
@@ -153,7 +149,7 @@ fun SignUp(
                     )
                     Spacer(modifier = Modifier.height(50.dp))
 
-                    OutlinedTextFieldRegisterValidation(
+                    CustomOutlinedTextField(
                         value = username,
                         onValueChange = {
                             username = it
@@ -171,7 +167,7 @@ fun SignUp(
                         hintMessage = hintMessageUsername
                     )
                     Spacer(modifier = Modifier.height(20.dp))
-                    OutlinedTextFieldRegisterValidation(
+                    CustomOutlinedTextField(
                         value = password,
                         onValueChange = {
                             password = it
@@ -190,7 +186,7 @@ fun SignUp(
                         hintMessage = hintMessagePassword
                     )
                     Spacer(modifier = Modifier.height(20.dp))
-                    OutlinedTextFieldRegisterValidation(
+                    CustomOutlinedTextField(
                         value = confirmPassword,
                         onValueChange = { confirmPassword = it },
                         label = "Powtórz hasło",

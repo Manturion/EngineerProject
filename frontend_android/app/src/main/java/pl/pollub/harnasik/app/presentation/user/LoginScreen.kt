@@ -21,13 +21,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -41,8 +38,6 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -50,7 +45,7 @@ import androidx.navigation.NavController
 import pl.pollub.harnasik.R
 import pl.pollub.harnasik.app.core.Drawer.DrawerContent
 import pl.pollub.harnasik.app.presentation.offers.AppBar
-import pl.pollub.harnasik.app.presentation.offers.command.components.OutlinedTextFieldRegisterValidation
+import pl.pollub.harnasik.app.presentation.offers.command.components.CustomOutlinedTextField
 import pl.pollub.harnasik.app.presentation.user.AuthUiEvent
 import pl.pollub.harnasik.app.presentation.user.AuthViewModel
 import pl.pollub.harnasik.app.util.Screen
@@ -129,7 +124,7 @@ fun LoginPage(
                     )
                     Spacer(modifier = Modifier.height(60.dp))
 
-                    OutlinedTextFieldRegisterValidation(
+                    CustomOutlinedTextField(
                         value = username,
                         onValueChange = {
                             username = it
@@ -147,14 +142,15 @@ fun LoginPage(
                         hintMessage = ""
                     )
                     Spacer(modifier = Modifier.height(20.dp))
-                    OutlinedTextFieldRegisterValidation(
+                    CustomOutlinedTextField(
                         value = password,
                         onValueChange = {
                             password = it
                             viewModel.onEvent(AuthUiEvent.SignUpPasswordChanged(password))
                         },
                         label = "Hasło",
-                        leadingIconImageVector = painterResource(id = R.drawable.ic_round_password_24),
+                        leadingIconImageVector = painterResource(
+                            id = R.drawable.ic_round_password_24),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
                         ),
@@ -185,7 +181,7 @@ fun LoginPage(
                     Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
                         Button(
                             onClick = {
-                                //navController.navigate(Screen.SignUp.route)
+                                navController.navigate(Screen.SignUp.route)
                             },
                             colors = ButtonDefaults.buttonColors(
                                 contentColor = MaterialTheme.colorScheme.onPrimary,
@@ -203,7 +199,7 @@ fun LoginPage(
                     Spacer(modifier = Modifier.height(60.dp))
                     ClickableText(
                         text = AnnotatedString("Nie pamiętam hasła"), onClick = {
-                           // navController.navigate(Screen.ForgotPassword.route)
+                           navController.navigate(Screen.ForgotPassword.route)
                         }, style = TextStyle(
                             fontSize = 16.sp, fontFamily = fontFamily
                         )

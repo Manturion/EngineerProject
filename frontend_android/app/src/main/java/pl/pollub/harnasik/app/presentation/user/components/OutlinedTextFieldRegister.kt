@@ -26,7 +26,7 @@ import pl.pollub.harnasik.app.presentation.user.ShowTextUnderField
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OutlinedTextFieldRegisterValidation(
+fun CustomOutlinedTextField(
     value: String,
     onValueChange: (String) -> Unit,
     label: String,
