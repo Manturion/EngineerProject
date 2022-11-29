@@ -1,8 +1,11 @@
 package pl.pollub.harnasik.app.core.Drawer
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -14,6 +17,7 @@ import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -97,26 +101,51 @@ fun DrawerContent(navController: NavController) {
             )
         }
 
-
-        if (AuthUser == null) {
-            Button(modifier = Modifier
-                .fillMaxWidth()
-                .padding(85.dp), onClick = {
-                navController.navigate(Screen.Login.route)
-            }) {
-                Text(text = "Zaloguj się")
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
+                Button(modifier = Modifier
+                    .fillMaxWidth(),
+                    onClick = {
+                        navController.navigate(Screen.UserPanelScreen.route)
+                    }) {
+                    Text(text = "Panel użytkownika")
+                }
             }
-        } else {
-            Button(modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 90.dp, top = 40.dp, end = 90.dp), onClick = {
-                AuthUser = null
-                navController.navigate(Screen.Login.route)
-            }) {
-                Text(text = "Wyloguj się")
-
+            Spacer(modifier = Modifier.height(20.dp))
+            Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
+                Button(modifier = Modifier
+                    .fillMaxWidth(),
+                    onClick = {
+                        navController.navigate(Screen.ModeratorPanelScreen.route)
+                    }) {
+                    Text(text = "Panel moderatora")
+                }
+            }
+            Spacer(modifier = Modifier.height(20.dp))
+            Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
+                if (AuthUser == null) {
+                    Button(modifier = Modifier
+                        .fillMaxWidth(),
+                        onClick = {
+                        navController.navigate(Screen.Login.route)
+                    }) {
+                        Text(text = "Zaloguj się")
+                    }
+                } else {
+                    Button(modifier = Modifier
+                        .fillMaxWidth(),
+                        onClick = {
+                        AuthUser = null
+                        navController.navigate(Screen.Login.route)
+                    }) {
+                        Text(text = "Wyloguj się")
+                    }
+                }
             }
         }
     }
-
 }
