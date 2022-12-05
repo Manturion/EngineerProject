@@ -30,103 +30,82 @@ import pl.pollub.harnasik.app.util.Screen
 fun BottomBar(navController: NavController) {
 
     val customModifier = Modifier
-            .padding(start = 8.dp, end = 4.dp)
-            .width(64.dp)
-            .height(64.dp)
+        .padding(start = 10.dp, end = 10.dp)
+        .width(70.dp)
+        .height(70.dp)
 
     BottomAppBar(
-            modifier = Modifier.height(58.dp),
-            containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary,
-            actions = {
-                IconButton(
-                        onClick = {
-                                  navController.navigate(Screen.AllOffersScreen.route)
-                                  },
-                        modifier = customModifier
-                ) {
-                    Icon(
-                            painter = painterResource(id = R.drawable.ic_round_home_24),
-                            contentDescription = "Strona_glowna",
-                            tint = MaterialTheme.colorScheme.onPrimary,
-                    )
-                }
-                IconButton(
-                        onClick = { /* doSomething() */ },
-                        modifier = customModifier
-                ) {
-
-                    BadgedBox(
-                            badge = {
-                                Badge {
-                                    val badgeNumber = "8"
-                                    Text(
-                                            badgeNumber,
-                                            modifier = Modifier.semantics {
-                                                contentDescription = "$badgeNumber new notifications"
-                                            }
-                                    )
-                                }
-                            }) {
-                        Icon(
-                                painter = painterResource(id = R.drawable.ic_round_notifications_24),
-                                contentDescription = "powiadomienie",
-                                tint = MaterialTheme.colorScheme.onPrimary,
-                        )
-                    }
-
-
-                }
-                IconButton(
-                        onClick = { /* doSomething() */ },
-                        modifier = customModifier
-                ) {
-                    Icon(
-                            painter = painterResource(id = R.drawable.ic_round_search_24),
-                            contentDescription = "Szukaj",
-                            tint = MaterialTheme.colorScheme.onPrimary,
-                    )
-                }
-                IconButton(
-                        onClick = { /* doSomething() */ },
-                        modifier = customModifier
+        modifier = Modifier.height(58.dp),
+        containerColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.onPrimary,
+        actions = {
+            IconButton(
+                onClick = {
+                    navController.navigate(Screen.AllOffersScreen.route)
+                },
+                modifier = Modifier
+                    .padding(start = 40.dp, end = 10.dp)
+                    .width(70.dp)
+                    .height(70.dp)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_round_home_24),
+                    contentDescription = "Strona_glowna",
+                    tint = MaterialTheme.colorScheme.onPrimary,
                 )
-                {
-                    BadgedBox(
-                            badge = {
-                                Badge {
-                                    val badgeNumber = "1"
-                                    Text(
-                                            badgeNumber,
-                                            modifier = Modifier.semantics {
-                                                contentDescription = "$badgeNumber nowa waid"
-                                            }
-                                    )
+            }
+            IconButton(
+                onClick = { /* doSomething() */ },
+                modifier = customModifier
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_round_search_24),
+                    contentDescription = "Szukaj",
+                    tint = MaterialTheme.colorScheme.onPrimary,
+                )
+            }
+            IconButton(
+                onClick = { /* doSomething() */ },
+                modifier = Modifier
+                    .padding(start = 10.dp, end = 10.dp)
+                    .width(70.dp)
+                    .height(70.dp)
+            ) {
+                BadgedBox(
+                    badge = {
+                        Badge {
+                            val badgeNumber = "0"
+                            Text(
+                                badgeNumber,
+                                modifier = Modifier.semantics {
+                                    contentDescription = "$badgeNumber new notifications"
                                 }
-                            }
-                    ) {
-
-                        Icon(
-                                painter = painterResource(id = R.drawable.ic_round_email_24),
-                                contentDescription = "wiadomosci",
-                                tint = MaterialTheme.colorScheme.onPrimary,
-                        )
-                    }
-                }
-            },
-            floatingActionButton = {
-                FloatingActionButton(
-                        onClick = { /* do something */ },
-                        containerColor = MaterialTheme.colorScheme.onPrimary,
-                        elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation(),
-                        modifier = Modifier.padding(bottom = 8.dp)
-                ) {
+                            )
+                        }
+                    }) {
                     Icon(
-                            painter = painterResource(id = R.drawable.ic_round_person_24),
-                            contentDescription = stringResource(R.string.label_continue_to_courses),
-                            tint = MaterialTheme.colorScheme.primary,
+                        painter = painterResource(id = R.drawable.ic_round_notifications_24),
+                        contentDescription = "powiadomienie",
+                        tint = MaterialTheme.colorScheme.onPrimary,
                     )
                 }
             }
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    navController.navigate(Screen.UserPanelScreen.route)
+                },
+                containerColor = MaterialTheme.colorScheme.onPrimary,
+                elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation(),
+                modifier = Modifier.padding(bottom = 8.dp)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_round_person_24),
+                    contentDescription = stringResource(R.string.label_continue_to_courses),
+                    tint = MaterialTheme.colorScheme.primary,
+                )
+            }
+        }
     )
 }
