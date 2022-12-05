@@ -1,5 +1,6 @@
 package pl.pollub.harnasik.app.core.Drawer
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
@@ -74,32 +76,103 @@ fun DrawerContent(navController: NavController) {
             }
         }
 
-
         Spacer(Modifier.height(60.dp))
 
-        itemsList.forEach {
-            NavigationDrawerItem(
-                modifier = Modifier.padding(
-                    start = 24.dp,
-                    end = 24.dp,
-                    top = 8.dp
-                ), icon = {
-                    Icon(
-                        painter = painterResource(id = it.iconPath),
-                        contentDescription = stringResource(R.string.label_continue_to_courses),
-                        tint = MaterialTheme.colorScheme.onTertiaryContainer,
+        NavigationDrawerItem(
+            modifier = Modifier.padding(
+                start = 24.dp,
+                end = 24.dp,
+                top = 8.dp
+            ), icon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_round_sell_24),
+                    contentDescription = stringResource(R.string.label_continue_to_courses),
+                    tint = MaterialTheme.colorScheme.onTertiaryContainer,
 
-                        )
-                }, label = {
-                    Text(
-                        text = it.title,
-                        modifier = Modifier.weight(1f),
-                        fontFamily = FontFamily(Font(R.font.opensans)),
-                        fontSize = 18.sp
                     )
-                }, onClick = {}, selected = false
-            )
-        }
+            }, label = {
+                Text(
+                    text = "Moje oferty",
+                    modifier = Modifier.weight(1f),
+                    fontFamily = FontFamily(Font(R.font.opensans)),
+                    fontSize = 18.sp
+                )
+            }, onClick = {
+                navController.navigate(Screen.AllOffersScreen.route)
+            }, selected = false
+        )
+
+        NavigationDrawerItem(
+            modifier = Modifier.padding(
+                start = 24.dp,
+                end = 24.dp,
+                top = 8.dp
+            ), icon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_baseline_help_24),
+                    contentDescription = stringResource(R.string.label_continue_to_courses),
+                    tint = MaterialTheme.colorScheme.onTertiaryContainer,
+
+                    )
+            }, label = {
+                Text(
+                    text = "Pomoc",
+                    modifier = Modifier.weight(1f),
+                    fontFamily = FontFamily(Font(R.font.opensans)),
+                    fontSize = 18.sp
+                )
+            }, onClick = {
+                navController.navigate(Screen.HelpScreen.route)
+            }, selected = false
+        )
+
+        NavigationDrawerItem(
+            modifier = Modifier.padding(
+                start = 24.dp,
+                end = 24.dp,
+                top = 8.dp
+            ), icon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_baseline_people_24),
+                    contentDescription = stringResource(R.string.label_continue_to_courses),
+                    tint = MaterialTheme.colorScheme.onTertiaryContainer,
+                    )
+            }, label = {
+                Text(
+                    text = "O nas",
+                    modifier = Modifier.weight(1f),
+                    fontFamily = FontFamily(Font(R.font.opensans)),
+                    fontSize = 18.sp
+                )
+            }, onClick = {
+                navController.navigate(Screen.AboutUsScreen.route)
+            }, selected = false
+        )
+
+        NavigationDrawerItem(
+            modifier = Modifier.padding(
+                start = 24.dp,
+                end = 24.dp,
+                top = 8.dp
+            ), icon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_baseline_chat_bubble_24),
+                    contentDescription = stringResource(R.string.label_continue_to_courses),
+                    tint = MaterialTheme.colorScheme.onTertiaryContainer,
+
+                    )
+            }, label = {
+                Text(
+                    text = "Kontakt",
+                    modifier = Modifier.weight(1f),
+                    fontFamily = FontFamily(Font(R.font.opensans)),
+                    fontSize = 18.sp
+                )
+            }, onClick = {
+                navController.navigate(Screen.ContactScreen.route)
+            }, selected = false
+        )
+
 
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -131,17 +204,17 @@ fun DrawerContent(navController: NavController) {
                     Button(modifier = Modifier
                         .fillMaxWidth(),
                         onClick = {
-                        navController.navigate(Screen.Login.route)
-                    }) {
+                            navController.navigate(Screen.Login.route)
+                        }) {
                         Text(text = "Zaloguj się")
                     }
                 } else {
                     Button(modifier = Modifier
                         .fillMaxWidth(),
                         onClick = {
-                        AuthUser = null
-                        navController.navigate(Screen.Login.route)
-                    }) {
+                            AuthUser = null
+                            navController.navigate(Screen.Login.route)
+                        }) {
                         Text(text = "Wyloguj się")
                     }
                 }
