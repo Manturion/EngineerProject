@@ -18,55 +18,58 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import pl.pollub.harnasik.R
+import pl.pollub.harnasik.app.util.Screen
 
 
 @Composable
 fun AppBar(
 //        onNavigationIconClick: () -> Unit
-        navController: NavController
+    navController: NavController
 ) {
 
 
     Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                    .fillMaxWidth()
-                    .height(64.dp)
-                    .background(color = MaterialTheme.colorScheme.primary)
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(64.dp)
+            .background(color = MaterialTheme.colorScheme.primary)
     ) {
 
-        var colorUndoButtonIfMainButtonActive = MaterialTheme.colorScheme.onPrimary 
+        var colorUndoButtonIfMainButtonActive = MaterialTheme.colorScheme.onPrimary
         if (navController.currentBackStackEntry?.destination?.route == "all_offers_screen") {
             colorUndoButtonIfMainButtonActive = MaterialTheme.colorScheme.primary
         }
 
         IconButton(
-                onClick = { navController.popBackStack() }
+            onClick = { navController.popBackStack() }
         ) {
             Icon(
-                    painter = painterResource(id = R.drawable.ic_round_arrow_back_ios_new_24),
-                    contentDescription = stringResource(R.string.label_continue_to_courses),
-                    tint = colorUndoButtonIfMainButtonActive,
+                painter = painterResource(id = R.drawable.ic_round_arrow_back_ios_new_24),
+                contentDescription = stringResource(R.string.label_continue_to_courses),
+                tint = colorUndoButtonIfMainButtonActive,
             )
         }
 
         Icon(
-                painter = painterResource(id = R.drawable.ic_round_shopping_cart_24),
-                contentDescription = "koszyk",
-                tint = MaterialTheme.colorScheme.onPrimary,
+            painter = painterResource(id = R.drawable.ic_round_shopping_cart_24),
+            contentDescription = "koszyk",
+            tint = MaterialTheme.colorScheme.onPrimary,
 
-        )
+            )
         Text(
-                text = "Zaoszczędź z nami",
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.onPrimary
+            text = "Zaoszczędź z nami",
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.onPrimary
         )
-        IconButton(modifier = Modifier.padding(16.dp), onClick = { /* todo */ }) {
+        IconButton(
+            modifier = Modifier.padding(16.dp),
+            onClick = { navController.navigate(Screen.SettingsScreen.route) }) {
             Icon(
-                    painter = painterResource(id = R.drawable.ic_round_settings_24),
-                    contentDescription = "ustawienia",
-                    tint = MaterialTheme.colorScheme.onPrimary,
+                painter = painterResource(id = R.drawable.ic_round_settings_24),
+                contentDescription = "ustawienia",
+                tint = MaterialTheme.colorScheme.onPrimary,
             )
         }
     }

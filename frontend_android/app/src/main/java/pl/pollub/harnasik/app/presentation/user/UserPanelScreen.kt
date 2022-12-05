@@ -133,7 +133,7 @@ fun ManageText() {
 fun PasswordResetText() {
     Text(
         "Zresetuj hasło",
-        fontFamily = pl.pollub.harnasik.app.presentation.user.login.fontFamily,
+        fontFamily = fontFamily,
         fontSize = 16.sp,
         color = MaterialTheme.colorScheme.onPrimary
     )
@@ -143,7 +143,7 @@ fun PasswordResetText() {
 fun MyOffersText() {
     Text(
         "Moje oferty",
-        fontFamily = pl.pollub.harnasik.app.presentation.user.login.fontFamily,
+        fontFamily = fontFamily,
         fontSize = 16.sp,
         color = MaterialTheme.colorScheme.onPrimary
     )

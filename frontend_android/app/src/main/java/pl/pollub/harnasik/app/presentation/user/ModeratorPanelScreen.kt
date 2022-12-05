@@ -119,7 +119,7 @@ fun ModeratorManageText() {
 fun ReportedOffers() {
     Text(
         "Zgłoszone oferty",
-        fontFamily = pl.pollub.harnasik.app.presentation.user.login.fontFamily,
+        fontFamily = fontFamily,
         fontSize = 16.sp,
         color = Color.Black
     )
@@ -129,7 +129,7 @@ fun ReportedOffers() {
 fun BlockedUsers() {
     Text(
         "Zablokowani użytkownicy",
-        fontFamily = pl.pollub.harnasik.app.presentation.user.login.fontFamily,
+        fontFamily = fontFamily,
         fontSize = 16.sp,
         color = Color.Black
     )

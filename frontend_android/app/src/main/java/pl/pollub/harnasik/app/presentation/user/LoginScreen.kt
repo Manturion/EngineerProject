@@ -48,9 +48,8 @@ import pl.pollub.harnasik.app.presentation.offers.AppBar
 import pl.pollub.harnasik.app.presentation.offers.command.components.CustomOutlinedTextField
 import pl.pollub.harnasik.app.presentation.user.AuthUiEvent
 import pl.pollub.harnasik.app.presentation.user.AuthViewModel
+import pl.pollub.harnasik.app.presentation.user.fontFamily
 import pl.pollub.harnasik.app.util.Screen
-
-var fontFamily: FontFamily = FontFamily(Font(R.font.opensans))
 
 @Composable
 fun ShowTextUnderField(text: String, color: Color) {
