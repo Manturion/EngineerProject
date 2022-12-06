@@ -103,6 +103,7 @@ private fun SwitchWithLabel(label: String, state: Boolean, onStateChange: (Boole
 
     ) {
 
+
         Text(text = label, fontSize = 20.sp)
         Spacer(modifier = Modifier.padding(start = 20.dp))
         Switch(

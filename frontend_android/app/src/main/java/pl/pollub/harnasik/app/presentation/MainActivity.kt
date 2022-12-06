@@ -33,6 +33,7 @@ import pl.pollub.harnasik.app.presentation.user.SettingsScreen
 import pl.pollub.harnasik.app.presentation.user.HelpScreen
 import pl.pollub.harnasik.app.presentation.user.AboutUsScreen
 import pl.pollub.harnasik.app.presentation.user.ContactScreen
+import pl.pollub.harnasik.app.presentation.user.SearchScreen
 import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_LAT
 import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_LONG
 import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_TITLE
@@ -129,6 +130,10 @@ class MainActivity : ComponentActivity() {
 
                             composable(Screen.ContactScreen.route) { navBackStack ->
                                 ContactScreen(navController = navController)
+                            }
+
+                            composable(Screen.SearchScreen.route) { navBackStack ->
+                                SearchScreen(navController = navController)
                             }
                         }
                     }

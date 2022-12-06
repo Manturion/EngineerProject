@@ -1,9 +1,15 @@
 package pl.pollub.harnasik.app.core.BottomBar
 
 
+import android.widget.Toast
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.BottomAppBar
@@ -14,13 +20,25 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.currentCompositionLocalContext
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import pl.pollub.harnasik.R
 import pl.pollub.harnasik.app.util.Screen
@@ -55,7 +73,9 @@ fun BottomBar(navController: NavController) {
                 )
             }
             IconButton(
-                onClick = { /* doSomething() */ },
+                onClick = {
+                    navController.navigate(Screen.SearchScreen.route)
+                },
                 modifier = customModifier
             ) {
                 Icon(
@@ -65,7 +85,8 @@ fun BottomBar(navController: NavController) {
                 )
             }
             IconButton(
-                onClick = { /* doSomething() */ },
+                onClick = {
+                   },
                 modifier = Modifier
                     .padding(start = 10.dp, end = 10.dp)
                     .width(70.dp)
