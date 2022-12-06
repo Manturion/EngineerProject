@@ -88,7 +88,7 @@ fun ModeratorPanel(
                     Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
                         Button(
                             onClick = {
-                                // navController.navigate(Screen.AllOffersScreen.route)
+                                navController.navigate(Screen.BlockedUsersScreen.route)
                             },
                             shape = RoundedCornerShape(50.dp),
                             modifier = Modifier

@@ -37,6 +37,7 @@ import pl.pollub.harnasik.app.presentation.user.ContactScreen
 import pl.pollub.harnasik.app.presentation.user.SearchScreen
 import pl.pollub.harnasik.app.presentation.user.NotificationsScreen
 import pl.pollub.harnasik.app.presentation.user.ReportedOffersScreen
+import pl.pollub.harnasik.app.presentation.user.BlockedUsersScreen
 
 import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_LAT
 import pl.pollub.harnasik.app.util.DETAIL_ARGUMENT_LONG
@@ -146,6 +147,10 @@ class MainActivity : ComponentActivity() {
 
                             composable(Screen.ReportedOffersScreen.route) { navBackStack ->
                                 ReportedOffersScreen(navController = navController)
+                            }
+
+                            composable(Screen.BlockedUsersScreen.route) { navBackStack ->
+                                BlockedUsersScreen(navController = navController)
                             }
                         }
                     }

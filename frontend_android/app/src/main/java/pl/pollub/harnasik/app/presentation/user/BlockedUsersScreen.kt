@@ -12,6 +12,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -40,7 +43,7 @@ import pl.pollub.harnasik.app.presentation.offers.AppBar
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ReportedOffersScreen(
+fun BlockedUsersScreen(
     navController: NavController, viewModel: AuthViewModel = hiltViewModel()
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
@@ -63,60 +66,64 @@ fun ReportedOffersScreen(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.Start
                 ) {
-                    ReportedOffersText()
+                    BlockedUSersText()
                     Spacer(modifier = Modifier.height(40.dp))
-                    ReportedOffersListItemPreview()
+                    BlockedUsersListItemPreview()
                 }
             })
     }
 }
 
 @Composable
-fun ReportedOffersListItem(offerText: String, onItemClick: (String) -> Unit) {
+fun BlockedUsersListItem(userText: String, onItemClick: (String) -> Unit) {
     Row(
         modifier = Modifier
-            .clickable(onClick = { onItemClick(offerText) })
+            .clickable(onClick = { onItemClick(userText) })
             .height(57.dp)
-            .background(Color(0xFF930D00))
+            .background(Color(0xFFED4420))
             .fillMaxWidth()
-            .padding(13.dp, 17.dp)
+            .padding(8.dp, 17.dp)
     ) {
         Icon(
-            painter = painterResource(id = R.drawable.ic_round_error_24),
-            contentDescription = "Reported offer",
+            painter = painterResource(id = R.drawable.ic_baseline_people_24),
+            contentDescription = "Blocked user",
             tint = MaterialTheme.colorScheme.onPrimary,
         )
-        Spacer(modifier = Modifier.width(20.dp))
-        Text(text = offerText, fontSize = 20.sp, color = Color.White)
+        Spacer(modifier = Modifier.width(3.dp))
+        Icon(
+            painter = painterResource(id = R.drawable.ic_round_thumb_up_alt_24),
+            contentDescription = "Unblock",
+            tint = Color(0xFF0A810C),
+        )
+        Text(text = userText, fontSize = 20.sp, color = Color.White)
     }
     Spacer(modifier = Modifier.height(20.dp))
 }
 
 @Preview(showBackground = true)
 @Composable
-fun ReportedOffersListItemPreview() {
-    ReportedOffersListItem(offerText = "Super oferta!!!!!11!1223",
+fun BlockedUsersListItemPreview() {
+    BlockedUsersListItem(userText = "pawlakjan@o2.pl",
         onItemClick = {})
-    ReportedOffersListItem(offerText = "Mleko tańsze niż",
+    BlockedUsersListItem(userText = "misuszatek00@o2.pl",
         onItemClick = {})
-    ReportedOffersListItem(offerText = "ppppdpadadad",
+    BlockedUsersListItem(userText = "jamestheSullivan@gmail.com",
         onItemClick = {})
-    ReportedOffersListItem(offerText = "Parówki Berlinki 3 zł",
+    BlockedUsersListItem(userText = "fakekonto@pollub.edu.pl",
         onItemClick = {})
 }
 
 @Preview(showBackground = true)
 @Composable
-fun ReportedOffersListPreview() {
+fun BlockedUsersListPreview() {
     val navController = rememberNavController()
 }
 
-
 @Composable
-fun ReportedOffersText() {
+fun BlockedUSersText() {
     Spacer(modifier = Modifier.height(20.dp))
     Text(
-        "Zgłoszone oferty:",
+        "Zablokowani użytkownicy:",
         style = TextStyle(
             fontSize = 30.sp, fontFamily = FontFamily.Default
         )
