@@ -86,6 +86,7 @@ fun BottomBar(navController: NavController) {
             }
             IconButton(
                 onClick = {
+                          navController.navigate(Screen.NotificationsScreen.route)
                    },
                 modifier = Modifier
                     .padding(start = 10.dp, end = 10.dp)
@@ -95,7 +96,7 @@ fun BottomBar(navController: NavController) {
                 BadgedBox(
                     badge = {
                         Badge {
-                            val badgeNumber = "0"
+                            val badgeNumber = "8"
                             Text(
                                 badgeNumber,
                                 modifier = Modifier.semantics {
