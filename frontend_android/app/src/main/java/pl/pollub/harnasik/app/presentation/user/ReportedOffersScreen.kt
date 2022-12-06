@@ -12,8 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -23,13 +21,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -45,7 +42,7 @@ import pl.pollub.harnasik.app.presentation.offers.AppBar
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun NotificationsScreen(
+fun ReportedOffersScreen(
     navController: NavController, viewModel: AuthViewModel = hiltViewModel()
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
@@ -62,29 +59,33 @@ fun NotificationsScreen(
                 DrawerContent(navController = navController)
             }, content = {
                 Column(
-                    modifier = Modifier.fillMaxSize().padding(15.dp, 0.dp),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(15.dp, 0.dp),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.Start
                 ) {
-                    NotificationListItemPreview()
+                    ReportedOffersText()
+                    Spacer(modifier = Modifier.height(40.dp))
+                    ReportedOffersListItemPreview()
                 }
             })
     }
 }
 
 @Composable
-fun NotificationListItem(countryText: String, onItemClick: (String) -> Unit) {
+fun ReportedOffersListItem(countryText: String, onItemClick: (String) -> Unit) {
     Row(
         modifier = Modifier
             .clickable(onClick = { onItemClick(countryText) })
             .height(57.dp)
-            .background(Color(0xFFED4420))
+            .background(Color(0xFF930D00))
             .fillMaxWidth()
-            .padding(8.dp, 17.dp)
+            .padding(13.dp, 17.dp)
     ) {
         Icon(
-            painter = painterResource(id = R.drawable.ic_round_notifications_24),
-            contentDescription = "Notifcation",
+            painter = painterResource(id = R.drawable.ic_round_error_24),
+            contentDescription = "Reported offer",
             tint = MaterialTheme.colorScheme.onPrimary,
         )
         Spacer(modifier = Modifier.width(20.dp))
@@ -95,27 +96,33 @@ fun NotificationListItem(countryText: String, onItemClick: (String) -> Unit) {
 
 @Preview(showBackground = true)
 @Composable
-fun NotificationListItemPreview() {
-    NotificationListItem(countryText = "Witaj w aplikacji!",
+fun ReportedOffersListItemPreview() {
+    ReportedOffersListItem(countryText = "Super oferta!!!!!11!1223",
         onItemClick = {})
-    NotificationListItem(countryText = "Tu znajdziesz powiadomienia",
+    ReportedOffersListItem(countryText = "Mleko tańsze niż",
         onItemClick = {})
-    NotificationListItem(countryText = "Życzymy dobrej zabawy!",
+    ReportedOffersListItem(countryText = "ppppdpadadad",
         onItemClick = {})
-    NotificationListItem(countryText = "Sprawdź tę ofertę",
-        onItemClick = {})
-    NotificationListItem(countryText = "Twoja oferta została zgłoszona",
-        onItemClick = {})
-    NotificationListItem(countryText = "Twoja oferta zaraz się przedawni",
-        onItemClick = {})
-    NotificationListItem(countryText = "Akcja charytatywna",
-        onItemClick = {})
-    NotificationListItem(countryText = "Planowana przerwa w aplikacji",
+    ReportedOffersListItem(countryText = "Parówki Berlinki 3 zł",
         onItemClick = {})
 }
 
 @Preview(showBackground = true)
 @Composable
-fun NotificationListPreview() {
+fun ReportedOffersListPreview() {
     val navController = rememberNavController()
 }
+
+
+@Composable
+fun ReportedOffersText() {
+    Spacer(modifier = Modifier.height(20.dp))
+    Text(
+        "Zgłoszone oferty:",
+        style = TextStyle(
+            fontSize = 30.sp, fontFamily = FontFamily.Default
+        )
+    )
+    Spacer(modifier = Modifier.height(20.dp))
+}
+

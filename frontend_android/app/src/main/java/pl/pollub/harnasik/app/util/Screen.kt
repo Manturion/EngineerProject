@@ -21,6 +21,7 @@ sealed class Screen(
     object ContactScreen : Screen("contact_screen")
     object SearchScreen : Screen("search_screen")
     object NotificationsScreen : Screen("notifications_screen")
+    object ReportedOffersScreen : Screen("reported_offers_screen")
 
     object MapDisplay :
         Screen("map_display_screen/{$DETAIL_ARGUMENT_TITLE}/{$DETAIL_ARGUMENT_LAT}/{$DETAIL_ARGUMENT_LONG}") {

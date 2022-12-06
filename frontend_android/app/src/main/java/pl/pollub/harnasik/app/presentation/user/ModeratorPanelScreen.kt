@@ -31,6 +31,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import pl.pollub.harnasik.app.core.Drawer.DrawerContent
 import pl.pollub.harnasik.app.presentation.offers.AppBar
+import pl.pollub.harnasik.app.util.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
@@ -72,13 +73,13 @@ fun ModeratorPanel(
                     Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
                         Button(
                             onClick = {
-                                // navController.navigate(Screen.ForgotPassword.route)
+                                navController.navigate(Screen.ReportedOffersScreen.route)
                             },
                             shape = RoundedCornerShape(50.dp),
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(50.dp),
-                            colors = ButtonDefaults.buttonColors(Color.Green)
+                            colors = ButtonDefaults.buttonColors(Color(0xFF0A810C))
                             ) {
                             ReportedOffers()
                         }
@@ -93,7 +94,7 @@ fun ModeratorPanel(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(50.dp),
-                            colors = ButtonDefaults.buttonColors(Color.Green)
+                            colors = ButtonDefaults.buttonColors(Color(0xFF0A810C))
                             ) {
                             BlockedUsers()
                         }
@@ -121,7 +122,7 @@ fun ReportedOffers() {
         "Zgłoszone oferty",
         fontFamily = fontFamily,
         fontSize = 16.sp,
-        color = Color.Black
+        color = Color.White
     )
 }
 
@@ -131,6 +132,6 @@ fun BlockedUsers() {
         "Zablokowani użytkownicy",
         fontFamily = fontFamily,
         fontSize = 16.sp,
-        color = Color.Black
+        color = Color.White
     )
 }

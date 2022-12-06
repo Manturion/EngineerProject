@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -182,10 +183,11 @@ fun DrawerContent(navController: NavController) {
             Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
                 Button(modifier = Modifier
                     .fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(Color(0xFF0A810C)),
                     onClick = {
-                        navController.navigate(Screen.UserPanelScreen.route)
+                        navController.navigate(Screen.ModeratorPanelScreen.route)
                     }) {
-                    Text(text = "Panel użytkownika")
+                    Text(text = "Panel moderatora")
                 }
             }
             Spacer(modifier = Modifier.height(20.dp))
@@ -193,9 +195,9 @@ fun DrawerContent(navController: NavController) {
                 Button(modifier = Modifier
                     .fillMaxWidth(),
                     onClick = {
-                        navController.navigate(Screen.ModeratorPanelScreen.route)
+                        navController.navigate(Screen.UserPanelScreen.route)
                     }) {
-                    Text(text = "Panel moderatora")
+                    Text(text = "Panel użytkownika")
                 }
             }
             Spacer(modifier = Modifier.height(20.dp))
